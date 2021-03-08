@@ -1,5 +1,6 @@
 package geekbarains.material.ui.picture
 
+import android.app.ProgressDialog.show
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -48,13 +49,10 @@ class PictureOfTheDayFragment : Fragment() {
             dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, 0)}.time)
         Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
 
-        loadData(todayAsString)
+        viewModel.getData(todayAsString)
+            .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
 
-    }
-
-   private fun loadData(date:String){
-       viewModel.getData(date)
-           .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
+        chip1.isChecked = true
     }
 
     override fun onCreateView(
@@ -83,34 +81,34 @@ class PictureOfTheDayFragment : Fragment() {
         //подключаем BottomBar с fab
         setBottomAppBar(view)
 
-        chipGroupMain.setOnCheckedChangeListener { group, position ->
+        chipGroupMain.setOnCheckedChangeListener { group, id ->
             Log.d(TAG, "PictureOfTheDayFragment onViewCreated setOnCheckedChangeListener")
-            group.findViewById<Chip>(position)?.let {
-                Log.d(TAG, "position = $position")
-                when(position){
-                    1->{
-                        val yesterdayAsString =
+            //нужно проверять на null иначе крэш при повторном нажатии на ту же иконку  - id = -1
+            //val id = group.findViewById<Chip>(position)?.id
+                Log.d(TAG, " id = $id")
+                when(id){
+                    R.id.chip1->{
+                        val todayAsString =
                             dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, 0)}.time)
-                        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $yesterdayAsString")
+                        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
                         image_view.clear()
-                        loadData(yesterdayAsString)
+                        viewModel.getData(todayAsString)
                     }
-                    2-> {
-                        val beforeYesterdayAsString =
+                    R.id.chip2-> {
+                        val yesterdayAsString =
                             dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, -1)}.time)
-                        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $beforeYesterdayAsString")
+                        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated yesterdayAsString = $yesterdayAsString")
                         image_view.clear()
-                        loadData(beforeYesterdayAsString)
+                        viewModel.getData(yesterdayAsString)
                     }
-                    3-> {
-                        val treeDaysAgoAsString =
+                    R.id.chip3-> {
+                        val beforeYesterdayAsString =
                         dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, -2)}.time)
-                        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $treeDaysAgoAsString")
+                        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated beforeYesterdayAsString = $beforeYesterdayAsString")
                         image_view.clear()
-                        loadData(treeDaysAgoAsString)
+                        viewModel.getData(beforeYesterdayAsString)
                     }
                 }
-            }
         }
     }
 
@@ -187,7 +185,7 @@ class PictureOfTheDayFragment : Fragment() {
                         bottom_sheet_description.text = serverResponseData.explanation
                     }
                 }else {
-                    //todo
+                    //todo video
                 }
             }
             is PictureOfTheDayData.Loading -> {
@@ -195,12 +193,11 @@ class PictureOfTheDayFragment : Fragment() {
                 progressBarNasa.visibility = View.VISIBLE
             }
             is PictureOfTheDayData.Error -> {
-                //прекращаем поках прогрессбара
+                //прекращаем показ прогрессбара
                 progressBarNasa.visibility = View.GONE
                 toast(data.error.message)
+                image_view.load(R.drawable.ic_load_error_vector)
+                }
             }
         }
     }
-
-
-}

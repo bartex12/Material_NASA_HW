@@ -20,7 +20,7 @@ class PODRetrofitImpl {
             .baseUrl(baseUrl)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson()))
-            //.client(createOkHttpClient(PODInterceptor()))
+            .client(createOkHttpClient(PODInterceptor()))
             .build()
             .create(PictureOfTheDayAPI::class.java)
     }
@@ -33,18 +33,19 @@ class PODRetrofitImpl {
 
 
 
-//    private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {
-//        val httpClient = OkHttpClient.Builder()
-//        httpClient.addInterceptor(interceptor)
-//        httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-//        return httpClient.build()
-//    }
-//
-//    inner class PODInterceptor : Interceptor {
-//
-//        @Throws(IOException::class)
-//        override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
-//            return chain.proceed(chain.request())
-//        }
-//    }
+    private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {
+        val httpClient = OkHttpClient.Builder()
+        httpClient.addInterceptor(interceptor)
+        //логгирование внутри OkHttp
+        httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        return httpClient.build()
+    }
+
+    inner class PODInterceptor : Interceptor {
+
+        @Throws(IOException::class)
+        override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+            return chain.proceed(chain.request())
+        }
+    }
 }
