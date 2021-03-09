@@ -54,29 +54,28 @@
                 android:id="@+id/chipGroupMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/input_layout"
-                app:layout_constraintBottom_toTopOf="@+id/image_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/input_layout"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chip1"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:id= "@+id/chip1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Сегодня" />
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chip2"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:id= "@+id/chip2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Вчера" />
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chip3"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:id= "@+id/chip3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Позавчера" />
@@ -88,11 +87,24 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:contentDescription="@string/photo_of_the_day_stub"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
+
+            <WebView
+                android:id="@+id/web_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

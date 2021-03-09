@@ -9,6 +9,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,19 +41,6 @@ class PictureOfTheDayFragment : Fragment() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        val todayAsString =
-            dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, 0)}.time)
-        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
-
-        viewModel.getData(todayAsString)
-            .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
-
-        chip1.isChecked = true
     }
 
     override fun onCreateView(
@@ -112,6 +100,19 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+//
+//        val todayAsString =
+//            dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, 0)}.time)
+        //грузим видео с фазами луны в 2021
+       val todayAsString = "2021-01-11"
+        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
+
+        viewModel.getData(todayAsString)
+            .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
+    }
+
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -165,33 +166,46 @@ class PictureOfTheDayFragment : Fragment() {
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
             is PictureOfTheDayData.Success -> {
-                //прекращаем поках прогрессбара
+                val serverResponseData = data.serverResponseData
+                val url = serverResponseData.url
+                //прекращаем показ прогрессбара
                 progressBarNasa.visibility = View.GONE
+
                 if(data.serverResponseData.mediaType == "image"){
-                    val serverResponseData = data.serverResponseData
-                    val url = serverResponseData.url
                     if (url.isNullOrEmpty()) {
                         //showError("Сообщение, что ссылка пустая")
                         toast("Link is empty")
                     } else {
-                        //showSuccess()
+                        image_view.visibility =View.VISIBLE
+                        web_view.visibility =View.GONE
+
+                        //Koil image download  (аналог Picasso и Glide, написанный на Kotlin)
                         image_view.load(url) {
                             lifecycle(this@PictureOfTheDayFragment)
                             error(R.drawable.ic_load_error_vector)
                             placeholder(R.drawable.ic_no_photo_vector)
                         }
-                        //тестовый текст / в макете выставлены значения выезжания bottom sheet
-                        bottom_sheet_description_header.text = serverResponseData.title
-                        bottom_sheet_description.text = serverResponseData.explanation
                     }
                 }else {
-                    //todo video
+                    web_view.clearCache(true)
+                    web_view.clearHistory()
+                    web_view.settings.javaScriptEnabled = true  // небезопасно тащить скрипты
+                    web_view.settings.javaScriptCanOpenWindowsAutomatically = true
+
+                    image_view.visibility =View.GONE
+                    web_view.visibility =View.VISIBLE
+                    web_view.loadUrl(url)
                 }
+                //тестовый текст / в макете выставлены значения выезжания bottom sheet
+                bottom_sheet_description_header.text = serverResponseData.title
+                bottom_sheet_description.text = serverResponseData.explanation
             }
+
             is PictureOfTheDayData.Loading -> {
                 //показываем прогресс-бар
                 progressBarNasa.visibility = View.VISIBLE
             }
+
             is PictureOfTheDayData.Error -> {
                 //прекращаем показ прогрессбара
                 progressBarNasa.visibility = View.GONE
