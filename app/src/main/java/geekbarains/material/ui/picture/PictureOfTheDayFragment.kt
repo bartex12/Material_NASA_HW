@@ -39,6 +39,7 @@ class PictureOfTheDayFragment : Fragment() {
     val dateFormat: DateFormat =SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
@@ -105,7 +106,8 @@ class PictureOfTheDayFragment : Fragment() {
 //
 //        val todayAsString =
 //            dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, 0)}.time)
-        //грузим видео с фазами луны в 2021
+
+        //при запуске приложения грузим видео с фазами луны в 2021
        val todayAsString = "2021-01-11"
         Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
 
