@@ -118,6 +118,21 @@ class PictureOfTheDayFragment : Fragment() {
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+        //скрываем bottom_app_bar при движении bottomSheet и показываем при сворачивании
+        bottomSheetBehavior.addBottomSheetCallback( object :BottomSheetBehavior.BottomSheetCallback(){
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING ){
+                    bottom_app_bar.visibility =View.GONE
+                    fab.visibility = View.GONE
+                }else if (newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    bottom_app_bar.visibility = View.VISIBLE
+                    fab.visibility = View.VISIBLE
+                }
+            }
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
     }
 
     private fun setBottomAppBar(view: View) {
