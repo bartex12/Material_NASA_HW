@@ -6,4 +6,16 @@
     <color name="color_gray">#66000000</color>
     <color name="background">#FAFAFA</color>
     <color name="backgroundTextRize">#FFC107</color>
+
+    <color name="colorFone">#80cff2da</color>
+    <color name="button_tint">#85EC6D</color>
+
+    <color name="colorPrimaryPurple">#6200EE</color>
+    <color name="colorPrimaryDarkPurple">#3700B3</color>
+    <color name="colorAccentPurple">#ff6e40</color>
+
+    <color name="colorPrimaryBlack">#424242</color>
+    <color name="colorPrimaryDarkBlack">#212121</color>
+    <color name="colorAccentBlack">#5677fc</color>
+
 </resources>

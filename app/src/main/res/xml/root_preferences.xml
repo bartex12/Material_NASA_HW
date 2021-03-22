@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <PreferenceCategory
+            android:title="@string/theme_cat">
+            <ListPreference
+                android:entries="@array/pref_entry_color"
+                android:entryValues="@array/pref_entryValues_color"
+                android:key="ListColor"
+                android:title="@string/app_theme"
+                app:defaultValue="1"
+                android:summary="@string/choose_color_theme">
+            </ListPreference>
+        </PreferenceCategory>
+
+</PreferenceScreen>

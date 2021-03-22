@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+   style="@style/FrameStyle">
 
 
     <ProgressBar
         android:id="@+id/progressBarNasa"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center"/>
+        style="@style/ProgressBarStyle"/>
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/FrameStyle">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/FrameStyle"
             android:paddingStart="10dp"
             android:paddingEnd="10dp">
 
@@ -36,7 +29,7 @@
                 app:endIconDrawable="@drawable/ic_wikipedia"
                 app:endIconMode="custom"
                 app:helperText="@string/wiki_helper_text"
-                app:layout_constraintBottom_toTopOf="@+id/chipGroup"
+                app:layout_constraintBottom_toTopOf="@+id/chipGroupMain"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -52,8 +45,7 @@
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupMain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/ChipGroupStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_layout"
@@ -61,24 +53,18 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip1"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Сегодня" />
+                    style="@style/ChipStyle"
+                    android:text="@string/today" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip2"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Вчера" />
+                    style="@style/ChipStyle"
+                    android:text="@string/yesterday" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip3"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Позавчера" />
+                    style="@style/ChipStyle"
+                    android:text="@string/before_yesterday" />
             </com.google.android.material.chip.ChipGroup>
 
             <geekbarains.material.util.EquilateralImageView
@@ -114,23 +100,23 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="?colorPrimary"
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
         android:visibility="visible"
-        app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
+        app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar"  />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
+        android:backgroundTint="?colorAccent"
         app:layout_anchor="@id/bottom_app_bar"
-        app:srcCompat="@drawable/ic_plus_fab"
         android:visibility="visible"
-        app:tint="#FFFFFF" />
+        app:tint="?colorBottomIcon"
+        app:srcCompat="@drawable/ic_plus_fab"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

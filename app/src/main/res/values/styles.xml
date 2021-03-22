@@ -21,11 +21,28 @@
         <item name="materialButtonStyle">@style/AppButton</item>
         <item name="textInputStyle">@style/AppTextField</item>
         <item name="materialCardViewStyle">@style/AppCard</item>
+        <!--        свои атрибуты-->
+        <item name="colorBottomIcon">@android:color/white</item>
+        <item name="favorite"> @style/ButtonFavoriteStyle</item>
 
-        <item name="ttt">@color/backgroundTextRize</item>
-
-<!--        <item name="android:forceDarkAllowed"> true </item>-->
+        <!--        <item name="android:forceDarkAllowed"> true </item>-->
     </style>
+
+    <style name="AppThemePurple" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPrimaryPurple</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkPurple</item>
+        <item name="colorAccent">@color/colorAccentPurple</item>
+    </style>
+
+
+    <style name="AppThemeBlack" parent="AppTheme">
+        <item name="colorPrimary">@color/colorPrimaryBlack</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlack</item>
+        <item name="colorAccent">@color/colorAccentBlack</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.MyTheme">
         <item name="colorOnSurface">#FF0000</item>
@@ -43,4 +60,47 @@
         <item name="cardElevation">8dp</item>
         <item name="cardBackgroundColor">?attr/colorAccent </item>
     </style>
+
+    <style name="ButtonFavoriteStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="strokeColor">?colorAccent</item>
+    </style>
+
+    <style name="FrameStyle" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="AppBarStyle" parent="FrameStyle">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="AppBarStyle">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="ChipGroupStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ChipStyle" parent= "Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>
