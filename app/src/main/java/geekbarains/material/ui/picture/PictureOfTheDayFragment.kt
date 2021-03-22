@@ -25,7 +25,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PictureOfTheDayFragment : Fragment() {
+class PictureOfTheDayFragment : Fragment(), BottomNavigationDrawerFragment.OnItemClickListener {
 
     companion object {
         const val TAG = "33333"
@@ -38,6 +38,10 @@ class PictureOfTheDayFragment : Fragment() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
+    }
+
+    override fun onItemClick(date: String) {
+        viewModel.sendServerRequest(date)
     }
 
     override fun onCreateView(
@@ -70,28 +74,27 @@ class PictureOfTheDayFragment : Fragment() {
             Log.d(TAG, "PictureOfTheDayFragment onViewCreated setOnCheckedChangeListener")
             //нужно проверять на null иначе крэш при повторном нажатии на ту же иконку  - id = -1
             //val id = group.findViewById<Chip>(position)?.id
-                Log.d(TAG, " id = $id")
                 when(id){
                     R.id.chip1->{
                         val todayAsString =
                             dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, 0)}.time)
                         Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
                         image_view.clear()
-                        viewModel.getData(todayAsString)
+                        viewModel.sendServerRequest(todayAsString)
                     }
                     R.id.chip2-> {
                         val yesterdayAsString =
                             dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, -1)}.time)
                         Log.d(TAG, "PictureOfTheDayFragment onActivityCreated yesterdayAsString = $yesterdayAsString")
                         image_view.clear()
-                        viewModel.getData(yesterdayAsString)
+                        viewModel.sendServerRequest(yesterdayAsString)
                     }
                     R.id.chip3-> {
                         val beforeYesterdayAsString =
                         dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, -2)}.time)
                         Log.d(TAG, "PictureOfTheDayFragment onActivityCreated beforeYesterdayAsString = $beforeYesterdayAsString")
                         image_view.clear()
-                        viewModel.getData(beforeYesterdayAsString)
+                        viewModel.sendServerRequest(beforeYesterdayAsString)
                     }
                 }
         }
@@ -106,8 +109,18 @@ class PictureOfTheDayFragment : Fragment() {
        val todayAsString = "2021-01-11"
         Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
 
-        viewModel.getData(todayAsString)
+        if (savedInstanceState == null){
+            Log.d(TAG, "savedInstanceState == null")
+            viewModel. sendServerRequest(todayAsString)
+        }
+
+        viewModel.getData()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "PictureOfTheDayFragment onPause ")
     }
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
@@ -168,7 +181,9 @@ class PictureOfTheDayFragment : Fragment() {
 
             android.R.id.home -> {
                 activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
+                  val dialog =   BottomNavigationDrawerFragment()
+                    dialog .setOnItemClickListener(this)
+                    dialog.show(it.supportFragmentManager, "tag")
                 }
             }
         }
@@ -176,6 +191,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun renderData(data: PictureOfTheDayData) {
+        Log.d(TAG, "*** PictureOfTheDayFragment renderData ")
         when (data) {
             is PictureOfTheDayData.Success -> {
                 val serverResponseData = data.serverResponseData
@@ -184,12 +200,16 @@ class PictureOfTheDayFragment : Fragment() {
                 progressBarNasa.visibility = View.GONE
 
                 if(data.serverResponseData.mediaType == "image"){
+                    Log.d(TAG, "*** PictureOfTheDayFragment renderData  mediaType = image")
                     if (url.isNullOrEmpty()) {
                         //showError("Сообщение, что ссылка пустая")
                         toast("Link is empty")
                     } else {
                         image_view.visibility =View.VISIBLE
                         web_view.visibility =View.GONE
+                        //грузим несуществующий файл
+                        //web_view.loadUrl("file:///android_asset/nonexistent.html")
+                        web_view.loadUrl(  "about:blank") //или так
 
                         //Koil image download  (аналог Picasso и Glide, написанный на Kotlin)
                         image_view.load(url) {
@@ -199,6 +219,7 @@ class PictureOfTheDayFragment : Fragment() {
                         }
                     }
                 }else {
+                    Log.d(TAG, "*** PictureOfTheDayFragment renderData  mediaType = video")
                     web_view.clearCache(true)
                     web_view.clearHistory()
                     web_view.settings.javaScriptEnabled = true  // небезопасно тащить скрипты
@@ -226,4 +247,6 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
         }
-    }
+
+
+}

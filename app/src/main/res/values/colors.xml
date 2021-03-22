@@ -18,4 +18,11 @@
     <color name="colorPrimaryDarkBlack">#212121</color>
     <color name="colorAccentBlack">#5677fc</color>
 
+    <color name="bright_gray">#663b4351</color>
+    <color name="whisper">#F6F6FA</color>
+
+    <color name="black">#000</color>
+
+
+
 </resources>

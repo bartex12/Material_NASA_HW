@@ -33,8 +33,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:boxCornerRadiusTopStart="30dp"
-                 app:boxCornerRadiusBottomEnd="30dp">
+                app:boxCornerRadiusTopStart="20dp"
+                 app:boxCornerRadiusBottomEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_edit_text"

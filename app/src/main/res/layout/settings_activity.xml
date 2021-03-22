@@ -4,7 +4,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-        style="@style/AppBarStyle"
+        style="@style/WidgetStyle"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar

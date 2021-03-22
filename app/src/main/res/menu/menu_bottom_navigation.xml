@@ -2,12 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/navigation_one"
-            android:icon="@drawable/ic_archive"
-            android:title="На экран 1" />
+            android:id="@+id/navigation_video"
+            android:icon="@drawable/ic_baseline_videocam_24"
+            android:title="@string/video" />
         <item
-            android:id="@+id/navigation_two"
-            android:icon="@drawable/ic_send"
-            android:title="На экран 2" />
+            android:id="@+id/navigation_today"
+            android:icon="@drawable/ic_baseline_looks_one_24"
+            android:title="@string/today" />
+
+        <item
+            android:id="@+id/navigation_yesterday"
+            android:icon="@drawable/ic_baseline_looks_two_24"
+            android:title="@string/yesterday" />
+
+        <item
+            android:id="@+id/navigation_before_yesterday"
+            android:icon="@drawable/ic_baseline_looks_3_24"
+            android:title="@string/before_yesterday" />
     </group>
 </menu>

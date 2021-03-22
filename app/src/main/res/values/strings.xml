@@ -13,13 +13,9 @@
     <string name="input_any_text">Введите что-нибудь в строке поиска</string>
 
     <string name="title_activity_settings">Настройки</string>
-    <!--Темы приложения-->
     <string name="app_theme">Тема приложения</string>
     <string name="choose_color_theme">Выберите цветовую тему приложения</string>
     <string name="theme_cat">Тема</string>
-    <string name="today">Сегодня</string>
-    <string name="yesterday">Вчера</string>
-    <string name="before_yesterday">Позавчера</string>
     <string name="default2">Default</string>
     <string name="entry">Entry</string>
     <string name="choice">Choice</string>
@@ -58,6 +54,10 @@
     <string name="tab_2">Tab 2</string>
     <string name="tab_3">Tab 3</string>
     <string name="card">Card</string>
+    <string name="video">Видео с фазами луны</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="before_yesterday">Позавчера</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>

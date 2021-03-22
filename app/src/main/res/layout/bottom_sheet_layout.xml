@@ -4,47 +4,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#f6f6fa"
-    android:visibility="visible"
+    style="@style/BottomSheetRootStyle"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="120dp"
+    app:behavior_peekHeight="@dimen/behavior_peekHeight"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     tools:visibility="visible">
 
-    <View
-        android:id="@+id/bottom_sheet_line"
-        android:layout_width="50dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="5dp"
-        android:background="#663b4351"
+    <ScrollView
+        android:id="@+id/scrolling"
+        style="@style/FrameStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/bottom_sheet_description_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:textColor="#000"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_line"
-        tools:text="@string/bottov_shit_title" />
+        <LinearLayout
+            style="@style/WidgetStyle"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/bottom_sheet_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_sheet_description_header"
-        tools:text="@string/bottom_shit_text" />
+            <View
+                android:id="@+id/bottom_sheet_line"
+                style="@style/ViewBottomSheetStyle"/>
+
+            <TextView
+                android:id="@+id/bottom_sheet_description_header"
+                style="@style/TextViewBottomSheetHeaderStyle"
+                tools:text="@string/bottov_shit_title"/>
+
+            <TextView
+                android:id="@+id/bottom_sheet_description"
+                style="@style/TextViewBottomSheetDescriptionStyle"
+                tools:text="@string/bottom_shit_text" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
