@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import geekbarains.material.R
 import geekbarains.material.ui.picture.PictureOfTheDayFragment
-import geekbarains.material.ui.settings.SettingsActivity
-
 
 //в макете активити только FrameLayout - ни тулбара, ни шторки нет
 //все навороты - во фрагменте с фото дня
@@ -39,8 +37,6 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.container, PictureOfTheDayFragment.newInstance())
                 .commitNow()
         }
-
-
     }
 
     override fun onResume() {

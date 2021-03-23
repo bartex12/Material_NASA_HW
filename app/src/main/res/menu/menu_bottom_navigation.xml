@@ -6,18 +6,18 @@
             android:icon="@drawable/ic_baseline_videocam_24"
             android:title="@string/video" />
         <item
-            android:id="@+id/navigation_today"
-            android:icon="@drawable/ic_baseline_looks_one_24"
-            android:title="@string/today" />
-
-        <item
-            android:id="@+id/navigation_yesterday"
-            android:icon="@drawable/ic_baseline_looks_two_24"
-            android:title="@string/yesterday" />
-
-        <item
-            android:id="@+id/navigation_before_yesterday"
+            android:id="@+id/navigation_3days_ago"
             android:icon="@drawable/ic_baseline_looks_3_24"
-            android:title="@string/before_yesterday" />
+            android:title="@string/three_days_ago" />
+
+        <item
+            android:id="@+id/navigation_4days_ago"
+            android:icon="@drawable/ic_baseline_looks_4_24"
+            android:title="@string/four_days_ago" />
+
+        <item
+            android:id="@+id/navigation_5days_ago"
+            android:icon="@drawable/ic_baseline_looks_5_24"
+            android:title="@string/five_days_ago" />
     </group>
 </menu>

@@ -8,11 +8,10 @@
     <dimen name="tv_paddingEnd">10dp</dimen>
     <dimen name="tv_layout_marginTop">5dp</dimen>
     <dimen name="layout_margin_8dp">8dp</dimen>
-
-
-
-
-
-
+    <dimen name="boxCornerRadiusTopStart">20dp</dimen>
+    <dimen name="boxCornerRadiusBottomEnd">20dp</dimen>
+    <dimen name="cl_paddingStart">10dp</dimen>
+    <dimen name="cl_paddingEnd">10dp</dimen>
+    <dimen name="web_view_layout_height">300dp</dimen>
 </resources>
 

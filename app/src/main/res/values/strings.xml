@@ -58,6 +58,10 @@
     <string name="today">Сегодня</string>
     <string name="yesterday">Вчера</string>
     <string name="before_yesterday">Позавчера</string>
+    <string name="three_days_ago">3 дня назад</string>
+    <string name="four_days_ago">4 дня назад</string>
+    <string name="five_days_ago">5 дней назад</string>
+    <string name="fab">fab</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>

@@ -36,7 +36,6 @@
         <item name="colorAccent">@color/colorAccentPurple</item>
     </style>
 
-
     <style name="AppThemeBlack" parent="AppTheme">
         <item name="colorPrimary">@color/colorPrimaryBlack</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkBlack</item>
@@ -58,22 +57,6 @@
         <item name="boxBackgroundColor">@color/text_field_background</item>
     </style>
 
-    <style name="AppCard" parent="Widget.MaterialComponents.CardView">
-        <item name="cardElevation">8dp</item>
-        <item name="cardBackgroundColor">?attr/colorAccent </item>
-    </style>
-
-    <style name="ButtonFavoriteStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">16dp</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
-        <item name="android:textColor">?colorPrimary</item>
-        <item name="android:textSize">12sp</item>
-        <item name="strokeColor">?colorAccent</item>
-    </style>
-
     <style name="FrameStyle" >
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -81,6 +64,36 @@
 
     <style name="WidgetStyle" parent="FrameStyle">
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextInputEditTextStyle" parent="WidgetStyle">
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="EquilateralImageViewStyle" parent="WidgetStyle">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:visibility">visible</item>
+    </style>
+
+    <style name="WebViewStyle" parent="FrameStyle">
+        <item name="android:layout_height">@dimen/web_view_layout_height</item>
+        <item name="android:visibility">visible</item>
+    </style>
+
+    <style name="BottomAppBarStyle" parent="FrameStyle">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_gravity">bottom</item>
+    </style>
+
+    <style name="FabStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">?colorAccent</item>
     </style>
 
     <style name="NavigationViewStyle" parent="WidgetStyle">
@@ -131,13 +144,32 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
-
     <style name="ViewBottomSheetStyle" >
         <item name="android:layout_width">@dimen/bottom_sheet_view_layout_width</item>
         <item name="android:layout_height">@dimen/bottom_sheet_view_layout_height</item>
         <item name="android:layout_marginTop">@dimen/bottom_sheet_view_layout_marginTop</item>
         <item name="android:background">?bottom_sheet_view_background</item>
         <item name="android:layout_gravity">center</item>
+    </style>
 
+    <style name="WikiSearchTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AppCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">8dp</item>
+        <item name="cardBackgroundColor">?attr/colorAccent </item>
+    </style>
+
+    <style name="ButtonFavoriteStyle" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="strokeColor">?colorAccent</item>
     </style>
 </resources>

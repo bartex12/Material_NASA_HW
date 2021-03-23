@@ -16,7 +16,6 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
 import geekbarains.material.ui.MainActivity
-import geekbarains.material.ui.chips.SettingFragment
 import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
@@ -102,9 +101,7 @@ class PictureOfTheDayFragment : Fragment(), BottomNavigationDrawerFragment.OnIte
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//
-//        val todayAsString =
-//            dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, 0)}.time)
+
         //грузим видео с фазами луны в 2021
        val todayAsString = "2021-01-11"
         Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
@@ -126,6 +123,7 @@ class PictureOfTheDayFragment : Fragment(), BottomNavigationDrawerFragment.OnIte
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
         //скрываем bottom_app_bar при движении bottomSheet и показываем при сворачивании
         bottomSheetBehavior.addBottomSheetCallback( object :BottomSheetBehavior.BottomSheetCallback(){
             override fun onStateChanged(bottomSheet: View, newState: Int) {
