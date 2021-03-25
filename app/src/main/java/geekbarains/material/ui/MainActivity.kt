@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import geekbarains.material.R
+import geekbarains.material.ui.api.ApiFragment
 import geekbarains.material.ui.picture.PictureOfTheDayFragment
 
 //в макете активити только FrameLayout - ни тулбара, ни шторки нет
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, PictureOfTheDayFragment.newInstance())
+                .replace(R.id.container, ApiFragment.newInstance())
                 .commitNow()
         }
     }

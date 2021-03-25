@@ -21,6 +21,7 @@
                 android:id="@+id/input_layout"
                 style="@style/TextInputLayoutStyle"
                 android:hint="@string/search_wiki"
+                android:visibility="gone"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
                 app:endIconCheckable="true"
@@ -42,6 +43,7 @@
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupMain"
                 style="@style/ChipGroupStyle"
+                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_layout"
@@ -91,18 +93,18 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         style="@style/BottomAppBarStyle"
+        android:visibility="gone"
         app:backgroundTint="?colorPrimary"
         app:fabAlignmentMode="center"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
-        android:visibility="visible"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar"  />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         style="@style/FabStyle"
+        android:visibility="gone"
         app:layout_anchor="@id/bottom_app_bar"
-        android:visibility="visible"
         app:tint="?colorBottomIcon"
         app:srcCompat="@drawable/ic_plus_fab"
         android:contentDescription="@string/fab" />
