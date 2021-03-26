@@ -3,17 +3,11 @@ package geekbarains.material.ui
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.preference.PreferenceManager
 import geekbarains.material.R
-import geekbarains.material.ui.api.ApiFragment
-import geekbarains.material.ui.picture.BottomNavigationDrawerFragment
-import geekbarains.material.ui.picture.BottomSheet
-import geekbarains.material.ui.picture.PictureOfTheDayFragment
-import geekbarains.material.ui.search.SearchFragment
+import geekbarains.material.ui.tabs.ApiFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 //в макете активити только FrameLayout - ни тулбара, ни шторки нет

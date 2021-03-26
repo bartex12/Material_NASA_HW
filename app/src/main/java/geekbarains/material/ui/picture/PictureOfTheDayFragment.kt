@@ -1,7 +1,5 @@
 package geekbarains.material.ui.picture
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -14,12 +12,9 @@ import coil.api.clear
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
-import geekbarains.material.ui.api.ApiFragment
 import geekbarains.material.ui.search.SearchFragment
-import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
-import kotlinx.android.synthetic.main.fragment_api.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -29,7 +24,6 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
 
     companion object {
         const val TAG = "33333"
-        fun newInstance() = PictureOfTheDayFragment()
         private var isExpanded = false
     }
 
@@ -39,10 +33,10 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
-//
-//    override fun onItemClick(date: String) {
-//        viewModel.sendServerRequest(date)
-//    }
+
+    override fun onItemClick(date: String) {
+        viewModel. sendServerRequest(date)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +50,7 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
         Log.d(TAG, "PictureOfTheDayFragment onViewCreated ")
 
 //        //разрешаем показ меню во фрагменте
-//        setHasOptionsMenu(true)
+           setHasOptionsMenu(true)
 
         //находим корневой лейаут и подключаем BottomSheet
         val bottomSheet: ConstraintLayout = initBottomSheet(view)
@@ -110,7 +104,6 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
                     }else{
                         bottomSheet.visibility = View.GONE
-                       // bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
                     }
                     true
                 }
@@ -123,6 +116,7 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                 R.id.bottom_view_search -> {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container,SearchFragment())
+                        .addToBackStack("search")
                         .commit()
                     true
                 }
@@ -264,9 +258,4 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                 }
             }
         }
-
-    override fun onItemClick(date: String) {
-        viewModel. sendServerRequest(date)
-    }
-
 }

@@ -1,0 +1,48 @@
+package geekbarains.material.ui.tabs.earth
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import geekbarains.material.R
+import kotlinx.android.synthetic.main.item_capital.view.*
+
+class EarthRecyclerAdapter(private val onitemClickListener: OnitemClickListener): RecyclerView.Adapter<EarthRecyclerAdapter.ViewHolder>() {
+
+    interface OnitemClickListener{
+        fun onItemclick(capitalOfState: CapitalOfState)
+    }
+
+    //так сделано чтобы передавать список в адаптер без конструктора
+    // - через присвоение полю значения
+    var listCapitals: List<CapitalOfState> = listOf()
+        set(value){
+            field = value
+            notifyDataSetChanged()
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_capital, parent, false))
+
+    override fun getItemCount(): Int {
+        return listCapitals.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind( listCapitals[position])
+    }
+
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
+
+        fun bind(capitalOfState: CapitalOfState){
+            itemView.tv_state.text = capitalOfState.name
+            itemView.tv_capital.text = capitalOfState.capital
+
+            itemView.setOnClickListener {
+                onitemClickListener.onItemclick(capitalOfState)
+            }
+        }
+    }
+}
+

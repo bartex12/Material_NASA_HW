@@ -1,4 +1,4 @@
-package geekbarains.material.ui.api
+package geekbarains.material.ui.tabs.weather
 
 import android.os.Bundle
 import android.view.LayoutInflater

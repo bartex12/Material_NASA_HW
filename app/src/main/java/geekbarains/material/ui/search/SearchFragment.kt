@@ -5,20 +5,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import coil.api.clear
 import com.google.android.material.chip.Chip
 import geekbarains.material.R
-import geekbarains.material.ui.picture.BottomNavigationDrawerFragment
-import geekbarains.material.ui.picture.PictureOfTheDayFragment
 import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.util.toast
-import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_main.input_edit_text
-import kotlinx.android.synthetic.main.fragment_main.input_layout
 import kotlinx.android.synthetic.main.fragment_search.*
-import java.util.*
 
 class SearchFragment : Fragment(){
 
@@ -71,14 +63,9 @@ class SearchFragment : Fragment(){
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> toast("Favourite")
 
             R.id.app_bar_settings ->
                 startActivity(Intent(requireActivity(), SettingsActivity::class.java))
-
-            android.R.id.home -> {
-                //todo
-            }
         }
         return super.onOptionsItemSelected(item)
     }

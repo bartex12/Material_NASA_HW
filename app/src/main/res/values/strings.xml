@@ -67,6 +67,8 @@
     <string name="descr">Описание</string>
     <string name="searching">Поиск</string>
     <string name="elsee">Ещё</string>
+    <string name="state">Страна</string>
+    <string name="capital">Столица</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>
