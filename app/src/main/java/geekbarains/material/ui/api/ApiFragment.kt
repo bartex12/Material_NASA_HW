@@ -38,64 +38,10 @@ class ApiFragment:Fragment() {
         //разрешаем показ меню во фрагменте
         setHasOptionsMenu(true)
 
-        view_pager.adapter =ViewPageAdapter(childFragmentManager)
+        view_pager.adapter = ViewPageAdapter(childFragmentManager)
         tab_layout.setupWithViewPager(view_pager)
 
-//        //находим корневой лейаут и подключаем BottomSheet, передавая туда контекст и вью для манипуляций
-//        val bottomSheet = BottomSheet(view, bottom_navigation_view)
-//        Log.d(TAG, "ApiFragment onViewCreated bottomSheet = $bottomSheet" )
-//        //инициализация нижнего меню фрагмента
-//        initBottomNavigationView(bottomSheet.bottomSheet)
-//
-//        //находим корневой лейаут и подключаем BottomSheet
-//        val bottomSheet: ConstraintLayout = view.findViewById(R.id.bottom_sheet_container)
-//        //настраиваем  Behavior
-//        setBottomSheetBehavior(bottomSheet)
-//        //инициализация нижнего меню фрагмента - слушатель на нажатие пункта меню
-//        initBottomNavigationView(bottomSheet)
     }
-
-//    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-//        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-//        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-//        //скрываем bottom_app_bar при движении bottomSheet и показываем при сворачивании
-//        bottomSheetBehavior.addBottomSheetCallback( object : BottomSheetBehavior.BottomSheetCallback(){
-//            override fun onStateChanged(bottomSheet: View, newState: Int) {
-//                if (newState == BottomSheetBehavior.STATE_DRAGGING ){
-//                    bottom_navigation_view.visibility =View.GONE
-//                    //fab.visibility = View.GONE
-//                }else if (newState == BottomSheetBehavior.STATE_COLLAPSED){
-//                    bottom_navigation_view.visibility = View.VISIBLE
-//                    //fab.visibility = View.VISIBLE
-//                }
-//            }
-//            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-//            }
-//        })
-//    }
-
-//    private fun initBottomNavigationView(bottomSheet: ConstraintLayout) {
-//        bottom_navigation_view.setOnNavigationItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.bottom_view_description -> {
-//                    bottomSheet.visibility = View.VISIBLE
-//                    true
-//                }
-//                R.id.bottom_view_search -> {
-//                    view_pager.setCurrentItem(4)
-//                    true
-//                }
-//                R.id.bottom_view_more -> {
-//                        val dialog = BottomNavigationDrawerFragment()
-//                        dialog.setOnItemClickListener(this)
-//                        dialog.show(childFragmentManager, "tag_dialog_more")
-//
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

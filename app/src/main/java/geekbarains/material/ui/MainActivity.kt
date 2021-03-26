@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(){
         }
 
         setSupportActionBar(toolbar)
+        //отключаем показ заголовка тулбара, так как там свой макет с main_title
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
         
         with(toolbar.findViewById<TextView>(R.id.main_title)){
