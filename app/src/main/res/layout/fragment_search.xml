@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:paddingStart="@dimen/cl_paddingStart"
+    android:paddingEnd="@dimen/cl_paddingEnd"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_search"
+        android:hint="@string/search_wiki"
+        app:boxCornerRadiusBottomEnd="@dimen/boxCornerRadiusBottomEnd"
+        app:boxCornerRadiusTopStart="@dimen/boxCornerRadiusTopStart"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_wikipedia"
+        app:endIconMode="custom"
+        app:helperText="@string/wiki_helper_text"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_edit_text_search"
+            style="@style/TextInputEditTextStyle" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/chips_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupSearch"
+            style="@style/ChipGroupStyle"
+            android:layout_marginTop="8dp"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip1"
+                style="@style/ChipStyle"
+                android:text="Меркурий" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip2"
+                style="@style/ChipStyle"
+                android:text="Венера" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip3"
+                style="@style/ChipStyle"
+                android:text="Земля" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Марс" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip5"
+                style="@style/ChipStyle"
+                android:text="Юпитер" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip6"
+                style="@style/ChipStyle"
+                android:text="Сатурн" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip7"
+                style="@style/ChipStyle"
+                android:text="Уран" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Нептун " />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip9"
+                style="@style/ChipStyle"
+                android:text="Вселенная" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip10"
+                style="@style/ChipStyle"
+                android:text="Туманность" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip11"
+                style="@style/ChipStyle"
+                android:text="Галактика" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip12"
+                style="@style/ChipStyle"
+                android:text="Звезда" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip13"
+                style="@style/ChipStyle"
+                android:text="Планета" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip14"
+                style="@style/ChipStyle"
+                android:text="Комета" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Астероид " />
+        </com.google.android.material.chip.ChipGroup>
+
+    </LinearLayout>
+
+</LinearLayout>

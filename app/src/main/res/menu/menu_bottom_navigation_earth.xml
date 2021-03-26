@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/bottom_view_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/searching" />
+
+    <item
+        android:id="@+id/bottom_view_more"
+        android:icon="@drawable/ic_more_horiz_24"
+        android:title="@string/elsee" />
+</menu>

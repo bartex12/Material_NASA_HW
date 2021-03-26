@@ -3,4 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     style="@style/FrameStyle"
+    android:layout_marginTop="?attr/actionBarSize"
     tools:context=".ui.MainActivity" />
