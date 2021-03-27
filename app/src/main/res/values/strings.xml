@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">Material</string>
+    <string name="app_name">Only stars</string>
     <string name="photo_of_the_day_stub">Photo of the day</string>
     <string name="search_wiki">Найти в Википедии</string>
     <string name="wiki_helper_text">Поищите термин в википедии</string>
     <string name="favourite">favourite</string>
-    <string name="settings">settings</string>
+    <string name="settings">Настройки</string>
     <string name="search">Search</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -62,6 +62,14 @@
     <string name="four_days_ago">4 дня назад</string>
     <string name="five_days_ago">5 дней назад</string>
     <string name="fab">fab</string>
+    <string name="The_universe_in_the_palm">Вселенная на ладони</string>
+    <string name="home">В начало</string>
+    <string name="descr">Описание</string>
+    <string name="searching">Поиск</string>
+    <string name="elsee">Фото</string>
+    <string name="state">Страна</string>
+    <string name="capital">Столица</string>
+    <string name="last_search">Последнее</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>

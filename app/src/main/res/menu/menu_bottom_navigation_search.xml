@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/app_bar_last"
+        android:icon="@drawable/ic_outline_find_replace_24"
+        android:title="@string/last_search"/>
+
+    <item
+        android:id="@+id/app_bar_settings"
+        android:icon="@drawable/ic_settings_menu"
+        android:title="@string/settings"/>
+</menu>

@@ -7,7 +7,7 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import geekbarains.material.R
-import kotlinx.android.synthetic.main.settings_activity.*
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -29,7 +29,7 @@ class SettingsActivity : AppCompatActivity() {
             3->setTheme(R.style.AppThemeBlack)
         }
 
-        setContentView(R.layout.settings_activity)
+        setContentView(R.layout.activity_settings)
         //при запуске
         if (savedInstanceState == null) {
             supportFragmentManager

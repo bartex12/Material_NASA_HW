@@ -22,7 +22,7 @@
         <item name="textInputStyle">@style/AppTextField</item>
         <item name="materialCardViewStyle">@style/AppCard</item>
         <!--        свои атрибуты-->
-        <item name="colorBottomIcon">@android:color/white</item>
+        <item name="colorBottomIcon">?colorPrimary</item>
         <item name="favorite"> @style/ButtonFavoriteStyle</item>
         <item name="bottom_sheet_view_background"> @color/bright_gray</item>
         <item name="bottom_sheet_root_background"> @color/whisper</item>
@@ -172,4 +172,5 @@
         <item name="android:textSize">12sp</item>
         <item name="strokeColor">?colorAccent</item>
     </style>
+
 </resources>

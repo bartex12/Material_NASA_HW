@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_layout_search"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin_8dp"
+        android:hint="@string/search_wiki"
+        app:boxCornerRadiusBottomEnd="@dimen/boxCornerRadiusBottomEnd"
+        app:boxCornerRadiusTopStart="@dimen/boxCornerRadiusTopStart"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:endIconCheckable="true"
+        app:endIconDrawable="@drawable/ic_wikipedia"
+        app:endIconMode="custom"
+        app:helperText="@string/wiki_helper_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/chipGroupSearch">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_edit_text_search"
+            style="@style/TextInputEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupSearch"
+        style="@style/ChipGroupStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_layout_search"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip1"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Меркурий" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip2"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Венера" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip3"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Земля" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Марс" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip5"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Юпитер" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip6"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сатурн" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip7"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Уран" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip8"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нептун" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip81"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Плутон" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip9"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вселенная" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip10"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Туманность" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip11"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Галактика" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip12"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Звезда" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip13"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Планета" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip14"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Комета" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip15"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Астероид" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip16"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Чёрная дыра" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip17"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Тёмная материя" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip18"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Тёмная энергия" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip19"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Созвездие" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip20"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Млечный путь" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip21"
+            style="@style/ChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Солнце" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/btn_color_selector"
+        app:itemTextColor="@color/btn_color_selector"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/menu_bottom_navigation_search" />
+</androidx.constraintlayout.widget.ConstraintLayout>
