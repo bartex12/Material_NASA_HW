@@ -1,5 +1,6 @@
 package geekbarains.material.ui.picture
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -13,6 +14,7 @@ import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
 import geekbarains.material.ui.search.SearchFragment
+import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -96,7 +98,6 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                     viewPager.setCurrentItem(0)
                     true
                 }
-
                 R.id.bottom_view_description -> {
                     isExpanded = !isExpanded
                     if(isExpanded){
@@ -107,12 +108,6 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                     }
                     true
                 }
-
-//                R.id.bottom_view_search -> {
-//                    val viewPager= view.rootView.findViewById<ViewPager>(R.id.view_pager)
-//                    viewPager.setCurrentItem(4)
-//                    true
-//                }
                 R.id.bottom_view_search -> {
                     requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container,SearchFragment())
@@ -120,12 +115,15 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                         .commit()
                     true
                 }
-
                 R.id.bottom_view_more -> {
                         val dialog = BottomNavigationDrawerFragment()
                         dialog.setOnItemClickListener(this)
                         dialog.show(childFragmentManager, "tag_dialog_more")
 
+                    true
+                }
+                R.id.app_bar_settings -> {
+                    startActivity(Intent(requireActivity(), SettingsActivity::class.java))
                     true
                 }
                 else -> false

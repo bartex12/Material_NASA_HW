@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/bottom_view_description"
-        android:icon="@drawable/ic_read_more_24"
+        android:icon="@drawable/ic_outline_article_24"
         android:title="@string/descr" />
 
     <item
@@ -13,6 +13,11 @@
 
     <item
         android:id="@+id/bottom_view_more"
-        android:icon="@drawable/ic_more_horiz_24"
+        android:icon="@drawable/ic_baseline_add_circle_outline_24"
         android:title="@string/elsee" />
+
+    <item
+        android:id="@+id/app_bar_settings"
+        android:icon="@drawable/ic_settings_menu"
+        android:title="@string/settings"/>
 </menu>

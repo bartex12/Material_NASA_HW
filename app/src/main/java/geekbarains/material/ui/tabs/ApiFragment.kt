@@ -30,7 +30,7 @@ class ApiFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //разрешаем показ меню во фрагменте
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
 
         view_pager.adapter = ViewPageAdapter(childFragmentManager)
         tab_layout.setupWithViewPager(view_pager)

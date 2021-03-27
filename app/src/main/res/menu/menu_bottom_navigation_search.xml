@@ -7,7 +7,12 @@
         android:title="@string/home"/>
 
     <item
-        android:id="@+id/bottom_view_more"
-        android:icon="@drawable/ic_more_horiz_24"
-        android:title="@string/elsee" />
+        android:id="@+id/app_bar_last"
+        android:icon="@drawable/ic_outline_find_replace_24"
+        android:title="@string/last_search"/>
+
+    <item
+        android:id="@+id/app_bar_settings"
+        android:icon="@drawable/ic_settings_menu"
+        android:title="@string/settings"/>
 </menu>

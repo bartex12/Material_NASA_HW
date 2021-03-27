@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.earth
+package geekbarains.material.ui.tabs.earth.entity.capital
 
 object MapOfCapital {
     val mapCapitals = mapOf(

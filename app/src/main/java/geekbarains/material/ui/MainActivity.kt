@@ -5,20 +5,19 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.preference.PreferenceManager
 import geekbarains.material.R
 import geekbarains.material.ui.tabs.ApiFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_settings.*
 
-//в макете активити только FrameLayout - ни тулбара, ни шторки нет
-//все навороты - во фрагменте с фото дня
 class MainActivity : AppCompatActivity(){
 
     companion object{
         const val TAG = "33333"
     }
     private var oldTheme:Int = 1
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +39,28 @@ class MainActivity : AppCompatActivity(){
                 .replace(R.id.container, ApiFragment.newInstance())
                 .commitNow()
         }
-
+        //поддержка экшенбара
         setSupportActionBar(toolbar)
         //отключаем показ заголовка тулбара, так как там свой макет с main_title
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
-        
+        Log.d(TAG, "MainActivity onCreate backStackEntryCount =" +
+                "${supportFragmentManager.backStackEntryCount}" )
+        //https://stackoverflow.com/questions/28531503/toolbar-switching-from-drawer-to-back-
+        // button-with-only-one-activity/29292130#29292130
+        //если в BackStack есть  фрагменты
+        //то отображаем стрелку назад и устанавливаем слушатель на щелчок по ней с действием
+        //onBackPressed(), иначе не показываем стрелку
+        supportFragmentManager.addOnBackStackChangedListener {  //слушатель BackStack
+            if(supportFragmentManager.backStackEntryCount > 0){
+                supportActionBar?.setDisplayHomeAsUpEnabled(true) //показать стрелку
+                toolbar.setNavigationOnClickListener { // слушатель кнопки навигации- стрелка
+                    onBackPressed()
+                }
+            }else{
+                supportActionBar?.setDisplayHomeAsUpEnabled(false)//не показывать стрелку
+            }
+        }
+        //текстовое поле в тулбаре
         with(toolbar.findViewById<TextView>(R.id.main_title)){
            textSize = 16f
            setTextColor(Color.WHITE)

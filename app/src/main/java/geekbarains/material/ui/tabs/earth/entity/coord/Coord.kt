@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.earth
+package geekbarains.material.ui.tabs.earth.entity.coord
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

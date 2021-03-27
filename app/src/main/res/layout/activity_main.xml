@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <TextView
@@ -25,21 +24,12 @@
                 android:layout_height="wrap_content"/>
 
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:layout_margin="@dimen/fab_margin"-->
-<!--        android:visibility="gone"-->
-<!--        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 <!--поведение fab при прокрутке-->
 <!--  app:layout_behavior="ru.barcats.a3l5_home.FabBehaviorVisible"-->
+<!-- сворачивание app:layout_scrollFlags="scroll|enterAlways"-->

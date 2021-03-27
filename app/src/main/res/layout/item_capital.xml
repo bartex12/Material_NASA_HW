@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginBottom="4dp"
-    android:orientation="horizontal">
+    android:layout_marginLeft="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="8dp"
+    android:clipToPadding="false"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/card_padding"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_capital"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="?colorPrimaryDark"
+        tools:text="@string/capital"/>
 
         <TextView
             android:id="@+id/tv_state"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="?colorPrimaryDark"
-            tools:text="@string/state"
-            />
+            tools:text="@string/state"/>
 
-        <TextView
-            android:id="@+id/tv_capital"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="14sp"
-            android:textColor="?colorPrimaryDark"
-            tools:text="@string/capital"/>
     </LinearLayout>
+</androidx.cardview.widget.CardView >

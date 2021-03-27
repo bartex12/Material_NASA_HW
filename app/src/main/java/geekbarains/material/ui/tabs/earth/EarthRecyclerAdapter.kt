@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import geekbarains.material.R
+import geekbarains.material.ui.tabs.earth.entity.capital.CapitalOfState
 import kotlinx.android.synthetic.main.item_capital.view.*
 
 class EarthRecyclerAdapter(private val onitemClickListener: OnitemClickListener): RecyclerView.Adapter<EarthRecyclerAdapter.ViewHolder>() {

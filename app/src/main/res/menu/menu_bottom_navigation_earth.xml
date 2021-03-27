@@ -12,7 +12,8 @@
         android:title="@string/searching" />
 
     <item
-        android:id="@+id/bottom_view_more"
-        android:icon="@drawable/ic_more_horiz_24"
-        android:title="@string/elsee" />
+        android:id="@+id/app_bar_settings"
+        android:icon="@drawable/ic_settings_menu"
+        android:title="@string/settings"/>
+
 </menu>
