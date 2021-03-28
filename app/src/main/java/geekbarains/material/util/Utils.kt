@@ -13,6 +13,9 @@ fun Fragment.toast(string: String?) {
     }
 }
 
-fun Fragment.snackBar(view: View, string: CharSequence) {
-    Snackbar.make(view, string, Snackbar.LENGTH_SHORT).show()
+fun Fragment.snackBarLong(view: View, string: CharSequence) {
+    Snackbar.make(view, string, Snackbar.LENGTH_LONG).show()
     }
+fun Fragment.snackBarShort(view: View, string: CharSequence) {
+    Snackbar.make(view, string, Snackbar.LENGTH_SHORT).show()
+}

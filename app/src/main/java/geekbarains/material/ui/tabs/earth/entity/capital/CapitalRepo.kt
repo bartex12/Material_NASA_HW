@@ -1,12 +1,18 @@
 package geekbarains.material.ui.tabs.earth.entity.capital
 
-import geekbarains.material.ui.tabs.earth.entity.capital.ICapitalRepo
-import geekbarains.material.ui.tabs.earth.entity.capital.MapOfCapital
-
 class CapitalRepo:
     ICapitalRepo {
 
-    override fun loadData(): Map<String, String> {
-     return  MapOfCapital.mapCapitals
+    override fun loadData(): List<CapitalOfState> {
+        val list =   mutableListOf<CapitalOfState>()
+        for (mapp in MapOfCapital.mapCapitals){
+            list.add(
+                CapitalOfState(
+                    name = mapp.key,
+                    capital = mapp.value
+                )
+            )
+        }
+     return  list
     }
 }

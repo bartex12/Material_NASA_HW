@@ -70,6 +70,15 @@
     <string name="state">Страна</string>
     <string name="capital">Столица</string>
     <string name="last_search">Последнее</string>
+    <string name="google_maps_key">AIzaSyBU-yFz18nPaBwqBDedSGvUkfBgDYEQ0zc</string>
+    <!-- Google Maps menu -->
+    <string name="menu_map_mode">Map Mode</string>
+    <string name="menu_map_mode_normal">Normal</string>
+    <string name="menu_map_mode_satellite">Satellite</string>
+    <string name="menu_map_mode_terrain">Terrain</string>
+    <string name="menu_map_traffic">Traffic</string>
+    <string name="menu_map_location">My Location</string>
+    <string name="menu_map_point_new">Add Point</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>
