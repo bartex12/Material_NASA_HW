@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -60,8 +61,6 @@ class EarthFragment : Fragment(){
             Log.d(TAG, "EarthFragment onViewCreated вкладка со списком " )
             adapter?.listCapitals = list
         })
-        //инициализация нижнего меню фрагмента - слушатель на нажатие пункта меню
-        initBottomNavigationView(view)
 
         initAdapter()
     }
@@ -83,20 +82,8 @@ class EarthFragment : Fragment(){
                 Log.d(TAG, "EarthFragment getOnClickListener " +
                         "${capitalOfState.capital} ${capitalOfState.name}")
 
-             //   startActivity(Intent(requireActivity(), MapsActivity::class.java))
-
                 viewModelEarth.getCoordSealed(capitalOfState)
                     .observe(viewLifecycleOwner, Observer {renderData(it)})
-
-//                val geo = "geo:0,0?z=5&q=${capitalOfState.capital} ${capitalOfState.name} кафе рядом"
-//
-//                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(geo))
-//                // пакет для использования Гугл карты
-//                val packageManager: PackageManager = requireActivity().packageManager
-//                if (isPackageInstalled("com.google.android.apps.maps", packageManager)) {
-//                    intent.setPackage("com.google.android.apps.maps")
-//                }
-//                requireActivity().startActivity(intent)
             }
         }
 
@@ -122,24 +109,13 @@ class EarthFragment : Fragment(){
         val lat = capitalCoords.coord?.lat //широта для столицы государства
         val lon = capitalCoords.coord?.lon //долгота для столицы государства
 
-
         Log.d(TAG, "EarthFragment renderCoords " +
                 "Координаты для ${capitalCoords.name}  lon = $lon  lat = $lat  temp =$temp")
 
-        startActivity(Intent(requireActivity(), MapsActivity::class.java))
+        //запускаем активити с картой
+        MapsActivity.start(requireActivity(), lat, lon)
 
-//        val geo = "geo:34.5281,69.1723?z=7"
-//        val geo = "geo:0,0?z=5&q=Кабул Афганистан"
-//        val geo = "geo:$lat,$lon?z=12"
-//
-//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(geo))
-//        // пакет для использования Гугл карты
-//        val packageManager: PackageManager = requireActivity().packageManager
-//        if (isPackageInstalled("com.google.android.apps.maps", packageManager)) {
-//            intent.setPackage("com.google.android.apps.maps")
-//        }
-//        requireActivity().startActivity(intent)
-
+            //  получение картинки со спутника
 //        if(lon!=null && lat!=null){
 //            viewModelEarth.getPictureSealed(lon, lat).observe(viewLifecycleOwner, Observer {
 //                renderAssets(it)
@@ -151,15 +127,7 @@ class EarthFragment : Fragment(){
 
     }
 
-//    //если ошибка - возвращаем false
-//    private fun isPackageInstalled(packageName: String,packageManager: PackageManager): Boolean {
-//        return try {
-//            packageManager.getPackageInfo(packageName, 0)
-//            true
-//        } catch (e: PackageManager.NameNotFoundException) {
-//            false
-//        }
-//    }
+
 
     private fun renderAssets(data:PictureSealed) {
         when(data){
@@ -202,30 +170,5 @@ class EarthFragment : Fragment(){
             "Ошибка $error")
       //  tv_capital_description.text = error.message
        // iv_icon.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.whatcanido))
-    }
-
-    private fun initBottomNavigationView(view:View) {
-
-        bottom_navigation_earth.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> {
-                    val viewPager= view.rootView.findViewById<ViewPager>(R.id.view_pager)
-                    viewPager.setCurrentItem(0)
-                    true
-                }
-                R.id.bottom_view_search -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SearchFragment())
-                        .addToBackStack("search")
-                        .commit()
-                    true
-                }
-                R.id.app_bar_settings -> {
-                    startActivity(Intent(requireActivity(), SettingsActivity::class.java))
-                    true
-                }
-                else -> false
-            }
-        }
     }
 }

@@ -41,10 +41,6 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         navigation_view.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.navigation_video -> {
-                    val todayVideoAsString = "2021-01-11"
-                    listener.onItemClick(todayVideoAsString)
-                }
                 R.id.navigation_3days_ago ->{
                     val todayAsString =
                         dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, -3)}.time)
@@ -59,6 +55,10 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                     val beforeYesterdayAsString =
                         dateFormat.format( Calendar.getInstance().apply {add(Calendar.DATE, -5)}.time)
                     listener.onItemClick(beforeYesterdayAsString)
+                }
+                R.id.navigation_video -> {
+                    val todayVideoAsString = "2021-01-11"
+                    listener.onItemClick(todayVideoAsString)
                 }
             }
             this.dismiss()

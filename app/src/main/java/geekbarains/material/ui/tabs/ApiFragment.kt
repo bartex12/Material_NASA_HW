@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import geekbarains.material.R
+import geekbarains.material.ui.search.SearchFragment
 import geekbarains.material.ui.settings.SettingsActivity
-import geekbarains.material.util.toast
-import kotlinx.android.synthetic.main.fragment_api.*
+import kotlinx.android.synthetic.main.fragment_tabs.*
 
 class ApiFragment:Fragment() {
 
@@ -23,14 +23,14 @@ class ApiFragment:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_api,container, false )
+        return inflater.inflate(R.layout.fragment_tabs,container, false )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         //разрешаем показ меню во фрагменте
-        //setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
 
         view_pager.adapter = ViewPageAdapter(childFragmentManager)
         tab_layout.setupWithViewPager(view_pager)
@@ -44,6 +44,12 @@ class ApiFragment:Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.app_bar_search_wiki ->
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container, SearchFragment())
+                .addToBackStack("search")
+                .commit()
+
             R.id.app_bar_settings ->
                 startActivity(Intent(requireActivity(), SettingsActivity::class.java))
         }

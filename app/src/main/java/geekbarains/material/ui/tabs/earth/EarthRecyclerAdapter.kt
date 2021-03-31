@@ -37,8 +37,8 @@ class EarthRecyclerAdapter(private val onitemClickListener: OnitemClickListener)
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
 
         fun bind(capitalOfState: CapitalOfState){
-            itemView.tv_state.text = capitalOfState.name
-            itemView.tv_capital.text = capitalOfState.capital
+            itemView.tv_state.text = capitalOfState.capital
+            itemView.tv_capital.text = capitalOfState.name
 
             itemView.setOnClickListener {
                 onitemClickListener.onItemclick(capitalOfState)

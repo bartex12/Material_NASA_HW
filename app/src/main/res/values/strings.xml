@@ -58,6 +58,9 @@
     <string name="today">Сегодня</string>
     <string name="yesterday">Вчера</string>
     <string name="before_yesterday">Позавчера</string>
+    <string name="else_foto">Ещё фото</string>
+    <string name="show_descr">Описание</string>
+    <string name="two_days_ago">2 дня назад</string>
     <string name="three_days_ago">3 дня назад</string>
     <string name="four_days_ago">4 дня назад</string>
     <string name="five_days_ago">5 дней назад</string>
@@ -72,13 +75,14 @@
     <string name="last_search">Последнее</string>
     <string name="google_maps_key">AIzaSyBU-yFz18nPaBwqBDedSGvUkfBgDYEQ0zc</string>
     <!-- Google Maps menu -->
-    <string name="menu_map_mode">Map Mode</string>
-    <string name="menu_map_mode_normal">Normal</string>
-    <string name="menu_map_mode_satellite">Satellite</string>
-    <string name="menu_map_mode_terrain">Terrain</string>
-    <string name="menu_map_traffic">Traffic</string>
-    <string name="menu_map_location">My Location</string>
-    <string name="menu_map_point_new">Add Point</string>
+    <string name="menu_map_mode">Тип карты</string>
+    <string name="menu_map_mode_normal">По умолчанию</string>
+    <string name="menu_map_mode_satellite">Спутник</string>
+    <string name="menu_map_mode_terrain">Рельеф</string>
+    <string name="menu_map_traffic">Пробки на дорогах</string>
+    <string name="menu_map_location">Я здесь</string>
+    <string name="menu_map_point_new">Начальная точка</string>
+    <string name="wiki_search">Поиск в Википедии</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>

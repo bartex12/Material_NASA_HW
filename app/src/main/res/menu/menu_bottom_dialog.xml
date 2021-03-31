@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="none">
-        <item
-            android:id="@+id/navigation_video"
-            android:icon="@drawable/ic_baseline_videocam_24"
-            android:title="@string/video" />
+
         <item
             android:id="@+id/navigation_3days_ago"
             android:icon="@drawable/ic_baseline_looks_3_24"
@@ -19,5 +16,10 @@
             android:id="@+id/navigation_5days_ago"
             android:icon="@drawable/ic_baseline_looks_5_24"
             android:title="@string/five_days_ago" />
+
+        <item
+            android:id="@+id/navigation_video"
+            android:icon="@drawable/ic_baseline_videocam_24"
+            android:title="@string/video" />
     </group>
 </menu>

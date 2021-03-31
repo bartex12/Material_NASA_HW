@@ -57,11 +57,24 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
         //находим корневой лейаут и подключаем BottomSheet
         val bottomSheet: ConstraintLayout = initBottomSheet(view)
 
-        //инициализация нижнего меню фрагмента - слушатель на нажатие пункта меню
-        initBottomNavigationView(view, bottomSheet)
-
         //инициализация группы чипсов фрагмента
         initChipGroup()
+
+        chip_descr.setOnClickListener {
+            isExpanded = !isExpanded
+            if(isExpanded){
+                bottomSheet.visibility = View.VISIBLE
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            }else{
+                bottomSheet.visibility = View.GONE
+            }
+        }
+
+        chip4.setOnClickListener {
+            val dialog = BottomNavigationDrawerFragment()
+            dialog.setOnItemClickListener(this)
+            dialog.show(childFragmentManager, "tag_dialog_more")
+        }
     }
 
         //находим корневой лейаут и подключаем BottomSheet
@@ -79,56 +92,14 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
         bottomSheetBehavior.addBottomSheetCallback( object : BottomSheetBehavior.BottomSheetCallback(){
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING ){
-                    bottom_navigation_view.visibility =View.GONE
+                    //что то делать при протаскивании
                 }else if (newState == BottomSheetBehavior.STATE_COLLAPSED){
-                    bottom_navigation_view.visibility = View.VISIBLE
+                    //что-то делать при сворачивании
                 }
             }
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
         })
-    }
-
-        private fun initBottomNavigationView(view:View, bottomSheet: ConstraintLayout) {
-
-        bottom_navigation_view.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> {
-                    val viewPager= view.rootView.findViewById<ViewPager>(R.id.view_pager)
-                    viewPager.setCurrentItem(0)
-                    true
-                }
-                R.id.bottom_view_description -> {
-                    isExpanded = !isExpanded
-                    if(isExpanded){
-                        bottomSheet.visibility = View.VISIBLE
-                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-                    }else{
-                        bottomSheet.visibility = View.GONE
-                    }
-                    true
-                }
-                R.id.bottom_view_search -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container,SearchFragment())
-                        .addToBackStack("search")
-                        .commit()
-                    true
-                }
-                R.id.bottom_view_more -> {
-                        val dialog = BottomNavigationDrawerFragment()
-                        dialog.setOnItemClickListener(this)
-                        dialog.show(childFragmentManager, "tag_dialog_more")
-
-                    true
-                }
-                R.id.app_bar_settings -> {
-                    startActivity(Intent(requireActivity(), SettingsActivity::class.java))
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -162,38 +133,31 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                 R.id.chip1 -> {
                     val todayAsString =
                         dateFormat.format(
-                            Calendar.getInstance().apply { add(Calendar.DATE, 0) }.time
-                        )
-                    Log.d(
-                        TAG,
-                        "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString"
-                    )
+                            Calendar.getInstance().apply { add(Calendar.DATE, 0) }.time )
+                    Log.d(TAG,"PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
                     image_view.clear()
                     viewModel.sendServerRequest(todayAsString)
                 }
                 R.id.chip2 -> {
                     val yesterdayAsString =
                         dateFormat.format(
-                            Calendar.getInstance().apply { add(Calendar.DATE, -1) }.time
-                        )
-                    Log.d(
-                        TAG,
-                        "PictureOfTheDayFragment onActivityCreated yesterdayAsString = $yesterdayAsString"
-                    )
+                            Calendar.getInstance().apply { add(Calendar.DATE, -1) }.time)
+                    Log.d(TAG,"PictureOfTheDayFragment onActivityCreated yesterdayAsString = $yesterdayAsString")
                     image_view.clear()
                     viewModel.sendServerRequest(yesterdayAsString)
                 }
                 R.id.chip3 -> {
                     val beforeYesterdayAsString =
                         dateFormat.format(
-                            Calendar.getInstance().apply { add(Calendar.DATE, -2) }.time
-                        )
-                    Log.d(
-                        TAG,
-                        "PictureOfTheDayFragment onActivityCreated beforeYesterdayAsString = $beforeYesterdayAsString"
-                    )
+                            Calendar.getInstance().apply { add(Calendar.DATE, -2) }.time)
+                    Log.d(TAG,"PictureOfTheDayFragment onActivityCreated beforeYesterdayAsString = $beforeYesterdayAsString")
                     image_view.clear()
                     viewModel.sendServerRequest(beforeYesterdayAsString)
+                }
+                R.id.chip4 -> {
+                    val dialog = BottomNavigationDrawerFragment()
+                    dialog.setOnItemClickListener(this)
+                    dialog.show(childFragmentManager, "tag_dialog_more")
                 }
             }
         }

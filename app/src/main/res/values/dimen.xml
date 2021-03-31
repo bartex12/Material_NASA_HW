@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="behavior_peekHeight">120dp</dimen>
+    <dimen name="behavior_peekHeight">60dp</dimen>
     <dimen name="bottom_sheet_view_layout_width">50dp</dimen>
     <dimen name="bottom_sheet_view_layout_height">2dp</dimen>
     <dimen name="bottom_sheet_view_layout_marginTop">5dp</dimen>

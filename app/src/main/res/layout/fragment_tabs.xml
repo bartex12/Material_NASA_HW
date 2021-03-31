@@ -19,7 +19,7 @@
             android:id="@+id/tab_layout"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            app:tabMode="scrollable"
+            app:tabMode="auto"
             app:tabIndicatorHeight="3dp"/>
 
     </androidx.viewpager.widget.ViewPager>

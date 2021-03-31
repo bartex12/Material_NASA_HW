@@ -35,6 +35,10 @@ class SearchFragment : Fragment(){
         Log.d( TAG, "SearchFragment onViewCreated backStackEntryCount =" +
                 "${requireActivity().supportFragmentManager.backStackEntryCount}" )
 
+        //разрешаем показ меню во фрагменте
+        setHasOptionsMenu(true)
+
+
         //слушатель на чипсы
         initChipGroup()
         //слушатель на иконку строки поиска
@@ -48,7 +52,7 @@ class SearchFragment : Fragment(){
             }
         }
         //инициализация нижнего меню фрагмента - слушатель на нажатие пункта меню
-        initBottomNavigationView(view)
+        //initBottomNavigationView(view)
     }
 
     override fun onPause() {
@@ -73,26 +77,21 @@ class SearchFragment : Fragment(){
         }
     }
 
-    private fun initBottomNavigationView(view:View) {
-        bottom_navigation_search.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> {
-                    requireActivity().onBackPressed()
-                    true
-                }
-                R.id.app_bar_last -> {
-                    //последняя введённая строка в поле поиска
-                    val lastSearch = PreferenceManager.getDefaultSharedPreferences(requireActivity())
-                        .getString(LAST_STRING, "")
-                    input_edit_text_search.setText(lastSearch)
-                    true
-                }
-                R.id.app_bar_settings -> {
-                    startActivity(Intent(requireActivity(), SettingsActivity::class.java))
-                    true
-                }
-                else -> false
-            }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_app_bar, menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.app_bar_search_wiki).setVisible(false)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_settings ->
+                startActivity(Intent(requireActivity(), SettingsActivity::class.java))
         }
+        return super.onOptionsItemSelected(item)
     }
 }
