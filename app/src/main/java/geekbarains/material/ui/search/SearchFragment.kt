@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.chip.Chip
 import geekbarains.material.R
 import geekbarains.material.ui.settings.SettingsActivity
@@ -51,8 +50,6 @@ class SearchFragment : Fragment(){
                 toast(resources.getString(R.string. input_any_text))
             }
         }
-        //инициализация нижнего меню фрагмента - слушатель на нажатие пункта меню
-        //initBottomNavigationView(view)
     }
 
     override fun onPause() {

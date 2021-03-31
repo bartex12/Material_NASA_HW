@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import geekbarains.material.ui.MainActivity
 import geekbarains.material.ui.tabs.earth.entity.capital.CapitalOfState
 import geekbarains.material.ui.tabs.earth.entity.capital.CapitalRepo
 import geekbarains.material.ui.tabs.earth.entity.capital.ICapitalRepo

@@ -16,8 +16,6 @@ class ApiFragment:Fragment() {
         fun newInstance() = ApiFragment()
     }
 
-//    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -1,38 +1,25 @@
 package geekbarains.material.ui.tabs.earth
 
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
-import coil.api.load
-import com.google.android.material.appbar.AppBarLayout
 import geekbarains.material.R
 import geekbarains.material.ui.capitalpicture.CapitalPictureFragment
 import geekbarains.material.ui.maps.MapsActivity
-import geekbarains.material.ui.search.SearchFragment
-import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.ui.tabs.earth.entity.capital.CapitalOfState
 import geekbarains.material.ui.tabs.earth.entity.coord.CapitalCoords
 import geekbarains.material.ui.tabs.earth.entity.coord.CoordSealed
 import geekbarains.material.ui.tabs.earth.entity.picture.Assets
 import geekbarains.material.ui.tabs.earth.entity.picture.PictureSealed
 import geekbarains.material.util.snackBarLong
-import geekbarains.material.util.snackBarShort
-import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.fragment_earth.*
-import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.fragment_tabs.*
 
 class EarthFragment : Fragment(){
 
@@ -128,13 +115,8 @@ class EarthFragment : Fragment(){
                      viewModelEarth.getPictureSealed(lon, lat).observe(viewLifecycleOwner, Observer {
                       renderAssets(it)})
                  }
-
             }
         }
-
-//        snackBarShort(this@EarthFragment.requireView(),
-//            "Координаты для ${capitalCoords.name} \n lon = $lon  lat = $lat")
-
     }
 
 
@@ -175,9 +157,7 @@ class EarthFragment : Fragment(){
 
     private fun renderError(error: Throwable) {
         snackBarLong(this@EarthFragment.requireView(),
-            "Ошибка $error")
-        toast("Сегодня нет изображений со спунника ")
-      //  tv_capital_description.text = error.message
-       // iv_icon.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.whatcanido))
+            "Сегодня нет изображений со спунника \n " +
+                    "Ошибка $error")
     }
 }

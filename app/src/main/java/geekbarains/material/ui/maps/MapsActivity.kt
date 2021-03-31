@@ -174,55 +174,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         // Move camera to point with Animation
                         mMap!!.animateCamera(camUpdate)
                     }
-
-//                    // If location available
-//                    if (loc != null) {
-//                        // Create LatLng object for Maps
-//                        val target = LatLng(loc.latitude, loc.longitude)
-//                        // Defines a camera move. An object of this type can be used to modify a map's camera
-//                        // by calling moveCamera()
-//                        val camUpdate = CameraUpdateFactory.newLatLngZoom(target, 5f)
-//                        // Move camera to point with Animation
-//                        mMap!!.animateCamera(camUpdate)
-//                    }
                 }
             }
         }
-//        // Map type - Satellite
-//        if (id == R.id.menu_map_mode_satellite) {
-//            mMap!!.mapType = GoogleMap.MAP_TYPE_SATELLITE
-//            return true
-//        }
-//        // Map type - Terrain
-//        if (id == R.id.menu_map_mode_terrain) {
-//            mMap!!.mapType = GoogleMap.MAP_TYPE_TERRAIN
-//            return true
-//        }
-//        // My Location
-//        if (id == R.id.menu_map_location && mMap!!.isMyLocationEnabled) {
-//
-//            // Get last know location
-//            @SuppressLint("MissingPermission") val loc =
-//                mLocManager!!.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
-//
-//            // If location available
-//            if (loc != null) {
-//                // Create LatLng object for Maps
-//                val target = LatLng(loc.latitude, loc.longitude)
-//                // Defines a camera move. An object of this type can be used to modify a map's camera
-//                // by calling moveCamera()
-//                val camUpdate = CameraUpdateFactory.newLatLngZoom(target, 5f)
-//                // Move camera to point with Animation
-//                mMap!!.animateCamera(camUpdate)
-//            }
-//        }
-
-//        // Add point to map
-//        if (id == R.id.menu_map_point_new) {
-//            val map_taget = LatLng(lat.toDouble(), lon.toDouble())
-//            mMap!!.addMarker(MarkerOptions().position(map_taget))
-//            moveCamera(map_taget, 3f)
-//        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -233,6 +187,4 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (target == null || zoom < 1) return
         mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(target, zoom))
     }
-
-
 }

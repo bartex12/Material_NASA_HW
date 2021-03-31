@@ -16,8 +16,6 @@ class ViewPageAdapter(val fragmentManager : FragmentManager)
        const val EARTH = 1
        const val MARS = 2
        const val WEATHER = 3
-    /*   const val SEARCH = 4*/
-
     }
 
    private val fragments = arrayOf(PictureOfTheDayFragment(),
@@ -31,7 +29,6 @@ class ViewPageAdapter(val fragmentManager : FragmentManager)
             1->fragments[EARTH]
             2->fragments[MARS]
             3->fragments[WEATHER]
-           /* 4 -> fragments[SEARCH]*/
             else -> fragments[PICTURE_OF_DAY]
         }
     }
@@ -46,7 +43,6 @@ class ViewPageAdapter(val fragmentManager : FragmentManager)
             1->"Земля"
             2->"Марс"
             3->"Погода"
-            /*4-> "Поиск"*/
             else -> "Фото дня"
         }
     }
