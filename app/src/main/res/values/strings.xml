@@ -13,9 +13,14 @@
     <string name="input_any_text">Введите что-нибудь в строке поиска</string>
 
     <string name="title_activity_settings">Настройки</string>
+
     <string name="app_theme">Тема приложения</string>
     <string name="choose_color_theme">Выберите цветовую тему приложения</string>
+    <string name="show_earth">Показать страну</string>
+    <string name="show_earth_from">Выберите способ показа страны из списка стран</string>
+
     <string name="theme_cat">Тема</string>
+    <string name="theme_earth">Страны мира</string>
     <string name="default2">Default</string>
     <string name="entry">Entry</string>
     <string name="choice">Choice</string>
@@ -83,6 +88,9 @@
     <string name="menu_map_location">Я здесь</string>
     <string name="menu_map_point_new">Начальная точка</string>
     <string name="wiki_search">Поиск в Википедии</string>
+    <string name="choose_from_list">Выберите страну из списка</string>
+    <string name="world_map">На карте мира</string>
+    <string name="foto_sat">Со спутника</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>
@@ -94,6 +102,16 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+    </string-array>
+
+    <string-array name="pref_entry_earth">
+        <item>На карте мира</item>
+        <item>Со спутника</item>
+    </string-array>
+
+    <string-array name="pref_entryValues_earth">
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
 </resources>

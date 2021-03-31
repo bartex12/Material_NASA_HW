@@ -1,5 +1,6 @@
 package geekbarains.material.ui.tabs.earth.entity.picture
 
+import com.google.gson.GsonBuilder
 import geekbarains.material.ui.tabs.earth.entity.coord.IDataSourceCoords
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
@@ -21,7 +22,7 @@ object ApiFactoryPicture {
            //прикручиваем RxJava
            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
            //Конвертер,  необходимый  для  преобразования  JSON  в   объекты
-           .addConverterFactory(GsonConverterFactory.create())
+           .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
            .build()
            .create(IDataSourcePicture::class.java)
    }

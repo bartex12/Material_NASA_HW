@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui.tabs.pictureday
 
 import android.util.Log
 import androidx.lifecycle.LiveData

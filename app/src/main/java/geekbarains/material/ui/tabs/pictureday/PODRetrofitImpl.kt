@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui.tabs.pictureday
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson

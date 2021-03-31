@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui.tabs.pictureday
 
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET

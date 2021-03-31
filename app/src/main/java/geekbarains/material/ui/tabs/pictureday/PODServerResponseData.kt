@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui.tabs.pictureday
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

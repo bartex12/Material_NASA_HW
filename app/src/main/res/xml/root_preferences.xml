@@ -13,4 +13,16 @@
             </ListPreference>
         </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/theme_earth">
+        <ListPreference
+            android:entries="@array/pref_entry_earth"
+            android:entryValues="@array/pref_entryValues_earth"
+            android:key="ListEarth"
+            android:title="@string/show_earth"
+            app:defaultValue="1"
+            android:summary="@string/show_earth_from">
+        </ListPreference>
+    </PreferenceCategory>
+
 </PreferenceScreen>

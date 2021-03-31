@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui.tabs.pictureday
 
 sealed class PictureOfTheDayData {
     data class Success(val serverResponseData: PODServerResponseData) : PictureOfTheDayData()

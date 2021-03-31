@@ -3,7 +3,7 @@ package geekbarains.material.ui.tabs
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import geekbarains.material.ui.picture.PictureOfTheDayFragment
+import geekbarains.material.ui.tabs.pictureday.PictureOfTheDayFragment
 import geekbarains.material.ui.tabs.earth.EarthFragment
 import geekbarains.material.ui.tabs.mars.MarsFragment
 import geekbarains.material.ui.tabs.weather.WeatherFragment

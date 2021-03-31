@@ -18,11 +18,15 @@ class MainActivity : AppCompatActivity(){
         const val TAG = "33333"
     }
     private var oldTheme:Int = 1
+    private var oldType:Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "MainActivity onCreate " )
 
+        //читаем сохранённный в настройках тип картинки
+        oldType = PreferenceManager.getDefaultSharedPreferences(this)
+            .getString("ListEarth", "1")!!.toInt()
         //читаем сохранённную в настройках тему
         oldTheme = PreferenceManager.getDefaultSharedPreferences(this)
             .getString("ListColor", "1")!!.toInt()
@@ -72,10 +76,13 @@ class MainActivity : AppCompatActivity(){
         super.onResume()
         Log.d(TAG, "MainActivity onResume " )
         //при изменении темы и возвращении из настроек проверяем - какая тема установлена
+        //читаем сохранённный в настройках тип картинки
+        val  newType = PreferenceManager.getDefaultSharedPreferences(this)
+            .getString("ListEarth", "1")!!.toInt()
         val newTheme = PreferenceManager.getDefaultSharedPreferences(this)
             .getString("ListColor", "1")!!.toInt()
         Log.d(TAG, "MainActivity onResume newTheme = $newTheme  oldTheme = $oldTheme ")
-        if (newTheme != oldTheme){
+        if (newTheme != oldTheme||newType!=oldType){
             recreate()
         }
     }

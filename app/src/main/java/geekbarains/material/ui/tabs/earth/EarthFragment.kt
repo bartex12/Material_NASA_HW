@@ -12,9 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import coil.api.load
+import com.google.android.material.appbar.AppBarLayout
 import geekbarains.material.R
 import geekbarains.material.ui.capitalpicture.CapitalPictureFragment
 import geekbarains.material.ui.maps.MapsActivity
@@ -27,8 +29,10 @@ import geekbarains.material.ui.tabs.earth.entity.picture.Assets
 import geekbarains.material.ui.tabs.earth.entity.picture.PictureSealed
 import geekbarains.material.util.snackBarLong
 import geekbarains.material.util.snackBarShort
+import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.fragment_earth.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_tabs.*
 
 class EarthFragment : Fragment(){
 
@@ -37,6 +41,7 @@ class EarthFragment : Fragment(){
     }
     lateinit var viewModelEarth:EarthViewModel
     private var adapter: EarthRecyclerAdapter? = null
+    private var picture_type:Int = 1
 
     var temp  = 0
 
@@ -52,8 +57,11 @@ class EarthFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelEarth = ViewModelProvider(this).get(EarthViewModel::class.java)
+        //читаем сохранённный в настройках тип картинки
+        picture_type = PreferenceManager.getDefaultSharedPreferences(requireActivity())
+            .getString("ListEarth", "1")!!.toInt()
 
+        viewModelEarth = ViewModelProvider(this).get(EarthViewModel::class.java)
         //так как используются вкладки, а список на второй вкладке - для его отображения
         //используем LiveData, которая сама выдаст данные, когда перейдём на вкладку со списком
         //если делать не через LiveData? а просто получать список, он не отображается
@@ -61,7 +69,6 @@ class EarthFragment : Fragment(){
             Log.d(TAG, "EarthFragment onViewCreated вкладка со списком " )
             adapter?.listCapitals = list
         })
-
         initAdapter()
     }
 
@@ -112,16 +119,19 @@ class EarthFragment : Fragment(){
         Log.d(TAG, "EarthFragment renderCoords " +
                 "Координаты для ${capitalCoords.name}  lon = $lon  lat = $lat  temp =$temp")
 
-        //запускаем активити с картой
-        MapsActivity.start(requireActivity(), lat, lon)
+        when(picture_type){
+            1->{//запускаем активити с картой
+                MapsActivity.start(requireActivity(), lat, lon)
+                }
+            2 -> {//  получение картинки со спутника
+                if(lon!=null && lat!=null){
+                     viewModelEarth.getPictureSealed(lon, lat).observe(viewLifecycleOwner, Observer {
+                      renderAssets(it)})
+                 }
 
-            //  получение картинки со спутника
-//        if(lon!=null && lat!=null){
-//            viewModelEarth.getPictureSealed(lon, lat).observe(viewLifecycleOwner, Observer {
-//                renderAssets(it)
-//                //startActivity(Intent(requireActivity(), MapsActivity::class.java))
-//            })
-//        }
+            }
+        }
+
 //        snackBarShort(this@EarthFragment.requireView(),
 //            "Координаты для ${capitalCoords.name} \n lon = $lon  lat = $lat")
 
@@ -147,14 +157,12 @@ class EarthFragment : Fragment(){
     }
 
     private fun renderPicture(assets: Assets){
-
-
-//        assets.url?. let{
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .replace(R.id.container, CapitalPictureFragment.newInstance(it))
-//                .addToBackStack("capitalPicture")
-//                .commit()
-//        }
+        assets.url?. let{
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.container, CapitalPictureFragment.newInstance(it))
+                .addToBackStack("capitalPicture")
+                .commit()
+        }
     }
 
     private fun renderLoadingStart(){
@@ -168,6 +176,7 @@ class EarthFragment : Fragment(){
     private fun renderError(error: Throwable) {
         snackBarLong(this@EarthFragment.requireView(),
             "Ошибка $error")
+        toast("Сегодня нет изображений со спунника ")
       //  tv_capital_description.text = error.message
        // iv_icon.setImageDrawable( ContextCompat.getDrawable(requireContext(),R.drawable.whatcanido))
     }

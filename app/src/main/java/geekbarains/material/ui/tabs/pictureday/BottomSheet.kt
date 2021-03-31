@@ -1,4 +1,4 @@
-package geekbarains.material.ui.picture
+package geekbarains.material.ui.tabs.pictureday
 
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout

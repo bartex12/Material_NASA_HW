@@ -69,14 +69,14 @@ class EarthViewModel: ViewModel() {
     private fun  loadPictureSealed(lon:Float, lat:Float){
         Log.d(TAG, "EarthViewModel loadPictureSealed lon = $lon lat = $lat" )
         pictureSealed.value = PictureSealed.Loading(null)//далее запускаем прогресс бар
-        pictureRepo.getPictureOfCapital(lon, lat, "2021-03-10",0.1f,
+        pictureRepo.getPictureOfCapital(lon, lat,/*"2021-01-01",*/
             "wX1Eamf7gnFJj4cgU1U1pl5LGNyxvuLhT7FQ9wPg" )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d(TAG, "EarthViewModel loadCoordSealed url = ${it.url}" )
+                Log.d(TAG, "EarthViewModel loadPictureSealed url = ${it.url}" )
                 pictureSealed.value = PictureSealed.Success(assets = it)
             },{error->
-                Log.d(TAG, "EarthViewModel loadCoordSealed error = $error" )
+                Log.d(TAG, "EarthViewModel loadPictureSealed error = $error" )
                 pictureSealed.value = PictureSealed.Error(error = error)
             })
     }
