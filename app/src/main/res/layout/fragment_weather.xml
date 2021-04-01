@@ -7,13 +7,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_weather"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bg_system"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_weather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,5 +23,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottom_navigation_earth" />
+        app:menu="@menu/menu_bottom_navigation_earth" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

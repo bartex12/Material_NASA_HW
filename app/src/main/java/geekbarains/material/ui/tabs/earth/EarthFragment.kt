@@ -1,10 +1,13 @@
 package geekbarains.material.ui.tabs.earth
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,12 +17,16 @@ import geekbarains.material.R
 import geekbarains.material.ui.capitalpicture.CapitalPictureFragment
 import geekbarains.material.ui.maps.MapsActivity
 import geekbarains.material.ui.tabs.earth.entity.capital.CapitalOfState
+import geekbarains.material.ui.tabs.earth.entity.capital.MapOfCapital
 import geekbarains.material.ui.tabs.earth.entity.coord.CapitalCoords
 import geekbarains.material.ui.tabs.earth.entity.coord.CoordSealed
 import geekbarains.material.ui.tabs.earth.entity.picture.Assets
 import geekbarains.material.ui.tabs.earth.entity.picture.PictureSealed
 import geekbarains.material.util.snackBarLong
+import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.fragment_earth.*
+import kotlinx.android.synthetic.main.fragment_search.*
+import java.util.*
 
 class EarthFragment : Fragment(){
 
@@ -31,6 +38,8 @@ class EarthFragment : Fragment(){
     private var picture_type:Int = 1
 
     var temp  = 0
+
+    var capitalOfState = listOf<CapitalOfState>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,8 +64,37 @@ class EarthFragment : Fragment(){
         viewModelEarth.loadData().observe(viewLifecycleOwner, Observer {list->
             Log.d(TAG, "EarthFragment onViewCreated вкладка со списком " )
             adapter?.listCapitals = list
+            capitalOfState = list //сохраняем список во viewModel
         })
+
         initAdapter()
+
+        //слушатель на изменение текста в поле поиска
+        input_edit_text_earth.addTextChangedListener {et->
+            if (et.toString().isNotBlank()) {
+                val listSearched = mutableListOf<CapitalOfState>()
+                for (state in capitalOfState) {
+                    state.name?. let{ name->
+                        if((name.toUpperCase(Locale.ROOT)
+                                .startsWith(et.toString().toUpperCase(Locale.ROOT)))){
+                            listSearched.add(state)
+                        }
+
+//                        if ((name.toUpperCase(Locale.ROOT))
+//                                .contains(et.toString().toUpperCase(Locale.ROOT))){
+//                            listSearched.add(state)
+//                            }
+                        }
+                    }
+                adapter?.listCapitals = listSearched
+            }else{
+                adapter?.listCapitals = capitalOfState
+            }
+        }
+        //слушатель на иконку  в конце поля поиска
+        input_layout_earth.setEndIconOnClickListener {
+            input_edit_text_earth.setText("") // очищаем поле и возвращаем исходный список
+        }
     }
 
     override fun onPause() {

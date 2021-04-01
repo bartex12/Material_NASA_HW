@@ -33,11 +33,8 @@ class SearchFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         Log.d( TAG, "SearchFragment onViewCreated backStackEntryCount =" +
                 "${requireActivity().supportFragmentManager.backStackEntryCount}" )
-
         //разрешаем показ меню во фрагменте
         setHasOptionsMenu(true)
-
-
         //слушатель на чипсы
         initChipGroup()
         //слушатель на иконку строки поиска

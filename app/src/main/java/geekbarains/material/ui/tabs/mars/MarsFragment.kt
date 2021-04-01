@@ -22,35 +22,4 @@ class MarsFragment: Fragment() {
         return inflater.inflate(R.layout.fragment_mars,container, false )
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        //инициализация нижнего меню фрагмента - слушатель на нажатие пункта меню
-        initBottomNavigationView(view)
-    }
-
-    private fun initBottomNavigationView(view:View) {
-
-        bottom_navigation_mars.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> {
-                    val viewPager= view.rootView.findViewById<ViewPager>(R.id.view_pager)
-                    viewPager.setCurrentItem(0)
-                    true
-                }
-                R.id.bottom_view_search -> {
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SearchFragment())
-                        .addToBackStack("search")
-                        .commit()
-                    true
-                }
-                R.id.app_bar_settings -> {
-                    startActivity(Intent(requireActivity(), SettingsActivity::class.java))
-                    true
-                }
-                else -> false
-            }
-        }
-    }
 }

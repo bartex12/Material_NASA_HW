@@ -56,6 +56,7 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
         initChipGroup()
         initDescription(bottomSheet)
         initBottomDialog()
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
