@@ -91,6 +91,7 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
     }
 
     private fun initDescription(bottomSheet: ConstraintLayout) {
+
         chip_descr.setOnClickListener {
             isExpanded = !isExpanded
             if (isExpanded) {
@@ -113,6 +114,7 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
         private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+
         //скрываем bottom_app_bar при движении bottomSheet и показываем при сворачивании
         bottomSheetBehavior.addBottomSheetCallback( object : BottomSheetBehavior.BottomSheetCallback(){
             override fun onStateChanged(bottomSheet: View, newState: Int) {
