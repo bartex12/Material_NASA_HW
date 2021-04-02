@@ -1,17 +1,25 @@
 package geekbarains.material.ui.tabs.earth
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import geekbarains.material.R
 import geekbarains.material.util.snackBarLong
+import kotlinx.android.synthetic.main.fragment_earth.*
 import kotlinx.android.synthetic.main.fragment_mars.*
+import kotlinx.android.synthetic.main.item_mars.*
 
 class EarthFragment: Fragment() {
 
@@ -60,25 +68,6 @@ class EarthFragment: Fragment() {
 
     private fun renderPicture(data: List<PictureOfEarth>){
         adapter?.listOfPictures = data
-//       //val  url = "https://epic.gsfc.nasa.gov/archive/natural/2021/03/31/png/epic_1b_20210331001751.png "
-//        val date = data[0].date?.take(10)
-//        val dateWithDiv = date?.replace("-", "/")
-//        val url ="https://epic.gsfc.nasa.gov/archive/natural/$dateWithDiv/" +
-//                "jpg/${data[0].image}.jpg "
-//        Log.d(PictureOfTheDayFragment.TAG, "### EarthFragment renderPicture url = $url")
-//
-//        imageViewTest.load(url){
-//            lifecycle(this@EarthFragment)
-//            placeholder(R.drawable.ic_no_photo_vector)
-//            error(R.drawable.ic_load_error_vector)
-//        }
-
-//        Picasso.with(context)
-//            .load(url)
-//            .placeholder(R.drawable.ic_no_photo_vector)
-//            .error(R.drawable.ic_load_error_vector)
-//            .into(imageViewTest)
-
     }
 
     private fun renderLoadingStart(){
@@ -104,8 +93,11 @@ class EarthFragment: Fragment() {
     private fun getOnClickListener(): EarthRecyclerAdapter.OnItemClickListener =
         object : EarthRecyclerAdapter.OnItemClickListener{
             override fun onItemClick(url: String) {
-                Log.d(TAG, "EarthFragment getOnClickListener $url")
-                //todo увеличить картинку
+                Log.d(TAG, "### EarthFragment getOnClickListener $url")
+
+                val intent = Intent(requireActivity(), AnimationActivity::class.java)
+                intent.putExtra(AnimationActivity.URL_ANIMATION, url)
+                startActivity(intent)
             }
         }
 

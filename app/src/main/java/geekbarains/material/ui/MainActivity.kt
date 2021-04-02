@@ -97,13 +97,10 @@ class MainActivity : AppCompatActivity(){
         super.onResume()
         Log.d(TAG, "MainActivity onResume " )
         //при изменении темы и возвращении из настроек проверяем - какая тема установлена
-        //читаем сохранённный в настройках тип картинки
-        val  newType = PreferenceManager.getDefaultSharedPreferences(this)
-            .getString("ListEarth", "1")!!.toInt()
         val newTheme = PreferenceManager.getDefaultSharedPreferences(this)
             .getString("ListColor", "1")!!.toInt()
         Log.d(TAG, "MainActivity onResume newTheme = $newTheme  oldTheme = $oldTheme ")
-        if (newTheme != oldTheme||newType!=oldType){
+        if (newTheme != oldTheme){
             recreate()
         }
     }

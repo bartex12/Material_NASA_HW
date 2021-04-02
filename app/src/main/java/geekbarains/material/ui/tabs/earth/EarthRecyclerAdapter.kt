@@ -5,9 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.squareup.picasso.Picasso
 import geekbarains.material.R
+import kotlinx.android.synthetic.main.activity_animations.*
 import kotlinx.android.synthetic.main.item_mars.view.*
 
 class EarthRecyclerAdapter(val onItemClickListener:OnItemClickListener): RecyclerView.Adapter<EarthRecyclerAdapter.ViewHolder>() {
@@ -16,6 +22,7 @@ class EarthRecyclerAdapter(val onItemClickListener:OnItemClickListener): Recycle
         const val TAG = "33333"
     }
    lateinit var context:Context
+   var  isExpanded = false
 
 interface OnItemClickListener{
     fun onItemClick(url:String)
@@ -59,7 +66,24 @@ interface OnItemClickListener{
             itemView.textViewMars.text = pictureOfEarth.date
 
             itemView.setOnClickListener {
+
                 onItemClickListener.onItemClick(url)
+
+//                //определяем анимацию увеличения по щелску
+//                    isExpanded = !isExpanded
+//                    TransitionManager.beginDelayedTransition(
+//                        itemView.contaner_earth, TransitionSet()
+//                            .addTransition(ChangeBounds())
+//                            .addTransition(ChangeImageTransform())
+//                    )
+//
+//                    val params: ViewGroup.LayoutParams = itemView.iv_mars.layoutParams
+//                    params.height =
+//                        if (isExpanded) ViewGroup.LayoutParams.MATCH_PARENT else ViewGroup.LayoutParams.WRAP_CONTENT
+//                itemView.iv_mars.layoutParams = params
+//                itemView.iv_mars.scaleType =
+//                        if (isExpanded) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
+
             }
         }
 
