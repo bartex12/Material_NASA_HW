@@ -38,11 +38,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
     /** The Google Map object.  */
     private var mMap: GoogleMap? = null
-    var lat by Delegates.notNull<Float>()
-    var lon by Delegates.notNull<Float>()
+    private var lat by Delegates.notNull<Float>()
+    private var lon by Delegates.notNull<Float>()
 
     /** Location manager  */
-    var mLocManager: LocationManager? = null
+    private var mLocManager: LocationManager? = null
 
     /**
      * {@inheritDoc}
@@ -141,8 +141,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * {@inheritDoc}
      */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when(id){
+        when(item.itemId){
             R.id.menu_map_mode_satellite -> {
                 mMap!!.mapType = GoogleMap.MAP_TYPE_SATELLITE
               return  true

@@ -93,6 +93,29 @@
     <string name="choose_from_list">Выберите страну из списка</string>
     <string name="world_map">На карте мира</string>
     <string name="foto_sat">Со спутника</string>
+    <string name="merc">Меркурий</string>
+    <string name="venus">Венера</string>
+    <string name="earth_str">Земля</string>
+    <string name="mars_str">Марс</string>
+    <string name="jupiter">Юпитер</string>
+    <string name="saturn">Сатурн</string>
+    <string name="uran">Уран</string>
+    <string name="neptun">Нептун</string>
+    <string name="pluto">Плутон</string>
+    <string name="univers">Вселенная</string>
+    <string name="tuman">Туманность</string>
+    <string name="galo">Галактика</string>
+    <string name="star_str">Звезда</string>
+    <string name="planet">Планета</string>
+    <string name="comet">Комета</string>
+    <string name="aster">Астероид</string>
+    <string name="b_h">Чёрная дыра</string>
+    <string name="b_mat">Тёмная материя</string>
+    <string name="b_energy">Тёмная энергия</string>
+    <string name="castel">Созвездие</string>
+    <string name="milky">Млечный путь</string>
+    <string name="sun">Солнце</string>
+    <string name="tv_str">TextView</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>

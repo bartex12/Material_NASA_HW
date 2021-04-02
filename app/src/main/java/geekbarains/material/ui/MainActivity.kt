@@ -5,12 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.preference.PreferenceManager
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.android.gms.security.ProviderInstaller
 import geekbarains.material.R
 import geekbarains.material.ui.tabs.ApiFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_settings.*
+import java.security.KeyManagementException
+import java.security.NoSuchAlgorithmException
+import javax.net.ssl.SSLContext
+
 
 class MainActivity : AppCompatActivity(){
 
@@ -23,6 +28,22 @@ class MainActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "MainActivity onCreate " )
+
+        try {
+            // Google Play will install latest OpenSSL
+            ProviderInstaller.installIfNeeded(applicationContext)
+            val sslContext: SSLContext = SSLContext.getInstance("TLSv1.2")
+            sslContext.init(null, null, null)
+            sslContext.createSSLEngine()
+        } catch (e: GooglePlayServicesRepairableException) {
+            e.printStackTrace()
+        } catch (e: GooglePlayServicesNotAvailableException) {
+            e.printStackTrace()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        } catch (e: KeyManagementException) {
+            e.printStackTrace()
+        }
 
         //читаем сохранённный в настройках тип картинки
         oldType = PreferenceManager.getDefaultSharedPreferences(this)
@@ -46,7 +67,7 @@ class MainActivity : AppCompatActivity(){
         //поддержка экшенбара
         setSupportActionBar(toolbar)
         //отключаем показ заголовка тулбара, так как там свой макет с main_title
-        getSupportActionBar()?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         Log.d(TAG, "MainActivity onCreate backStackEntryCount =" +
                 "${supportFragmentManager.backStackEntryCount}" )
         //https://stackoverflow.com/questions/28531503/toolbar-switching-from-drawer-to-back-
