@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.worldmap.states
+package geekbarains.material.ui.tabs.map.states
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

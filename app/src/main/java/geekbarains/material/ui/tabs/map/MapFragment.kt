@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.worldmap
+package geekbarains.material.ui.tabs.map
 
 import android.os.Bundle
 import android.util.Log
@@ -12,20 +12,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
 import geekbarains.material.ui.maps.MapsActivity
-import geekbarains.material.ui.tabs.worldmap.states.CapitalOfState
-import geekbarains.material.ui.tabs.worldmap.coord.CapitalCoords
-import geekbarains.material.ui.tabs.worldmap.coord.CoordSealed
+import geekbarains.material.ui.tabs.map.states.CapitalOfState
+import geekbarains.material.ui.tabs.map.coord.CapitalCoords
+import geekbarains.material.ui.tabs.map.coord.CoordSealed
 import geekbarains.material.util.snackBarLong
-import kotlinx.android.synthetic.main.fragment_earth.*
+import kotlinx.android.synthetic.main.fragment_map.*
 import java.util.*
 
-class WorldMapFragment : Fragment(){
+class MapFragment : Fragment(){
 
     companion object{
         const val TAG = "33333"
     }
-    lateinit var viewModelEarth:WorldMapViewModel
-    private var adapter: WorldMapRecyclerAdapter? = null
+    lateinit var viewModelMap:MapViewModel
+    private var adapter: MapRecyclerAdapter? = null
 
     private var temp  = 0
 
@@ -36,19 +36,19 @@ class WorldMapFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_earth,container, false )
+        return inflater.inflate(R.layout.fragment_map,container, false )
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelEarth = ViewModelProvider(this).get(WorldMapViewModel::class.java)
+        viewModelMap = ViewModelProvider(this).get(MapViewModel::class.java)
         //так как используются вкладки, а список на второй вкладке - для его отображения
         //используем LiveData, которая сама выдаст данные, когда перейдём на вкладку со списком
         //если делать не через LiveData? а просто получать список, он не отображается
-        viewModelEarth.loadData().observe(viewLifecycleOwner, Observer {list->
-            Log.d(TAG, "WorldMapFragment onViewCreated вкладка со списком " )
+        viewModelMap.loadData().observe(viewLifecycleOwner, Observer { list->
+            Log.d(TAG, "MapFragment onViewCreated вкладка со списком " )
             adapter?.listCapitals = list
             capitalOfState = list //сохраняем список
         })
@@ -56,7 +56,7 @@ class WorldMapFragment : Fragment(){
         initAdapter()
 
         //слушатель на изменение текста в поле поиска
-        input_edit_text_earth.addTextChangedListener {et->
+        input_edit_text_map.addTextChangedListener { et->
             if (et.toString().isNotBlank()) {
                 val listSearched = mutableListOf<CapitalOfState>()
                 for (state in capitalOfState) {
@@ -73,29 +73,29 @@ class WorldMapFragment : Fragment(){
             }
         }
         //слушатель на иконку  в конце поля поиска
-        input_layout_earth.setEndIconOnClickListener {
-            input_edit_text_earth.setText("") // очищаем поле и возвращаем исходный список
+        input_layout_map.setEndIconOnClickListener {
+            input_edit_text_map.setText("") // очищаем поле и возвращаем исходный список
         }
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "WorldMapFragment onPause " )
+        Log.d(TAG, "MapFragment onPause " )
     }
 
     private fun  initAdapter(){
-    rv_earth.layoutManager =LinearLayoutManager(requireActivity())
-        adapter =  WorldMapRecyclerAdapter(getOnClickListener())
-        rv_earth.adapter = adapter
+    rv_map.layoutManager =LinearLayoutManager(requireActivity())
+        adapter =  MapRecyclerAdapter(getOnClickListener())
+        rv_map.adapter = adapter
     }
 
-    private fun getOnClickListener(): WorldMapRecyclerAdapter.OnitemClickListener =
-        object : WorldMapRecyclerAdapter.OnitemClickListener{
+    private fun getOnClickListener(): MapRecyclerAdapter.OnitemClickListener =
+        object : MapRecyclerAdapter.OnitemClickListener{
             override fun onItemclick(capitalOfState: CapitalOfState) {
-                Log.d(TAG, "WorldMapFragment getOnClickListener " +
+                Log.d(TAG, "MapFragment getOnClickListener " +
                         "${capitalOfState.capital} ${capitalOfState.name}")
 
-                viewModelEarth.getCoordSealed(capitalOfState)
+                viewModelMap.getCoordSealed(capitalOfState)
                     .observe(viewLifecycleOwner, Observer {renderData(it)})
             }
         }
@@ -121,21 +121,21 @@ class WorldMapFragment : Fragment(){
         val lat = capitalCoords.coord?.lat //широта для столицы государства
         val lon = capitalCoords.coord?.lon //долгота для столицы государства
 
-        Log.d(TAG, "WorldMapFragment renderCoords " +
+        Log.d(TAG, "MapFragment renderCoords " +
                 "Координаты для ${capitalCoords.name}  lon = $lon  lat = $lat  temp =$temp")
 
         MapsActivity.start(requireActivity(), lat, lon)
     }
 
     private fun renderLoadingStart(){
-       progressBarEarth.visibility = View.VISIBLE
+       progressBarMap.visibility = View.VISIBLE
     }
 
     private fun renderLoadingStop(){
-        progressBarEarth.visibility = View.GONE
+        progressBarMap.visibility = View.GONE
     }
 
     private fun renderError(error: Throwable) {
-        snackBarLong(this@WorldMapFragment.requireView(),"Ошибка $error")
+        snackBarLong(this@MapFragment.requireView(),"Ошибка $error")
     }
 }

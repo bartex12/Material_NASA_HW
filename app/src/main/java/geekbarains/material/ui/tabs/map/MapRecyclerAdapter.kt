@@ -1,15 +1,15 @@
-package geekbarains.material.ui.tabs.worldmap
+package geekbarains.material.ui.tabs.map
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import geekbarains.material.R
-import geekbarains.material.ui.tabs.worldmap.states.CapitalOfState
+import geekbarains.material.ui.tabs.map.states.CapitalOfState
 import kotlinx.android.synthetic.main.item_capital.view.*
 
-class WorldMapRecyclerAdapter(private val onitemClickListener: OnitemClickListener)
-    : RecyclerView.Adapter<WorldMapRecyclerAdapter.ViewHolder>() {
+class MapRecyclerAdapter(private val onitemClickListener: OnitemClickListener)
+    : RecyclerView.Adapter<MapRecyclerAdapter.ViewHolder>() {
 
     interface OnitemClickListener{
         fun onItemclick(capitalOfState: CapitalOfState)

@@ -6,20 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.ChangeBounds
-import androidx.transition.ChangeImageTransform
-import androidx.transition.TransitionManager
-import androidx.transition.TransitionSet
 import geekbarains.material.R
 import geekbarains.material.util.snackBarLong
 import kotlinx.android.synthetic.main.fragment_earth.*
-import kotlinx.android.synthetic.main.fragment_mars.*
-import kotlinx.android.synthetic.main.item_mars.*
+import kotlinx.android.synthetic.main.fragment_map.*
 
 class EarthFragment: Fragment() {
 
@@ -35,7 +29,7 @@ class EarthFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_mars,container, false )
+        return inflater.inflate(R.layout.fragment_earth,container, false )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,11 +65,11 @@ class EarthFragment: Fragment() {
     }
 
     private fun renderLoadingStart(){
-        progressBarMars.visibility = View.VISIBLE
+        progressBarEarth.visibility = View.VISIBLE
     }
 
     private fun renderLoadingStop(){
-        progressBarMars.visibility = View.GONE
+        progressBarEarth.visibility = View.GONE
     }
 
     private fun renderError(error: Throwable) {
@@ -85,9 +79,9 @@ class EarthFragment: Fragment() {
     }
 
     private fun  initAdapter(){
-        rv_mars.layoutManager = LinearLayoutManager(requireActivity())
+        rv_earth.layoutManager = LinearLayoutManager(requireActivity())
         adapter =  EarthRecyclerAdapter(getOnClickListener())
-        rv_mars.adapter = adapter
+        rv_earth.adapter = adapter
     }
 
     private fun getOnClickListener(): EarthRecyclerAdapter.OnItemClickListener =

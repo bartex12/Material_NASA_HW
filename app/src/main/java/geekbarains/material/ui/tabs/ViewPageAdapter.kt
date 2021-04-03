@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import geekbarains.material.ui.tabs.pictureofday.PictureOfTheDayFragment
-import geekbarains.material.ui.tabs.worldmap.WorldMapFragment
+import geekbarains.material.ui.tabs.map.MapFragment
 import geekbarains.material.ui.tabs.earth.EarthFragment
 import geekbarains.material.ui.tabs.mars.MarsFragment
 
@@ -22,7 +22,7 @@ class ViewPageAdapter(fragmentManager : FragmentManager)
        PictureOfTheDayFragment(),
        EarthFragment(),
        MarsFragment(),
-       WorldMapFragment())
+       MapFragment())
 
     override fun getItem(position: Int): Fragment {
         return  when(position){

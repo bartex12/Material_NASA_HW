@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.worldmap.coord
+package geekbarains.material.ui.tabs.map.coord
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory

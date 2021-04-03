@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.worldmap.coord
+package geekbarains.material.ui.tabs.map.coord
 
 sealed class CoordSealed {
     data class Success(val capitalCoords: CapitalCoords):

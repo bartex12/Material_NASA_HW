@@ -2,8 +2,8 @@
 <MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@layout/fragment_earth"
-        motion:constraintSetStart="@layout/fragment_earth_start"
+        motion:constraintSetEnd="@layout/fragment_map"
+        motion:constraintSetStart="@layout/fragment_map_start"
         motion:duration="1000">
 
         <OnClick motion:targetId="@id/search_button" />

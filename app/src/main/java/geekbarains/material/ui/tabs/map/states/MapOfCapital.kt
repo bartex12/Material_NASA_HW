@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.worldmap.states
+package geekbarains.material.ui.tabs.map.states
 
 object MapOfCapital {
     val mapCapitals = mapOf(

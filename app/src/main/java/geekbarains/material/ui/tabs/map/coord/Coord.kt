@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.worldmap.coord
+package geekbarains.material.ui.tabs.map.coord
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
