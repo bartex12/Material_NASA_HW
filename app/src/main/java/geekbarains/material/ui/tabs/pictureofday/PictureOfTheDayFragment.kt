@@ -1,5 +1,6 @@
 package geekbarains.material.ui.tabs.pictureofday
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,6 +12,7 @@ import coil.api.clear
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
+import geekbarains.material.ui.tabs.earth.AnimationActivity
 import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -56,7 +58,6 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
         initChipGroup()
         initDescription(bottomSheet)
         initBottomDialog()
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -198,6 +199,12 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                             lifecycle(this@PictureOfTheDayFragment)
                             error(R.drawable.ic_load_error_vector)
                             placeholder(R.drawable.ic_no_photo_vector)
+                        }
+                        image_view.setOnClickListener {
+                            Log.d(TAG, "PictureOfTheDayFragment onViewCreated setOnClickListener")
+                            val intent = Intent(requireActivity(), AnimationActivity::class.java)
+                            intent.putExtra(AnimationActivity.URL_ANIMATION, url)
+                            startActivity(intent)
                         }
                     }
                 }else {

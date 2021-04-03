@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
 import geekbarains.material.util.snackBarLong
 import kotlinx.android.synthetic.main.fragment_earth.*
-import kotlinx.android.synthetic.main.fragment_map.*
 
 class EarthFragment: Fragment() {
 
@@ -21,7 +20,7 @@ class EarthFragment: Fragment() {
         const val TAG = "33333"
     }
 
-    private lateinit var viewModelMars: EarthViewModel
+    private lateinit var viewModelEarth: EarthViewModel
     private var adapter: EarthRecyclerAdapter? = null
 
     override fun onCreateView(
@@ -35,11 +34,11 @@ class EarthFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelMars =ViewModelProvider(requireActivity()).get(EarthViewModel::class.java)
+        viewModelEarth =ViewModelProvider(requireActivity()).get(EarthViewModel::class.java)
 
         initAdapter()
 
-        viewModelMars.getPictures().observe(viewLifecycleOwner, Observer {
+        viewModelEarth.getPictures().observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
     }

@@ -21,8 +21,6 @@ import geekbarains.material.R
 import geekbarains.material.ui.MainActivity
 import geekbarains.material.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_animations.*
-import kotlinx.android.synthetic.main.activity_maps.*
-import kotlinx.android.synthetic.main.item_mars.view.*
 
 class AnimationActivity : AppCompatActivity() {
 

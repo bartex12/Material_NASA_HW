@@ -16,7 +16,6 @@
             android:paddingStart="@dimen/cl_paddingStart"
             android:paddingEnd="@dimen/cl_paddingEnd">
 
-
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupMain"
                 style="@style/ChipGroupStyle"
