@@ -2,15 +2,14 @@ package geekbarains.material.ui.tabs.earth
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
@@ -77,18 +76,17 @@ class AnimationActivity : AppCompatActivity() {
                     .addTransition(ChangeBounds())
                     .addTransition(ChangeImageTransform())
             )
-
             val params: ViewGroup.LayoutParams = image_view_animate.layoutParams
             params.height =
-                if (isExpanded){
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                } else{
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                }
+                if (isExpanded){ ViewGroup.LayoutParams.MATCH_PARENT }
+                else{ ViewGroup.LayoutParams.WRAP_CONTENT}
             image_view_animate.layoutParams = params
-            image_view_animate.scaleType =
-                if (isExpanded) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.FIT_CENTER
 
+            image_view_animate.scaleType =
+                if (isExpanded) ImageView.ScaleType.CENTER_CROP
+                else ImageView.ScaleType.FIT_CENTER
+
+            //ставим чёрный по всем краям
             container_animate.setBackgroundColor(Color.BLACK)
             image_view_animate.setBackgroundColor(Color.BLACK)
         }
