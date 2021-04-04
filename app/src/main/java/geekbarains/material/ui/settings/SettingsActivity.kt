@@ -57,7 +57,7 @@ class SettingsActivity : AppCompatActivity() {
                     if (newValue != oldTheme){
                         Log.d(TAG, "1 SettingsFragment ListPreferenceTheme newValue = $newValue" +
                                 " oldTheme = $oldTheme ")
-                        requireActivity().finish()
+                        requireActivity().recreate()
                     }else{
                         Log.d(TAG, "2 SettingsFragment ListPreferenceTheme newValue = $newValue" +
                                 " oldTheme = $oldTheme ")
