@@ -2,6 +2,7 @@ package geekbarains.material.ui.settings
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
@@ -30,6 +31,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity_settings)
+
         //при запуске
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -40,6 +42,11 @@ class SettingsActivity : AppCompatActivity() {
         //поддержка экшенбара
         setSupportActionBar(toolbar_settings)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar?.title = getString(R.string.settings)
+        //отключаем показ заголовка тулбара, так как там свой макет с setting_title
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar_settings.findViewById<TextView>(R.id.setting_title).setText(R.string.settings)
+
         //ставим слушатель нажатия на стрелку Назад в тулбаре
         toolbar_settings.setNavigationOnClickListener {
             onBackPressed()

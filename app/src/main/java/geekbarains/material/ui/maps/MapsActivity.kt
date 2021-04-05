@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.preference.PreferenceManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -40,7 +41,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var mMap: GoogleMap? = null
     private var lat by Delegates.notNull<Float>()
     private var lon by Delegates.notNull<Float>()
-
     /** Location manager  */
     private var mLocManager: LocationManager? = null
 
@@ -49,10 +49,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //читаем сохранённную в настройках тему
+        val oldTheme = PreferenceManager.getDefaultSharedPreferences(this)
+            .getString("ListColor", "1")!!.toInt()
+        //устанавливаем сохранённную в настройках тему
+        when(oldTheme){
+            1->setTheme(R.style.AppTheme)
+            2->setTheme(R.style.AppThemePurple)
+            3->setTheme(R.style.AppThemeBlack)
+        }
         setContentView(R.layout.activity_maps)
 
-       lat =   intent.getFloatExtra(LAT, 0f)
-       lon =   intent.getFloatExtra(LON, 0f)
+       lat = intent.getFloatExtra(LAT, 0f)
+       lon = intent.getFloatExtra(LON, 0f)
 
         //поддержка экшенбара
         setSupportActionBar(toolbar_maps)

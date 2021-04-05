@@ -4,10 +4,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import geekbarains.material.room.Database
+import geekbarains.material.room.Favorite
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class PictureOfTheDayViewModel : ViewModel() {
+
+    private val isFavorite = MutableLiveData<FavoriteSealed>()
+    private val roomCash:IRoomFavoriteCash = RoomFavoriteCash(Database.getInstance())
 
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData()
     private val retrofitImpl: PODRetrofitImpl = PODRetrofitImpl()
@@ -45,5 +50,42 @@ class PictureOfTheDayViewModel : ViewModel() {
                         liveDataForViewToObserve.value =PictureOfTheDayData.Error(error = error)
                     }
                 })
+    }
+
+    fun isFavoriteState(favorite: Favorite): LiveData<FavoriteSealed>{
+        roomCash.isFavorite(favorite)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                isFavorite.value =FavoriteSealed.Success(isFavorite = it)
+            }, {
+                isFavorite.value =FavoriteSealed.Error(error = it)
+                Log.d(TAG, "PictureOfTheDayViewModel isFavoriteState error = ${it.message} ")
+            })
+        return isFavorite
+    }
+
+    fun addToFavorite(favorite: Favorite){
+        Log.d(TAG, "PictureOfTheDayViewModel addToFavorite ")
+        roomCash.addToFavorite(favorite)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({
+                isFavorite.value = FavoriteSealed.Success(isFavorite = true)
+            },{
+                isFavorite.value =FavoriteSealed.Error(error = it)
+                Log.d(TAG, "PictureOfTheDayViewModel addToFavorite error = ${it.message} ")
+            })
+    }
+
+    fun removeFavorite(favorite: Favorite){
+        Log.d(TAG, "PictureOfTheDayViewModel addToFavorite ")
+        roomCash.removeFavorite(favorite)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({
+                isFavorite.value = FavoriteSealed.Success(isFavorite = false)
+            },{
+                isFavorite.value =FavoriteSealed.Error(error = it)
+                Log.d(TAG, "PictureOfTheDayViewModel removeFavorite error = ${it.message} ")
+            })
     }
 }

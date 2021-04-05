@@ -3,16 +3,22 @@ package geekbarains.material.ui.tabs.pictureofday
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import coil.api.clear
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
-import geekbarains.material.ui.tabs.earth.AnimationActivity
+import geekbarains.material.room.Database
+import geekbarains.material.room.Favorite
+import geekbarains.material.room.table.RoomFavorite
+import geekbarains.material.ui.animation.AnimationActivity
 import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -20,21 +26,22 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnItemClickListener {
+class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListener {
 
     companion object {
         const val TAG = "33333"
         private var isExpanded = false
     }
 
+    var favorite:Favorite? = null //экземпляр класса Favorite со всеми полями = null
     private val dateFormat: DateFormat =SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private val viewModel: PictureOfTheDayViewModel by lazy {
+
+    private  val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
-    //метод обратного вызова из класса BottomNavigationDrawerFragment : BottomSheetDialogFragment()
+    //метод обратного вызова из класса DatePickerFragment
     override fun onItemClick(date: String) {
         chipGroupMain.clearCheck() //убираем выделение
         viewModel. sendServerRequest(date)
@@ -49,7 +56,8 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "PictureOfTheDayFragment onViewCreated ")
+        Log.d(TAG, "PictureOfTheDayFragment onViewCreated  ")
+
         //разрешаем показ меню во фрагменте
            setHasOptionsMenu(true)
         //находим корневой лейаут и подключаем BottomSheet
@@ -57,12 +65,27 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
         //инициализация группы чипсов фрагмента
         initChipGroup()
         initDescription(bottomSheet)
-        initBottomDialog()
+        initDatePicker()
+        initFavoritListener()
+    }
+
+    private fun initFavoritListener() {
+        favoriteFoto.setOnClickListener {
+            favorite?. let{
+                viewModel.addToFavorite(it)
+            }
+            toast("Сохранено в избранном")
+        }
+        favoriteFotoFilled.setOnClickListener {
+            favorite?. let{
+                viewModel.removeFavorite(it)
+            }
+            toast("Удалено из избранного")
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         //если грузим видео с фазами луны в 2021 то val todayAsString = "2021-01-11"
         //но мы грузим картинку дня и поэтому
         val todayAsString =
@@ -78,21 +101,14 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "PictureOfTheDayFragment onPause ")
-    }
-
-    private fun initBottomDialog() {
+    private fun initDatePicker() {
         chip4.setOnClickListener {
-            val dialog = BottomNavigationDrawerFragment()
-            dialog.setOnItemClickListener(this)
-            dialog.show(childFragmentManager, "tag_dialog_more")
+            //показываем календарь в диалоге для выбора даты
+            DatePickerFragment(this).show(childFragmentManager, "DatePicker")
         }
     }
 
     private fun initDescription(bottomSheet: ConstraintLayout) {
-
         chip_descr.setOnClickListener {
             isExpanded = !isExpanded
             if (isExpanded) {
@@ -163,11 +179,27 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
                     image_view.clear()
                     viewModel.sendServerRequest(beforeYesterdayAsString)
                 }
-                R.id.chip4 -> {
-                    val dialog = BottomNavigationDrawerFragment()
-                    dialog.setOnItemClickListener(this)
-                    dialog.show(childFragmentManager, "tag_dialog_more")
+            }
+        }
+    }
+
+    private fun renderFavorite(data:FavoriteSealed){
+        Log.d(TAG, "*** PictureOfTheDayFragment renderFavorite ")
+        when(data){
+            is FavoriteSealed.Success -> {
+                Log.d(TAG, "#*#*# PictureOfTheDayFragment renderFavorite Success" +
+                        " data.isFavorite = ${data.isFavorite}")
+                if(data.isFavorite){
+                    favoriteFoto.visibility = View.GONE
+                    favoriteFotoFilled.visibility= View.VISIBLE
+                }else{
+                    favoriteFoto.visibility = View.VISIBLE
+                    favoriteFotoFilled.visibility = View.GONE
                 }
+            }
+            is FavoriteSealed.Error -> {
+                toast(data.error.message)
+                Log.d(TAG, "PictureOfTheDayFragment renderFavorite Error")
             }
         }
     }
@@ -176,8 +208,20 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
         Log.d(TAG, "*** PictureOfTheDayFragment renderData ")
         when (data) {
             is PictureOfTheDayData.Success -> {
+
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
+
+                //запоминаем в поле для того чтобы использовать при записи в избранное
+                favorite = Favorite(serverResponseData.date, serverResponseData.title,
+                     serverResponseData.url, serverResponseData.mediaType)
+
+                favorite?. let{
+                    viewModel.isFavoriteState(it).observe(viewLifecycleOwner, Observer {
+                        renderFavorite(it)
+                    })
+                }
+
                 //прекращаем показ прогрессбара
                 progressBarNasa.visibility = View.GONE
 
@@ -216,7 +260,7 @@ class PictureOfTheDayFragment : Fragment() , BottomNavigationDrawerFragment.OnIt
 
                     image_view.visibility =View.GONE
                     web_view.visibility =View.VISIBLE
-                    web_view.loadUrl(url)
+                    url?. let{web_view.loadUrl(url!!)}
                 }
                 //тестовый текст / в макете выставлены значения выезжания bottom sheet
                 bottom_sheet_description_header?.text = serverResponseData.title

@@ -10,7 +10,16 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_settings"
             style="@style/ToolbarStyle"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+            <TextView
+                android:id="@+id/setting_title"
+                android:textSize="@dimen/tv_size_middle"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.Toolbar>
+
 
     </com.google.android.material.appbar.AppBarLayout>
 

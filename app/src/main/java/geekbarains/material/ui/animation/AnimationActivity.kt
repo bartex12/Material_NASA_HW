@@ -1,4 +1,4 @@
-package geekbarains.material.ui.tabs.earth
+package geekbarains.material.ui.animation
 
 import android.content.Intent
 import android.graphics.Color
@@ -47,6 +47,7 @@ class AnimationActivity : AppCompatActivity() {
         setSupportActionBar(toolbar_anim)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = ""
+        //toolbar_anim.findViewById<TextView>(R.id.anim_title).setText("")
         //ставим слушатель нажатия на стрелку Назад в тулбаре
         toolbar_anim.setNavigationOnClickListener {
             onBackPressed()

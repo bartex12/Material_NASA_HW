@@ -11,6 +11,7 @@ import com.google.android.material.chip.Chip
 import geekbarains.material.R
 import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.util.toast
+import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment(){
@@ -33,6 +34,7 @@ class SearchFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         Log.d( TAG, "SearchFragment onViewCreated backStackEntryCount =" +
                 "${requireActivity().supportFragmentManager.backStackEntryCount}" )
+
         //разрешаем показ меню во фрагменте
         setHasOptionsMenu(true)
         //слушатель на чипсы

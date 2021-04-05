@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
+import geekbarains.material.ui.animation.AnimationActivity
 import geekbarains.material.util.snackBarLong
 import kotlinx.android.synthetic.main.fragment_earth.*
 
