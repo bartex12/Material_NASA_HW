@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import geekbarains.material.R
+import geekbarains.material.ui.favorite.FavoriteFragment
 import geekbarains.material.ui.search.SearchFragment
 import geekbarains.material.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.fragment_tabs.*
@@ -42,6 +43,11 @@ class ApiFragment:Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.app_bar_favorites ->
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, FavoriteFragment())
+                    .addToBackStack("favorite")
+                    .commit()
             R.id.app_bar_search_wiki ->
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.container, SearchFragment())

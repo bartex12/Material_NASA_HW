@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/app_bar_favorites"
+        android:icon="@drawable/ic_favorite_border_white_24"
+        android:title="@string/favorites"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/app_bar_search_wiki"
         android:icon="@drawable/ic_wikipedia_white"
         android:title="@string/wiki_search"

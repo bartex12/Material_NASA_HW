@@ -41,8 +41,9 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
-    //метод обратного вызова из класса DatePickerFragment
+    //метод обратного вызова из класса DatePickerFragment - календарь
     override fun onItemClick(date: String) {
+        //viewModel.saveDate(date)
         chipGroupMain.clearCheck() //убираем выделение
         viewModel. sendServerRequest(date)
     }
@@ -69,21 +70,6 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
         initFavoritListener()
     }
 
-    private fun initFavoritListener() {
-        favoriteFoto.setOnClickListener {
-            favorite?. let{
-                viewModel.addToFavorite(it)
-            }
-            toast("Сохранено в избранном")
-        }
-        favoriteFotoFilled.setOnClickListener {
-            favorite?. let{
-                viewModel.removeFavorite(it)
-            }
-            toast("Удалено из избранного")
-        }
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //если грузим видео с фазами луны в 2021 то val todayAsString = "2021-01-11"
@@ -99,6 +85,21 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
 
         viewModel.getData()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
+    }
+
+    private fun initFavoritListener() {
+        favoriteFoto.setOnClickListener {
+            favorite?. let{
+                viewModel.addToFavorite(it)
+            }
+            toast("Сохранено в избранном")
+        }
+        favoriteFotoFilled.setOnClickListener {
+            favorite?. let{
+                viewModel.removeFavorite(it)
+            }
+            toast("Удалено из избранного")
+        }
     }
 
     private fun initDatePicker() {
@@ -211,6 +212,7 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
 
                 val serverResponseData = data.serverResponseData
                 val url = serverResponseData.url
+                val mediaType = serverResponseData.mediaType
 
                 //запоминаем в поле для того чтобы использовать при записи в избранное
                 favorite = Favorite(serverResponseData.date, serverResponseData.title,
@@ -246,8 +248,10 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
                         }
                         image_view.setOnClickListener {
                             Log.d(TAG, "PictureOfTheDayFragment onViewCreated setOnClickListener")
+
                             val intent = Intent(requireActivity(), AnimationActivity::class.java)
                             intent.putExtra(AnimationActivity.URL_ANIMATION, url)
+                            intent.putExtra(AnimationActivity.MEDIA_TYPE_ANIMATION, mediaType)
                             startActivity(intent)
                         }
                     }

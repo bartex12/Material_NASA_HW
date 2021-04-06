@@ -17,6 +17,8 @@ class PictureOfTheDayViewModel : ViewModel() {
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDayData> = MutableLiveData()
     private val retrofitImpl: PODRetrofitImpl = PODRetrofitImpl()
 
+    var date = ""
+
     companion object {
         const val TAG = "33333"
     }
@@ -32,7 +34,7 @@ class PictureOfTheDayViewModel : ViewModel() {
         //val apiKey: String = BuildConfig.NASA_API_KEY
         val apiKey = "wX1Eamf7gnFJj4cgU1U1pl5LGNyxvuLhT7FQ9wPg"
 
-        Log.d(TAG, "PictureOfTheDayViewModel sendServerRequest ")
+        Log.d(TAG, "PictureOfTheDayViewModel sendServerRequest date = $date")
 
             retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey, date)
                 .subscribeOn(Schedulers.io())
@@ -87,5 +89,9 @@ class PictureOfTheDayViewModel : ViewModel() {
                 isFavorite.value =FavoriteSealed.Error(error = it)
                 Log.d(TAG, "PictureOfTheDayViewModel removeFavorite error = ${it.message} ")
             })
+    }
+
+    fun saveDate(dateCal:String){
+        date = dateCal
     }
 }

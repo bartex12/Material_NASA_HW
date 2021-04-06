@@ -3,24 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/layout_margin_8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/fotoImageViewEdit"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/photo_100" />
+        app:srcCompat="@drawable/photo_56in100" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoTitleEdit"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/layout_margin_16dp"
+        android:textColor="?colorPrimary"
         android:text="Заголовок"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
+        android:maxLines="2"
         app:layout_constraintEnd_toEndOf="@+id/barrierFotoEdit"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/fotoImageViewEdit"
@@ -31,8 +33,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Дата"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="14sp"
+        android:textColor="?colorPrimary"
+        android:layout_marginBottom="@dimen/layout_margin_8dp"
         app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
         app:layout_constraintEnd_toStartOf="@+id/barrierFotoEdit"
         app:layout_constraintHorizontal_bias="0.0"
@@ -41,7 +44,7 @@
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierFotoEdit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         app:barrierDirection="start"
         app:constraint_referenced_ids="showTextFoto" />
 
@@ -50,12 +53,12 @@
         android:id="@+id/showTextFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:tint="@color/design_default_color_error"
+        android:layout_marginEnd="@dimen/layout_margin_8dp"
+        android:tint="?colorAccent"
         app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fotoImageViewEdit"
-        app:srcCompat="@drawable/arrow2_56" />
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoDescriptionTextViewEdit"
@@ -68,7 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fotoImageViewEdit"
-        tools:visibility="visible" />
+        tools:visibility="gone" />
 
     <View
         android:layout_width="match_parent"

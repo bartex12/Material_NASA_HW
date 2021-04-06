@@ -1,22 +1,29 @@
 package geekbarains.material.ui.favorite
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
 import geekbarains.material.room.Favorite
+import geekbarains.material.ui.animation.AnimationActivity
+import geekbarains.material.ui.search.SearchFragment
+import geekbarains.material.ui.settings.SettingsActivity
+import geekbarains.material.ui.tabs.ApiFragment
+import geekbarains.material.ui.tabs.pictureofday.PictureOfTheDayFragment
+import geekbarains.material.ui.tabs.pictureofday.PictureOfTheDayViewModel
+import kotlinx.android.synthetic.main.favorite_foto.*
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class FavoriteFragment: Fragment() {
 
     private var adapter: FavoriteRVAdapter? = null
-
     private lateinit var favoriteViewModel: FavoriteViewModel
 
     companion object {
@@ -31,6 +38,9 @@ class FavoriteFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "FavoriteFragment onViewCreated ")
 
+        //разрешаем показ меню во фрагменте
+        setHasOptionsMenu(true)
+
         favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
         favoriteViewModel.getFavorite().observe(viewLifecycleOwner, Observer<List<Favorite>>{ favorites->
@@ -43,6 +53,7 @@ class FavoriteFragment: Fragment() {
         setHasOptionsMenu(true)
         requireActivity().invalidateOptionsMenu()
     }
+
 
     private fun renderData(favorites: List<Favorite>) {
         if(favorites.isEmpty()){
@@ -66,7 +77,36 @@ class FavoriteFragment: Fragment() {
     private fun getOnClickListener(): FavoriteRVAdapter.OnitemClickListener =
         object : FavoriteRVAdapter.OnitemClickListener{
             override fun onItemclick(favorite: Favorite) {
+                Log.d(TAG, "FavoriteFragment setOnClickListener ")
 
+                    val intent = Intent(requireActivity(), AnimationActivity::class.java)
+                    intent.putExtra(AnimationActivity.URL_ANIMATION, favorite.url)
+                    intent.putExtra(AnimationActivity.MEDIA_TYPE_ANIMATION, favorite.type)
+                    startActivity(intent)
             }
         }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_app_bar, menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.app_bar_favorites).isVisible = false
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_settings ->
+                startActivity(Intent(requireActivity(), SettingsActivity::class.java))
+
+            R.id.app_bar_search_wiki ->
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SearchFragment())
+                    .addToBackStack("search")
+                    .commit()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
