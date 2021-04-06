@@ -5,60 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/fotoImageViewEdit"
-        android:layout_width="80dp"
+    <WebView
+        android:id="@+id/web_view_video_anim"
+        android:layout_width="120dp"
         android:layout_height="80dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/video2_100" />
+        tools:ignore="WebViewLayout" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/videoScreen"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fotoTitleEdit"
-        android:layout_width="wrap_content"
+        android:id="@+id/fotoTitleVideo"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/layout_margin_16dp"
+        android:textColor="?colorPrimary"
         android:text="Заголовок"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textSize="16sp"
+        android:maxLines="2"
+        android:layout_marginStart="@dimen/layout_margin_8dp"
         app:layout_constraintEnd_toEndOf="@+id/barrierFotoEdit"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/fotoImageViewEdit"
-        app:layout_constraintTop_toTopOf="@+id/fotoImageViewEdit" />
+        app:layout_constraintStart_toEndOf="@+id/web_view_video_anim"
+        app:layout_constraintTop_toTopOf="@+id/web_view_video_anim" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fotoDateEdit"
-        android:layout_width="wrap_content"
+        android:id="@+id/fotoDateVideo"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Дата"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
+        android:textSize="14sp"
+        android:textColor="?colorPrimary"
+        android:layout_marginBottom="@dimen/layout_margin_8dp"
+        android:layout_marginStart="@dimen/layout_margin_8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/web_view_video_anim"
         app:layout_constraintEnd_toStartOf="@+id/barrierFotoEdit"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/fotoImageViewEdit" />
+        app:layout_constraintStart_toEndOf="@+id/web_view_video_anim" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrierFotoEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="showTextFoto" />
+        app:constraint_referenced_ids="showTextVideo" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/showTextFoto"
+        android:id="@+id/showTextVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:tint="@color/design_default_color_error"
-        app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
+        app:layout_constraintBottom_toBottomOf="@+id/web_view_video_anim"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fotoImageViewEdit"
-        app:srcCompat="@drawable/arrow2_56" />
+        app:layout_constraintTop_toTopOf="@+id/web_view_video_anim"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/fotoDescriptionTextViewEdit"
+        android:id="@+id/fotoDescriptionVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -67,14 +79,14 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fotoImageViewEdit"
+        app:layout_constraintTop_toBottomOf="@+id/web_view_video_anim"
         tools:visibility="visible" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#000"
-        app:layout_constraintBottom_toBottomOf="@+id/fotoDescriptionTextViewEdit"
+        app:layout_constraintTop_toBottomOf="@+id/fotoDescriptionVideo"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

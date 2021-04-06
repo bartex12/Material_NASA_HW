@@ -18,11 +18,11 @@
         android:id="@+id/fotoTitleEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/layout_margin_16dp"
         android:textColor="?colorPrimary"
         android:text="Заголовок"
         android:textSize="16sp"
         android:maxLines="2"
+        android:layout_marginStart="@dimen/layout_margin_8dp"
         app:layout_constraintEnd_toEndOf="@+id/barrierFotoEdit"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/fotoImageViewEdit"
@@ -30,12 +30,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoDateEdit"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Дата"
         android:textSize="14sp"
         android:textColor="?colorPrimary"
         android:layout_marginBottom="@dimen/layout_margin_8dp"
+        android:layout_marginStart="@dimen/layout_margin_8dp"
         app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
         app:layout_constraintEnd_toStartOf="@+id/barrierFotoEdit"
         app:layout_constraintHorizontal_bias="0.0"
@@ -77,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#000"
-        app:layout_constraintBottom_toBottomOf="@+id/fotoDescriptionTextViewEdit"
+        app:layout_constraintTop_toBottomOf="@+id/fotoDescriptionTextViewEdit"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
