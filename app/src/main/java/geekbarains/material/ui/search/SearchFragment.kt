@@ -11,6 +11,7 @@ import com.google.android.material.chip.Chip
 import geekbarains.material.R
 import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.util.toast
+import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment(){
@@ -36,8 +37,6 @@ class SearchFragment : Fragment(){
 
         //разрешаем показ меню во фрагменте
         setHasOptionsMenu(true)
-
-
         //слушатель на чипсы
         initChipGroup()
         //слушатель на иконку строки поиска
@@ -81,7 +80,8 @@ class SearchFragment : Fragment(){
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.app_bar_search_wiki).setVisible(false)
+        menu.findItem(R.id.app_bar_search_wiki).isVisible = false
+        menu.findItem(R.id.app_bar_edit).isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

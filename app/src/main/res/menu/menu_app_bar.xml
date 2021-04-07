@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/app_bar_edit"
+        android:icon="@drawable/ic_baseline_edit_24"
+        android:title="@string/edit"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/app_bar_favorites"
+        android:icon="@drawable/ic_favorite_border_white_24"
+        android:title="@string/favorites"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/app_bar_search_wiki"

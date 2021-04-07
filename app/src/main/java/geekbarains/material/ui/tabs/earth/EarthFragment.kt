@@ -1,5 +1,6 @@
 package geekbarains.material.ui.tabs.earth
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,29 +9,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
-import geekbarains.material.ui.capitalpicture.CapitalPictureFragment
-import geekbarains.material.ui.maps.MapsActivity
-import geekbarains.material.ui.tabs.earth.entity.capital.CapitalOfState
-import geekbarains.material.ui.tabs.earth.entity.coord.CapitalCoords
-import geekbarains.material.ui.tabs.earth.entity.coord.CoordSealed
-import geekbarains.material.ui.tabs.earth.entity.picture.Assets
-import geekbarains.material.ui.tabs.earth.entity.picture.PictureSealed
+import geekbarains.material.ui.animation.AnimationActivity
 import geekbarains.material.util.snackBarLong
 import kotlinx.android.synthetic.main.fragment_earth.*
 
-class EarthFragment : Fragment(){
+class EarthFragment: Fragment() {
 
     companion object{
         const val TAG = "33333"
     }
-    lateinit var viewModelEarth:EarthViewModel
-    private var adapter: EarthRecyclerAdapter? = null
-    private var picture_type:Int = 1
 
-    var temp  = 0
+    private lateinit var viewModelEarth: EarthViewModel
+    private var adapter: EarthRecyclerAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,117 +30,42 @@ class EarthFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_earth,container, false )
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //читаем сохранённный в настройках тип картинки
-        picture_type = PreferenceManager.getDefaultSharedPreferences(requireActivity())
-            .getString("ListEarth", "1")!!.toInt()
+        viewModelEarth =ViewModelProvider(requireActivity()).get(EarthViewModel::class.java)
 
-        viewModelEarth = ViewModelProvider(this).get(EarthViewModel::class.java)
-        //так как используются вкладки, а список на второй вкладке - для его отображения
-        //используем LiveData, которая сама выдаст данные, когда перейдём на вкладку со списком
-        //если делать не через LiveData? а просто получать список, он не отображается
-        viewModelEarth.loadData().observe(viewLifecycleOwner, Observer {list->
-            Log.d(TAG, "EarthFragment onViewCreated вкладка со списком " )
-            adapter?.listCapitals = list
-        })
         initAdapter()
+
+        viewModelEarth.getPictures().observe(viewLifecycleOwner, Observer {
+            renderData(it)
+        })
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "EarthFragment onPause " )
-    }
-
-    private fun  initAdapter(){
-    rv_earth.layoutManager =LinearLayoutManager(requireActivity())
-        adapter =  EarthRecyclerAdapter(getOnClickListener())
-        rv_earth.adapter = adapter
-    }
-
-    private fun getOnClickListener(): EarthRecyclerAdapter.OnitemClickListener =
-        object : EarthRecyclerAdapter.OnitemClickListener{
-            override fun onItemclick(capitalOfState: CapitalOfState) {
-                Log.d(TAG, "EarthFragment getOnClickListener " +
-                        "${capitalOfState.capital} ${capitalOfState.name}")
-
-                viewModelEarth.getCoordSealed(capitalOfState)
-                    .observe(viewLifecycleOwner, Observer {renderData(it)})
-            }
-        }
-
-    private fun renderData(data:CoordSealed) {
+    private fun renderData(data: PictureEarthSealed) {
         when(data){
-            is CoordSealed.Success ->{
-    //          Log.d(TAG, "EarthFragment renderData data =  $data" )
+            is PictureEarthSealed.Success ->{
                 renderLoadingStop()
-                renderCoords(data.capitalCoords)
+                renderPicture(data.listPicturesOfEarth)
             }
-            is CoordSealed.Error -> {
+            is PictureEarthSealed.Error -> {
                 renderLoadingStop()
                 renderError(data.error)
             }
-            is CoordSealed.Loading -> {
+            is PictureEarthSealed.Loading -> {
                 renderLoadingStart()
             }
         }
     }
 
-    private fun renderCoords(capitalCoords: CapitalCoords){
-        temp++
-        val lat = capitalCoords.coord?.lat //широта для столицы государства
-        val lon = capitalCoords.coord?.lon //долгота для столицы государства
-
-        Log.d(TAG, "EarthFragment renderCoords " +
-                "Координаты для ${capitalCoords.name}  lon = $lon  lat = $lat  temp =$temp")
-
-        when(picture_type){
-            1->{//запускаем активити с картой
-                MapsActivity.start(requireActivity(), lat, lon)
-                }
-            2 -> {//  получение картинки со спутника
-                if(lon!=null && lat!=null){
-                     viewModelEarth.getPictureSealed(lon, lat).observe(viewLifecycleOwner, Observer {
-                      renderAssets(it)})
-                 }
-            }
-        }
-    }
-
-
-
-    private fun renderAssets(data:PictureSealed) {
-        when(data){
-            is PictureSealed.Success ->{
-                //Log.d(TAG, "EarthFragment renderData data =  $data" )
-                renderLoadingStop()
-                renderPicture(data.assets)
-            }
-            is PictureSealed.Error -> {
-                renderLoadingStop()
-                renderError(data.error)
-            }
-            is PictureSealed.Loading -> {
-                renderLoadingStart()
-            }
-        }
-    }
-
-    private fun renderPicture(assets: Assets){
-        assets.url?. let{
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container, CapitalPictureFragment.newInstance(it))
-                .addToBackStack("capitalPicture")
-                .commit()
-        }
+    private fun renderPicture(data: List<PictureOfEarth>){
+        adapter?.listOfPictures = data
     }
 
     private fun renderLoadingStart(){
-       progressBarEarth.visibility = View.VISIBLE
+        progressBarEarth.visibility = View.VISIBLE
     }
 
     private fun renderLoadingStop(){
@@ -156,8 +73,26 @@ class EarthFragment : Fragment(){
     }
 
     private fun renderError(error: Throwable) {
-        snackBarLong(this@EarthFragment.requireView(),
+        snackBarLong(this.requireView(),
             "Сегодня нет изображений со спунника \n " +
                     "Ошибка $error")
     }
+
+    private fun  initAdapter(){
+        rv_earth.layoutManager = LinearLayoutManager(requireActivity())
+        adapter =  EarthRecyclerAdapter(getOnClickListener())
+        rv_earth.adapter = adapter
+    }
+
+    private fun getOnClickListener(): EarthRecyclerAdapter.OnItemClickListener =
+        object : EarthRecyclerAdapter.OnItemClickListener{
+            override fun onItemClick(url: String) {
+                Log.d(TAG, "### EarthFragment getOnClickListener $url")
+
+                val intent = Intent(requireActivity(), AnimationActivity::class.java)
+                intent.putExtra(AnimationActivity.URL_ANIMATION, url)
+                startActivity(intent)
+            }
+        }
+
 }
