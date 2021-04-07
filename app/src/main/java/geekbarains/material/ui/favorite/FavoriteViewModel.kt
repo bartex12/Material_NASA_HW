@@ -21,6 +21,7 @@ class FavoriteViewModel: ViewModel() {
     fun getFavorite(): LiveData<MutableList<Favorite>> {
         loadFavorite()
         return listFavoriteStates
+        
     }
 
     private fun loadFavorite() {
