@@ -16,7 +16,6 @@
             android:paddingStart="@dimen/cl_paddingStart"
             android:paddingEnd="@dimen/cl_paddingEnd">
 
-
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupMain"
                 style="@style/ChipGroupStyle"
@@ -52,9 +51,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
                 app:layout_constraintStart_toStartOf="@+id/chipGroupMain"/>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/favoriteFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/chip4"
+                app:layout_constraintStart_toEndOf="@+id/chip4"
+                app:layout_constraintTop_toTopOf="@+id/chip4"
+                app:layout_constraintEnd_toStartOf="@+id/chip_descr"
+                app:srcCompat="@drawable/ic_favorite_border_36" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/favoriteFotoFilled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/chip4"
+                app:layout_constraintStart_toEndOf="@+id/chip4"
+                app:layout_constraintTop_toTopOf="@+id/chip4"
+                app:layout_constraintEnd_toStartOf="@+id/chip_descr"
+                app:srcCompat="@drawable/ic_favorite_filled_36" />
+
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_descr"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/show_descr"

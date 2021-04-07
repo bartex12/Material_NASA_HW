@@ -49,154 +49,154 @@
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Меркурий" />
+            android:text="@string/merc" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip2"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Венера" />
+            android:text="@string/venus" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip3"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Земля" />
+            android:text="@string/earth_str" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip4"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Марс" />
+            android:text="@string/mars_str" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip5"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Юпитер" />
+            android:text="@string/jupiter" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip6"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сатурн" />
+            android:text="@string/saturn" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip7"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Уран" />
+            android:text="@string/uran" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip8"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Нептун" />
+            android:text="@string/neptun" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip81"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Плутон" />
+            android:text="@string/pluto" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip9"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Вселенная" />
+            android:text="@string/univers" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip10"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Туманность" />
+            android:text="@string/tuman" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip11"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Галактика" />
+            android:text="@string/galo" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip12"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Звезда" />
+            android:text="@string/star_str" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip13"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Планета" />
+            android:text="@string/planet" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip14"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Комета" />
+            android:text="@string/comet" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip15"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Астероид" />
+            android:text="@string/aster" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip16"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Чёрная дыра" />
+            android:text="@string/b_h" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip17"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Тёмная материя" />
+            android:text="@string/b_mat" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip18"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Тёмная энергия" />
+            android:text="@string/b_energy" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip19"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Созвездие" />
+            android:text="@string/castel" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip20"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Млечный путь" />
+            android:text="@string/milky" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip21"
             style="@style/ChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Солнце" />
+            android:text="@string/sun" />
 
     </com.google.android.material.chip.ChipGroup>
 
