@@ -39,5 +39,14 @@ class FavoriteViewModel: ViewModel() {
 
     fun saveDescription(description: String, favorite: Favorite){
         roomCash. saveDescription(description, favorite)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({favorites->
+                //обновляем список в случае его изменения
+                favorites?. let{
+                    Log.d(TAG, "FavoriteViewModel saveDescription: Favorite.size =  ${it.size}")}
+                listFavoriteStates.value = favorites
+            }, {error ->
+                Log.d(TAG, "FavoriteViewModel onError ${error.message}")
+            })
     }
 }

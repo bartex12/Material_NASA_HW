@@ -39,7 +39,7 @@ class RoomFavoriteCash(val db: Database):IRoomFavoriteCash {
     override fun loadFavorite(): Single<MutableList<Favorite>> = Single.fromCallable {
         db.favoriteDao.getAll().map {roomFavorite->
             Favorite(roomFavorite.date, roomFavorite.title,
-                roomFavorite.url, roomFavorite.type)
+                roomFavorite.url, roomFavorite.type, roomFavorite.description )
         }.toMutableList()
     }
         .subscribeOn(Schedulers.io())
@@ -54,9 +54,20 @@ class RoomFavoriteCash(val db: Database):IRoomFavoriteCash {
         }
     }
 
-    override fun saveDescription(description: String, favorite: Favorite) {
-       // TODO
+    override fun saveDescription(description: String, favorite: Favorite) = Single.fromCallable {
+        var roomFavorite: RoomFavorite? = null
+        favorite.date?.let { roomFavorite = db.favoriteDao.findByDate(it) }
+        roomFavorite?.let {
+            it.description = description
+            db.favoriteDao.update(it)
+        }
+
+        db.favoriteDao.getAll().map {favorites->
+            Favorite(favorites.date, favorites.title,
+                favorites.url, favorites.type, favorites.description)
+        }.toMutableList()
     }
+        .subscribeOn(Schedulers.io())
 
     private fun removeFavor(favorite: Favorite): Boolean{
         var roomFavorite:RoomFavorite? = null
@@ -78,7 +89,8 @@ class RoomFavoriteCash(val db: Database):IRoomFavoriteCash {
             date = favorite.date ?: "***",
             title = favorite.title ?: "***",
             url = favorite.url ?: "***",
-            type = favorite.type ?: "***"
+            type = favorite.type ?: "***",
+            description = favorite.description ?: "***"
         )
         //если в базе такой записи нет - пишем
         favorite.date?. let{

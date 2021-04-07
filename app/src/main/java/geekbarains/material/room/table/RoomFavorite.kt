@@ -12,5 +12,6 @@ class RoomFavorite (
     @PrimaryKey var date:String,
     var title:String,
     var url:String,
-    var type:String
+    var type:String,
+    var description :String
 )

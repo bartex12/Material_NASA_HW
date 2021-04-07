@@ -81,7 +81,7 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
     //здесь описываем как различаем типы
     override fun getItemViewType(position: Int): Int {
         return when{
-            position == 0 -> TYPE_HEADER
+           // position == 0 -> TYPE_HEADER
             listFavorites[position].type == "image" -> TYPE_IMAGE
             //listFavorites[position].type == "video" -> TYPE_VIDEO
             else -> TYPE_VIDEO
@@ -108,7 +108,7 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
 
             itemView.fotoTitleEdit.text = favorite.title
             itemView.fotoDateEdit.text = favorite.date
-            itemView.fotoDescriptionTextViewEdit.text = favorite.title
+            itemView.fotoDescriptionTextViewEdit.text = favorite.description
 
             //грузим картинку
             Picasso.with(context)
@@ -151,7 +151,7 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
 
         private fun addDescription(favorite:Favorite){
             onAddDescriptionListener.onAddDescription(favorite)
-           // notifyItemRemoved(layoutPosition)
+          notifyItemChanged(layoutPosition)
         }
 
         private fun removeItem(){
@@ -160,7 +160,7 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
         }
 
         private fun moveUp(){
-            layoutPosition.takeIf { it > 1 }?.also { currentPosition ->
+            layoutPosition.takeIf { it > 0 }?.also { currentPosition ->
                 listFavorites.removeAt(currentPosition).apply {
                     listFavorites.add(currentPosition - 1, this)
                 }
@@ -194,7 +194,7 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
 
             itemView.fotoTitleVideo.text = favorite.title
             itemView.fotoDateVideo.text = favorite.date
-            itemView.fotoDescriptionVideo.text = favorite.title
+            itemView.fotoDescriptionVideo.text = favorite.description
 
             itemView. web_view_video_anim.settings.javaScriptEnabled = true  // небезопасно тащить скрипты
             favorite.url?. let{itemView. web_view_video_anim.loadUrl(it)}
@@ -226,6 +226,15 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
             itemView.moveItemDownVideoEdit.setOnClickListener {
                 moveDown()
             }
+
+            itemView.addDescrVideoEdit.setOnClickListener {
+                addDescription(favorite)
+            }
+        }
+
+        private fun addDescription(favorite:Favorite){
+            onAddDescriptionListener.onAddDescription(favorite)
+            notifyItemChanged(layoutPosition)
         }
 
         private fun removeItem(){
@@ -234,7 +243,7 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
         }
 
         private fun moveUp(){
-            layoutPosition.takeIf { it > 1 }?.also { currentPosition ->
+            layoutPosition.takeIf { it > 0 }?.also { currentPosition ->
                 listFavorites.removeAt(currentPosition).apply {
                     listFavorites.add(currentPosition - 1, this)
                 }

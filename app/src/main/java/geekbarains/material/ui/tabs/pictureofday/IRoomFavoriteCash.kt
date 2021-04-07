@@ -11,6 +11,6 @@ interface IRoomFavoriteCash {
     fun loadFavorite(): Single<MutableList<Favorite>>
     fun isFavorite(favorite: Favorite):Single<Boolean>
 
-    fun saveDescription(description: String, favorite: Favorite)
+    fun saveDescription(description: String, favorite: Favorite) : Single<MutableList<Favorite>>
 
 }
