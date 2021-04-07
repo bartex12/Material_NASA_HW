@@ -3,19 +3,12 @@ package geekbarains.material.ui.favorite
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import geekbarains.material.R
 import geekbarains.material.room.Favorite
-import kotlinx.android.synthetic.main.dialog_add_description.*
 import kotlinx.android.synthetic.main.dialog_add_description.view.*
 
 class DialogAddDescription(val transmitDescription:TransmitDescription, val favorite: Favorite)

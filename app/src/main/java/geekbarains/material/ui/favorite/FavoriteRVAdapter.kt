@@ -6,23 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import geekbarains.material.R
 import geekbarains.material.room.Favorite
-import geekbarains.material.ui.tabs.pictureofday.PictureOfTheDayViewModel
-import kotlinx.android.synthetic.main.favorite_foto.*
 import kotlinx.android.synthetic.main.favorite_foto.view.*
-import kotlinx.android.synthetic.main.favorite_foto.view.fotoDescriptionTextViewEdit
-import kotlinx.android.synthetic.main.favorite_foto.view.showTextFoto
 import kotlinx.android.synthetic.main.favorite_header.view.*
-import kotlinx.android.synthetic.main.favorite_video.*
 import kotlinx.android.synthetic.main.favorite_video.view.*
-import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.item_earth.view.*
 
 class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
                          private val onRemoveListener: OnRemoveListener,
@@ -83,7 +73,6 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
         return when{
            // position == 0 -> TYPE_HEADER
             listFavorites[position].type == "image" -> TYPE_IMAGE
-            //listFavorites[position].type == "video" -> TYPE_VIDEO
             else -> TYPE_VIDEO
         }
     }
