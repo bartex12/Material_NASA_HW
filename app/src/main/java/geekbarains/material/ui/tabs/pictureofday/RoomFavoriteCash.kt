@@ -10,6 +10,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class RoomFavoriteCash(val db: Database):IRoomFavoriteCash {
 
+    companion object {
+        const val TAG = "33333"
+    }
 
     override fun addToFavorite(favorite: Favorite): Completable = Completable.create { emitter->
         add(favorite). let{
@@ -33,10 +36,12 @@ class RoomFavoriteCash(val db: Database):IRoomFavoriteCash {
         }
     }.subscribeOn(Schedulers.io())
 
-    override fun loadFavorite(): Single<List<Favorite>> = Single.fromCallable {
+    override fun loadFavorite(): Single<MutableList<Favorite>> = Single.fromCallable {
         db.favoriteDao.getAll().map {roomFavorite->
             Favorite(roomFavorite.date, roomFavorite.title,
-                roomFavorite.url, roomFavorite.type)}}
+                roomFavorite.url, roomFavorite.type)
+        }.toMutableList()
+    }
         .subscribeOn(Schedulers.io())
 
     override fun isFavorite(favorite: Favorite): Single<Boolean> {
@@ -49,11 +54,20 @@ class RoomFavoriteCash(val db: Database):IRoomFavoriteCash {
         }
     }
 
+    override fun saveDescription(description: String, favorite: Favorite) {
+       // TODO
+    }
+
     private fun removeFavor(favorite: Favorite): Boolean{
         var roomFavorite:RoomFavorite? = null
         favorite.date?. let{roomFavorite = db.favoriteDao.findByDate(it)}
         roomFavorite?. let{
             db.favoriteDao.delete(it)
+            //если вернётся null - значит удаление успешно
+            favorite.date?. let{
+                Log.d(TAG, "!!! RoomFavoriteCash removeFavor favorite.date =" +
+                        "  ${db.favoriteDao.findByDate(it)}")
+            }
             return true
         } ?:return false
     }

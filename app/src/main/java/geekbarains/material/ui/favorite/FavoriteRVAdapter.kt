@@ -6,21 +6,28 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import geekbarains.material.R
 import geekbarains.material.room.Favorite
+import geekbarains.material.ui.tabs.pictureofday.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.favorite_foto.*
 import kotlinx.android.synthetic.main.favorite_foto.view.*
 import kotlinx.android.synthetic.main.favorite_foto.view.fotoDescriptionTextViewEdit
 import kotlinx.android.synthetic.main.favorite_foto.view.showTextFoto
 import kotlinx.android.synthetic.main.favorite_header.view.*
+import kotlinx.android.synthetic.main.favorite_video.*
 import kotlinx.android.synthetic.main.favorite_video.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.item_earth.view.*
 
-class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
+class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener,
+                         private val onRemoveListener: OnRemoveListener,
+                         private val onAddDescriptionListener: OnAddDescriptionListener
+)
     : RecyclerView.Adapter<BaseViewHolder> (){
 
     companion object {
@@ -33,13 +40,27 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
     lateinit var context: Context
     var isOpenDescription = false
 
+    var isEdit:Boolean = false
+
+    interface OnRemoveListener{
+        fun onRemove(favorite: Favorite)
+    }
+
     interface OnitemClickListener{
         fun onItemclick(favorite: Favorite)
     }
 
+    interface OnAddDescriptionListener{
+        fun  onAddDescription(favorite: Favorite)
+    }
+
+    fun setEditType(isEdit:Boolean){
+        this.isEdit = isEdit
+    }
+
     //так сделано чтобы передавать список в адаптер без конструктора
     // - через присвоение полю значения
-    var listFavorites: List<Favorite> = listOf()
+    var listFavorites: MutableList<Favorite> = mutableListOf()
         set(value){
             field = value
             notifyDataSetChanged()
@@ -74,7 +95,17 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
     }
 
     inner class ImageViewHolder(itemView: View) : BaseViewHolder(itemView) {
+
         override fun bind(favorite: Favorite){
+            if(isEdit){
+                itemView.profileFotoEdit.visibility = View.VISIBLE
+                itemView.showTextFoto.visibility = View.GONE
+                itemView.fotoDescriptionTextViewEdit.visibility = View.GONE
+            }else{
+                itemView.profileFotoEdit.visibility = View.GONE
+                itemView.showTextFoto.visibility = View.VISIBLE
+            }
+
             itemView.fotoTitleEdit.text = favorite.title
             itemView.fotoDateEdit.text = favorite.date
             itemView.fotoDescriptionTextViewEdit.text = favorite.title
@@ -99,6 +130,51 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
             itemView.fotoImageViewEdit.setOnClickListener {
                 onitemClickListener.onItemclick(favorite)
             }
+
+            itemView.removeItemImageViewFotoEdit.setOnClickListener {
+                removeItem()
+                onRemoveListener.onRemove(favorite)
+            }
+
+            itemView.moveItemUpFotoEdit.setOnClickListener {
+                moveUp()
+            }
+
+            itemView.moveItemDownFotoEdit.setOnClickListener {
+                moveDown()
+            }
+
+            itemView.addDescrFotoEdit.setOnClickListener {
+                addDescription(favorite)
+            }
+        }
+
+        private fun addDescription(favorite:Favorite){
+            onAddDescriptionListener.onAddDescription(favorite)
+           // notifyItemRemoved(layoutPosition)
+        }
+
+        private fun removeItem(){
+            listFavorites.removeAt(layoutPosition)
+            notifyItemRemoved(layoutPosition)
+        }
+
+        private fun moveUp(){
+            layoutPosition.takeIf { it > 1 }?.also { currentPosition ->
+                listFavorites.removeAt(currentPosition).apply {
+                    listFavorites.add(currentPosition - 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition - 1)
+            }
+        }
+
+        private fun moveDown(){
+            layoutPosition.takeIf { it < listFavorites.size - 1 }?.also { currentPosition ->
+                listFavorites.removeAt(currentPosition).apply {
+                    listFavorites.add(currentPosition + 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition + 1)
+            }
         }
     }
 
@@ -106,6 +182,15 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
 
         @SuppressLint("SetJavaScriptEnabled")
          override  fun bind(favorite: Favorite){
+
+            if(isEdit){
+                itemView.profileVideoEdit.visibility = View.VISIBLE
+                itemView. showTextVideo.visibility = View.GONE
+                itemView. fotoDescriptionVideo.visibility = View.GONE
+            }else{
+                itemView.profileVideoEdit.visibility = View.GONE
+                itemView. showTextVideo.visibility = View.VISIBLE
+            }
 
             itemView.fotoTitleVideo.text = favorite.title
             itemView.fotoDateVideo.text = favorite.date
@@ -128,6 +213,42 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
             itemView. videoScreen.setOnClickListener {
                 onitemClickListener.onItemclick(favorite)
             }
+
+            itemView.removeItemImageViewVideoEdit.setOnClickListener {
+                removeItem()
+                onRemoveListener.onRemove(favorite)
+            }
+
+            itemView.moveItemUpVideoEdit.setOnClickListener {
+                moveUp()
+            }
+
+            itemView.moveItemDownVideoEdit.setOnClickListener {
+                moveDown()
+            }
+        }
+
+        private fun removeItem(){
+            listFavorites.removeAt(layoutPosition)
+            notifyItemRemoved(layoutPosition)
+        }
+
+        private fun moveUp(){
+            layoutPosition.takeIf { it > 1 }?.also { currentPosition ->
+                listFavorites.removeAt(currentPosition).apply {
+                    listFavorites.add(currentPosition - 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition - 1)
+            }
+        }
+
+        private fun moveDown(){
+            layoutPosition.takeIf { it < listFavorites.size - 1 }?.also { currentPosition ->
+                listFavorites.removeAt(currentPosition).apply {
+                    listFavorites.add(currentPosition + 1, this)
+                }
+                notifyItemMoved(currentPosition, currentPosition + 1)
+            }
         }
     }
 
@@ -136,5 +257,19 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
             itemView.header.text = context.getString(R.string.headerFavorite)
         }
     }
-
 }
+
+//fun showDeleteDialog(favorite: Favorite) {
+//    val deleteDialog = AlertDialog.Builder(context)
+//    deleteDialog.setTitle("Удалить: Вы уверены?")
+//    deleteDialog.setPositiveButton(
+//        "Нет"
+//    ) { dialog, which ->
+//        //ничего не делаем
+//    }
+//    deleteDialog.setNegativeButton("Да") { _, _ ->
+//        removeItem()
+//        onRemoveListener.onRemove(favorite)
+//    }
+//    deleteDialog.show()
+//}

@@ -15,10 +15,10 @@ class FavoriteViewModel: ViewModel() {
         const val TAG = "33333"
     }
 
-    private  var listFavoriteStates = MutableLiveData<List<Favorite>>()
+    private  var listFavoriteStates = MutableLiveData<MutableList<Favorite>>()
     private val roomCash: IRoomFavoriteCash = RoomFavoriteCash(Database.getInstance())
 
-    fun getFavorite(): LiveData<List<Favorite>> {
+    fun getFavorite(): LiveData<MutableList<Favorite>> {
         loadFavorite()
         return listFavoriteStates
     }
@@ -34,5 +34,10 @@ class FavoriteViewModel: ViewModel() {
             }, {error ->
                 Log.d(TAG, "FavoriteViewModel onError ${error.message}")
             })
+    }
+
+
+    fun saveDescription(description: String, favorite: Favorite){
+        roomCash. saveDescription(description, favorite)
     }
 }

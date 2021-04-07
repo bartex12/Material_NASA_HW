@@ -8,7 +8,9 @@ interface IRoomFavoriteCash {
     fun addToFavorite(favorite: Favorite): Completable
     fun removeFavorite(favorite: Favorite): Completable
 
-    fun loadFavorite(): Single<List<Favorite>>
+    fun loadFavorite(): Single<MutableList<Favorite>>
     fun isFavorite(favorite: Favorite):Single<Boolean>
+
+    fun saveDescription(description: String, favorite: Favorite)
 
 }

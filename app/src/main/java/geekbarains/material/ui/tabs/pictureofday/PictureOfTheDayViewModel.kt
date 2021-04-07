@@ -80,7 +80,7 @@ class PictureOfTheDayViewModel : ViewModel() {
     }
 
     fun removeFavorite(favorite: Favorite){
-        Log.d(TAG, "PictureOfTheDayViewModel addToFavorite ")
+        Log.d(TAG, "PictureOfTheDayViewModel removeFavorite ")
         roomCash.removeFavorite(favorite)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe ({
@@ -91,7 +91,4 @@ class PictureOfTheDayViewModel : ViewModel() {
             })
     }
 
-    fun saveDate(dateCal:String){
-        date = dateCal
-    }
 }

@@ -4,28 +4,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
 import geekbarains.material.room.Favorite
 import geekbarains.material.ui.animation.AnimationActivity
 import geekbarains.material.ui.search.SearchFragment
 import geekbarains.material.ui.settings.SettingsActivity
-import geekbarains.material.ui.tabs.ApiFragment
-import geekbarains.material.ui.tabs.pictureofday.PictureOfTheDayFragment
 import geekbarains.material.ui.tabs.pictureofday.PictureOfTheDayViewModel
-import kotlinx.android.synthetic.main.favorite_foto.*
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class FavoriteFragment: Fragment() {
 
     private var adapter: FavoriteRVAdapter? = null
     private lateinit var favoriteViewModel: FavoriteViewModel
+    private var isEdit = false
 
     companion object {
         const val TAG = "33333"
@@ -44,7 +40,8 @@ class FavoriteFragment: Fragment() {
 
         favoriteViewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
-        favoriteViewModel.getFavorite().observe(viewLifecycleOwner, Observer<List<Favorite>>{ favorites->
+        favoriteViewModel.getFavorite()
+            .observe(viewLifecycleOwner, Observer<MutableList<Favorite>>{ favorites->
             Log.d(TAG, "FavoriteFragment onViewCreated")
             favorites?. let{ renderData(it) }})
 
@@ -59,7 +56,7 @@ class FavoriteFragment: Fragment() {
     }
 
 
-    private fun renderData(favorites: List<Favorite>) {
+    private fun renderData(favorites: MutableList<Favorite>) {
         if(favorites.isEmpty()){
             rv_favorite.visibility = View.GONE
             empty_view_favorite.visibility = View.VISIBLE
@@ -74,7 +71,7 @@ class FavoriteFragment: Fragment() {
     private fun initAdapter() {
         rv_favorite.layoutManager = LinearLayoutManager(requireActivity())
 
-        adapter = FavoriteRVAdapter( getOnClickListener())
+        adapter = FavoriteRVAdapter( getOnClickListener(), getRemoveListener(), getAddDescriptionListener())
         rv_favorite.adapter = adapter
     }
 
@@ -90,6 +87,32 @@ class FavoriteFragment: Fragment() {
             }
         }
 
+    private fun getRemoveListener():FavoriteRVAdapter.OnRemoveListener =
+        object: FavoriteRVAdapter.OnRemoveListener{
+            override fun onRemove(favorite: Favorite) {
+                Log.d(TAG, "### ### FavoriteFragment getRemoveListener favorite.date = ${favorite.date}")
+                val viewModel = ViewModelProvider(requireActivity()).get(PictureOfTheDayViewModel::class.java)
+                viewModel.removeFavorite(favorite)
+            }
+        }
+
+    private fun getAddDescriptionListener():FavoriteRVAdapter.OnAddDescriptionListener =
+        object : FavoriteRVAdapter.OnAddDescriptionListener{
+            override fun onAddDescription(favorite: Favorite) {
+                DialogAddDescription(getOnTransmitListener(), favorite)
+                    .show(requireActivity().supportFragmentManager, "DialogAddDescription")
+            }
+        }
+
+    private fun getOnTransmitListener(): DialogAddDescription.TransmitDescription =
+        object : DialogAddDescription.TransmitDescription{
+            override fun onTransmit(description: String, favorite: Favorite) {
+                Log.d(TAG, "### ### FavoriteFragment getOnTransmitListener description = $description")
+                favoriteViewModel.saveDescription(description, favorite)
+            }
+        }
+
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_app_bar, menu)
@@ -103,6 +126,11 @@ class FavoriteFragment: Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 
+            R.id.app_bar_edit -> {
+                isEdit = !isEdit
+                adapter?.setEditType(isEdit)
+                adapter?.notifyDataSetChanged()
+            }
 
             R.id.app_bar_settings ->
                 startActivity(Intent(requireActivity(), SettingsActivity::class.java))

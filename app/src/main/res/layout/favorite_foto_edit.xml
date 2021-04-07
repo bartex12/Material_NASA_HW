@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@color/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/dragHandleImageViewVideoEdit"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_plus_fab" />

@@ -47,15 +47,65 @@
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         app:barrierDirection="start"
-        app:constraint_referenced_ids="showTextFoto" />
+        app:constraint_referenced_ids="moveItemDownFotoEdit" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/moveItemUpFotoEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/layout_margin_8dp"
+        android:tint="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/removeItemImageViewFotoEdit"
+        app:layout_constraintEnd_toStartOf="@+id/addDescrFotoEdit"
+        app:layout_constraintTop_toTopOf="@+id/addDescrFotoEdit"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_up_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/moveItemDownFotoEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/moveItemUpFotoEdit"
+        app:layout_constraintEnd_toStartOf="@+id/moveItemUpFotoEdit"
+        app:layout_constraintStart_toEndOf="@+id/barrierFotoEdit"
+        app:layout_constraintTop_toTopOf="@+id/moveItemUpFotoEdit"
+        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/addDescrFotoEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:tint="?colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/showTextFoto"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/removeItemImageViewFotoEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:tint="?colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/showTextFoto"
+        app:layout_constraintTop_toBottomOf="@id/addDescrFotoEdit"
+        app:srcCompat="@drawable/ic_baseline_delete_outline_24" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/profileFotoEdit"
+        android:visibility="gone"
+        app:constraint_referenced_ids=
+            "moveItemUpFotoEdit,moveItemDownFotoEdit, addDescrFotoEdit, removeItemImageViewFotoEdit"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        tools:visibility="visible"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/showTextFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/layout_margin_8dp"
-        android:tint="?colorAccent"
+        android:tint="?colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fotoImageViewEdit"
@@ -72,7 +122,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fotoImageViewEdit"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
 
     <View
         android:layout_width="match_parent"

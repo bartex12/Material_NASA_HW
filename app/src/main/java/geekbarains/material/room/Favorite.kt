@@ -5,4 +5,5 @@ data class Favorite(
     var title:String? = null,
     var url:String? = null,
     var type:String? = null
+
 )

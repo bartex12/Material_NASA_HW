@@ -133,6 +133,9 @@
     <string name="no_data_favorite">"Нет данных. Добавьте фото или видео в избранное "</string>
     <string name="headerFavorite">Избранное</string>
     <string name="edit">Редактирование</string>
+    <string name="description">Описание</string>
+    <string name="shot_descr">Краткое описание</string>
+    <string name="do_descr">Опишите картинку или вмдео</string>
 
 
     <string-array name="pref_entry_color">
