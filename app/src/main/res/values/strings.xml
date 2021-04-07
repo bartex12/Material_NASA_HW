@@ -136,6 +136,8 @@
     <string name="description">Описание</string>
     <string name="shot_descr">Краткое описание</string>
     <string name="do_descr">Опишите картинку или вмдео</string>
+    <string name="head">Заголовок</string>
+    <string name="datee">Дата</string>
 
 
     <string-array name="pref_entry_color">

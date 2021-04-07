@@ -10,6 +10,7 @@
         android:id="@+id/fotoImageViewEdit"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginStart="@dimen/layout_margin_8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/photo_56in100" />
@@ -35,8 +36,8 @@
         android:text="Дата"
         android:textSize="14sp"
         android:textColor="?colorPrimary"
-        android:layout_marginBottom="@dimen/layout_margin_8dp"
         android:layout_marginStart="@dimen/layout_margin_8dp"
+        android:layout_marginBottom="@dimen/layout_margin_8dp"
         app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
         app:layout_constraintEnd_toStartOf="@+id/barrierFotoEdit"
         app:layout_constraintHorizontal_bias="0.0"
@@ -109,7 +110,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fotoImageViewEdit"
-        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+        app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoDescriptionTextViewEdit"
