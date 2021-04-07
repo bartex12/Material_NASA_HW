@@ -32,6 +32,7 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
         const val TAG = "33333"
         private var isExpanded = false
     }
+    var isErrorTrue = false
 
     var favorite:Favorite? = null //экземпляр класса Favorite со всеми полями = null
     private val dateFormat: DateFormat =SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -82,6 +83,9 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
             Log.d(TAG, "savedInstanceState == null")
             viewModel. sendServerRequest(todayAsString)
         }
+//        val calen =Calendar.getInstance().time
+//        val cal = GregorianCalendar(year, month, dayOfMonth).time
+//        cal.after(GregorianCalendar().time)
 
         viewModel.getData()
             .observe(viewLifecycleOwner, Observer<PictureOfTheDayData> { renderData(it) })
@@ -275,8 +279,15 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
                 //показываем прогресс-бар
                 progressBarNasa.visibility = View.VISIBLE
             }
-
             is PictureOfTheDayData.Error -> {
+                //если у нас уже завтра, а в NASA ещё вчера - пробуем 1 раз загрузить вчерашнюю картинку
+                if (!isErrorTrue){
+                    val todayAsString =
+                        dateFormat.format(Calendar.getInstance().apply { add(Calendar.DATE, -1) }.time)
+                    viewModel. sendServerRequest(todayAsString)
+                    chip2.isChecked = true
+                }
+                isErrorTrue = true
                 //прекращаем показ прогрессбара
                 progressBarNasa.visibility = View.GONE
                 toast(data.error.message)

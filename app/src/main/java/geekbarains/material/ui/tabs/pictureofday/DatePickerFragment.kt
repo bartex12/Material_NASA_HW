@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import geekbarains.material.R
+import geekbarains.material.util.toast
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,12 +42,18 @@ class DatePickerFragment(val listener:OnItemClickListener) : DialogFragment(),  
     //выбираем дату и после нажатия ok попадаем в этот метод
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val date = dateFormat.format(GregorianCalendar(year, month, dayOfMonth).time)
-
-//        val date =
-//            String.format("%s-%s-%s", year.toString(),(month + 1).toString(),dayOfMonth.toString())
-        Log.d(TAG, "DatePickerFragment onDateSet  $date")
-        listener.onItemClick(date)
+        val cal = GregorianCalendar(year, month, dayOfMonth).time
+        if(cal.before(GregorianCalendar(1995, 6, 16).time)){
+            Log.d(TAG, "DatePickerFragment onDateSet before")
+            toast("нужно после 16-06-1995")
+        }else if(cal.after(GregorianCalendar().time)){
+            Log.d(TAG, "DatePickerFragment onDateSet after")
+            toast("нужно до сегодня ")
+        }else{
+            val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val date:String = dateFormat.format(GregorianCalendar(year, month, dayOfMonth).time)
+            listener.onItemClick(date)
+            Log.d(TAG, "DatePickerFragment onDateSet  $date")
+        }
     }
 }
