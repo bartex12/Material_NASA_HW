@@ -41,6 +41,11 @@ class ApiFragment:Fragment() {
         inflater.inflate(R.menu.menu_app_bar, menu)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.app_bar_edit).isVisible = false
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_favorites ->

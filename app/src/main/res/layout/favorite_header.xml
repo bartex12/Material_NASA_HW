@@ -9,7 +9,7 @@
         android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:padding="@dimen/layout_margin_16dp"
         android:text="@string/edit_case"
         android:textColor="?colorAccent"
         android:textSize="20sp"

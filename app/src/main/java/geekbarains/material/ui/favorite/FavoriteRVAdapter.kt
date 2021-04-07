@@ -1,10 +1,12 @@
 package geekbarains.material.ui.favorite
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import geekbarains.material.R
@@ -13,12 +15,13 @@ import kotlinx.android.synthetic.main.favorite_foto.*
 import kotlinx.android.synthetic.main.favorite_foto.view.*
 import kotlinx.android.synthetic.main.favorite_foto.view.fotoDescriptionTextViewEdit
 import kotlinx.android.synthetic.main.favorite_foto.view.showTextFoto
+import kotlinx.android.synthetic.main.favorite_header.view.*
 import kotlinx.android.synthetic.main.favorite_video.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.item_earth.view.*
 
 class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder> (){
+    : RecyclerView.Adapter<BaseViewHolder> (){
 
     companion object {
         const val TAG = "33333"
@@ -42,7 +45,7 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         context = parent.context
         val inflater = LayoutInflater.from(parent.context)
 
@@ -66,16 +69,12 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
 
     override fun getItemCount(): Int = listFavorites.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(getItemViewType(position)){
-            TYPE_IMAGE-> ( holder as ImageViewHolder ).bind(listFavorites[position])
-            TYPE_VIDEO-> ( holder as VideoViewHolder ).bind(listFavorites[position])
-            else-> ( holder as HeaderViewHolder ).bind(listFavorites[position])
-        }
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.bind(listFavorites[position])
     }
 
-    inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(favorite: Favorite){
+    inner class ImageViewHolder(itemView: View) : BaseViewHolder(itemView) {
+        override fun bind(favorite: Favorite){
             itemView.fotoTitleEdit.text = favorite.title
             itemView.fotoDateEdit.text = favorite.date
             itemView.fotoDescriptionTextViewEdit.text = favorite.title
@@ -103,8 +102,10 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
         }
     }
 
-    inner class VideoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(favorite: Favorite){
+    inner class VideoViewHolder(itemView: View) : BaseViewHolder(itemView) {
+
+        @SuppressLint("SetJavaScriptEnabled")
+         override  fun bind(favorite: Favorite){
 
             itemView.fotoTitleVideo.text = favorite.title
             itemView.fotoDateVideo.text = favorite.date
@@ -130,9 +131,9 @@ class FavoriteRVAdapter (private val onitemClickListener: OnitemClickListener)
         }
     }
 
-    inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(favorite: Favorite){
-            //
+    inner class HeaderViewHolder(itemView: View) : BaseViewHolder(itemView){
+       override fun bind(favorite: Favorite){
+            itemView.header.text = context.getString(R.string.headerFavorite)
         }
     }
 

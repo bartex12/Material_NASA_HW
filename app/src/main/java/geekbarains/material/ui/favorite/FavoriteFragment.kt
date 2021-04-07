@@ -9,6 +9,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
 import geekbarains.material.room.Favorite
@@ -52,6 +53,9 @@ class FavoriteFragment: Fragment() {
         //приводим меню тулбара в соответствии с onPrepareOptionsMenu в MainActivity
         setHasOptionsMenu(true)
         requireActivity().invalidateOptionsMenu()
+
+        //если во всех холдерах одинаковый дивайдер, можно так
+        //rv_favorite.addItemDecoration(DividerItemDecoration(requireActivity(), LinearLayoutManager.VERTICAL))
     }
 
 
@@ -98,6 +102,8 @@ class FavoriteFragment: Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+
+
             R.id.app_bar_settings ->
                 startActivity(Intent(requireActivity(), SettingsActivity::class.java))
 

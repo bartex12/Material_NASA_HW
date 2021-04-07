@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorFone"
+    android:background="@android:color/white"
     tools:context="geekbarains.material.ui.favorite.FavoriteFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_favorite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="16dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
         tools:context=".view.main.MainActivity"/>

@@ -131,6 +131,8 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="first_foto_apod">16–06–1995</string>
     <string name="no_data_favorite">"Нет данных. Добавьте фото или видео в избранное "</string>
+    <string name="headerFavorite">Избранное</string>
+    <string name="edit">Редактирование</string>
 
 
     <string-array name="pref_entry_color">
