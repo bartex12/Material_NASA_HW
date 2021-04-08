@@ -1,18 +1,18 @@
 package geekbarains.material.ui.favorite
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
+import geekbarains.material.model.Constants
 import geekbarains.material.room.Favorite
-import geekbarains.material.ui.animation.AnimationActivity
-import geekbarains.material.ui.search.SearchFragment
-import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.ui.tabs.pictureofday.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
@@ -21,6 +21,7 @@ class FavoriteFragment: Fragment() {
     private var adapter: FavoriteRVAdapter? = null
     private lateinit var favoriteViewModel: FavoriteViewModel
     private var isEdit = false
+    lateinit var navController:NavController
 
     companion object {
         const val TAG = "33333"
@@ -33,6 +34,8 @@ class FavoriteFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "FavoriteFragment onViewCreated ")
+
+        navController = Navigation.findNavController(view)
 
         //разрешаем показ меню во фрагменте
         setHasOptionsMenu(true)
@@ -79,10 +82,10 @@ class FavoriteFragment: Fragment() {
             override fun onItemclick(favorite: Favorite) {
                 Log.d(TAG, "FavoriteFragment setOnClickListener ")
 
-                    val intent = Intent(requireActivity(), AnimationActivity::class.java)
-                    intent.putExtra(AnimationActivity.URL_ANIMATION, favorite.url)
-                    intent.putExtra(AnimationActivity.MEDIA_TYPE_ANIMATION, favorite.type)
-                    startActivity(intent)
+                val bundle = bundleOf(
+                    Constants.URL_ANIMATION to favorite.url,
+                    Constants.MEDIA_TYPE_ANIMATION to favorite.type  ) //так проще
+                navController.navigate(R.id.animationFragment, bundle)
             }
         }
 
@@ -132,13 +135,10 @@ class FavoriteFragment: Fragment() {
             }
 
             R.id.app_bar_settings ->
-                startActivity(Intent(requireActivity(), SettingsActivity::class.java))
+                navController.navigate(R.id.settingsFragment)
 
             R.id.app_bar_search_wiki ->
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SearchFragment())
-                    .addToBackStack("search")
-                    .commit()
+                navController.navigate(R.id.searchFragment)
         }
         return super.onOptionsItemSelected(item)
     }

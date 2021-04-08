@@ -1,24 +1,23 @@
 package geekbarains.material.ui.tabs.pictureofday
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.preference.PreferenceManager
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import coil.api.clear
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
-import geekbarains.material.room.Database
+import geekbarains.material.model.Constants
 import geekbarains.material.room.Favorite
-import geekbarains.material.room.table.RoomFavorite
-import geekbarains.material.ui.animation.AnimationActivity
 import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -37,6 +36,8 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
     var favorite:Favorite? = null //экземпляр класса Favorite со всеми полями = null
     private val dateFormat: DateFormat =SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
+    lateinit var navController: NavController
 
     private  val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
@@ -59,6 +60,8 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "PictureOfTheDayFragment onViewCreated  ")
+
+        navController = Navigation.findNavController(view)
 
         //разрешаем показ меню во фрагменте
            setHasOptionsMenu(true)
@@ -252,11 +255,9 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
                         }
                         image_view.setOnClickListener {
                             Log.d(TAG, "PictureOfTheDayFragment onViewCreated setOnClickListener")
-
-                            val intent = Intent(requireActivity(), AnimationActivity::class.java)
-                            intent.putExtra(AnimationActivity.URL_ANIMATION, url)
-                            intent.putExtra(AnimationActivity.MEDIA_TYPE_ANIMATION, mediaType)
-                            startActivity(intent)
+                            val bundle = bundleOf(Constants.URL_ANIMATION to url,
+                                Constants.MEDIA_TYPE_ANIMATION to mediaType  ) //так проще
+                            navController.navigate(R.id.animationFragment, bundle)
                         }
                     }
                 }else {

@@ -21,22 +21,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import geekbarains.material.R
+import geekbarains.material.model.Constants
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlin.properties.Delegates
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    companion object{
-        const val LAT = "lat"
-        const val LON = "lon"
-
-        fun start(context: Context, lat:Float?, lon:Float?) {
-            val intent  = Intent(context, MapsActivity::class.java)
-                    intent.putExtra(LAT, lat)
-                    intent.putExtra(LON, lon)
-            context.startActivity(intent)
-        }
-    }
     /** The Google Map object.  */
     private var mMap: GoogleMap? = null
     private var lat by Delegates.notNull<Float>()
@@ -61,8 +51,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         setContentView(R.layout.activity_maps)
 
-       lat = intent.getFloatExtra(LAT, 0f)
-       lon = intent.getFloatExtra(LON, 0f)
+       lat = intent.getFloatExtra(Constants.LAT, 0f)
+       lon = intent.getFloatExtra(Constants.LON, 0f)
 
         //поддержка экшенбара
         setSupportActionBar(toolbar_maps)

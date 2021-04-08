@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import geekbarains.material.R
 import geekbarains.material.ui.favorite.FavoriteFragment
 import geekbarains.material.ui.search.SearchFragment
@@ -14,8 +16,9 @@ class ApiFragment:Fragment() {
 
     companion object{
         const val TAG = "33333"
-        fun newInstance() = ApiFragment()
     }
+
+    lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +30,8 @@ class ApiFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
 
         //разрешаем показ меню во фрагменте
         setHasOptionsMenu(true)
@@ -49,18 +54,13 @@ class ApiFragment:Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_favorites ->
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, FavoriteFragment())
-                    .addToBackStack("favorite")
-                    .commit()
+                navController.navigate(R.id.favoriteFragment)
+
             R.id.app_bar_search_wiki ->
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.container, SearchFragment())
-                .addToBackStack("search")
-                .commit()
+                navController.navigate(R.id.searchFragment)
 
             R.id.app_bar_settings ->
-                startActivity(Intent(requireActivity(), SettingsActivity::class.java))
+                navController.navigate(R.id.settingsFragment)
         }
         return super.onOptionsItemSelected(item)
     }

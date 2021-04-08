@@ -10,6 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.preference.PreferenceManager
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
@@ -36,6 +40,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var oldTheme:Int = 1
     private var oldType:Int = 1
     private var toggle:ActionBarDrawerToggle? = null
+
+    lateinit var navController: NavController
+    lateinit var  appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,76 +86,45 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             2->setTheme(R.style.AppThemePurple)
             3->setTheme(R.style.AppThemeBlack)
         }
+
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, ApiFragment.newInstance())
-                .commitNow()
-        }
-
-        setSupportActionBar(toolbar) //поддержка экшенбара
+        //поддержка экшенбара
+        setSupportActionBar(toolbar)
         //отключаем показ заголовка тулбара, так как там свой макет с main_title
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        toggle = ActionBarDrawerToggle(this,drawer_layout,
-            toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close )//гамбургер
-        toggle?. let{ drawer_layout.addDrawerListener(it)}  //слушатель гамбургера
-        toggle?.syncState() //синхронизация гамбургера
-
-        //https://stackoverflow.com/questions/28531503/toolbar-switching-from-drawer-to-back-
-        // button-with-only-one-activity/29292130#29292130
-        //если в BackStack больше одного фрагмента (там почему то всегда есть 1 фрагмент)
-        //то отображаем стрелку назад и устанавливаем слушатель на щелчок по ней с действием
-        //onBackPressed(), иначе отображаем гамбургер и по щелчку открываем шторку
-        supportFragmentManager.addOnBackStackChangedListener {  //слушатель BackStack
-            if(supportFragmentManager.backStackEntryCount > 0){
-                supportActionBar?.setDisplayHomeAsUpEnabled(true) //показать стрелку
-                toolbar.setNavigationOnClickListener { // слушатель кнопки навигации- стрелка
-                    onBackPressed()
-                }
-            }else{
-                supportActionBar?.setDisplayHomeAsUpEnabled(false) //не показывать стрелку
-                toggle?.syncState()
-                toolbar.setNavigationOnClickListener {// слушатель кнопки навигации- гамбургер
-                    drawer_layout.openDrawer(GravityCompat.START)
-                }
-            }
-        }
-
-        nav_view.setNavigationItemSelectedListener(this) //слушатель меню шторки
-
         //текстовое поле в тулбаре
         with(toolbar.findViewById<TextView>(R.id.main_title)){
             textSize = 16f
             setTextColor(Color.WHITE)
             text = context.getString(R.string.app_name)
         }
+
+        //находим NavController
+        navController =Navigation.findNavController(this, R.id.nav_host_fragment)
+        //читаем из графа конфигурацию
+        appBarConfiguration = AppBarConfiguration.Builder(navController.graph)
+            //Отображать кнопку навигации как гамбургер , когда она не отображается как кнопка вверх
+            .setOpenableLayout(drawer_layout)
+            .build()
+        //обработка событий экшенбара -гамбургер, кнопка вверх
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
+        //слушатель меню шторки -для обработки пунктов шторки
+        nav_view.setNavigationItemSelectedListener(this)
+//
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.container, ApiFragment.newInstance())
+//                .commitNow()
+//        }
     }
 
-//        //поддержка экшенбара если бы не было шторки
-//        setSupportActionBar(toolbar)
-//        //отключаем показ заголовка тулбара, так как там свой макет с main_title
-//        supportActionBar?.setDisplayShowTitleEnabled(false)
-//        Log.d(TAG, "MainActivity onCreate backStackEntryCount =" +
-//                "${supportFragmentManager.backStackEntryCount}" )
-//        //https://stackoverflow.com/questions/28531503/toolbar-switching-from-drawer-to-back-
-//        // button-with-only-one-activity/29292130#29292130
-//        //если в BackStack есть  фрагменты
-//        //то отображаем стрелку назад и устанавливаем слушатель на щелчок по ней с действием
-//        //onBackPressed(), иначе не показываем стрелку
-//        supportFragmentManager.addOnBackStackChangedListener {  //слушатель BackStack
-//            if(supportFragmentManager.backStackEntryCount > 0){
-//                supportActionBar?.setDisplayHomeAsUpEnabled(true) //показать стрелку
-//                toolbar.setNavigationOnClickListener { // слушатель кнопки навигации- стрелка
-//                    onBackPressed()
-//                }
-//            }else{
-//                supportActionBar?.setDisplayHomeAsUpEnabled(false)//не показывать стрелку
-//            }
-//        }
-
-
+    // Этот метод вызывается всякий раз, когда пользователь выбирает переход вверх
+    // в иерархии действий приложения из панели действий (экшенбара)
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                ||super.onSupportNavigateUp()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -167,25 +143,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_favorites -> {
                 Log.d(TAG, "MainActivity onNavigationItemSelected nav_favorites")
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, FavoriteFragment())
-                    .addToBackStack("FavoriteFragment")
-                    .commit()
+          navController.navigate(R.id.favoriteFragment)
             }
             R.id.nav_setting -> {
                 Log.d(TAG, "MainActivity onNavigationItemSelected nav_setting")
-                startActivity(Intent(this, SettingsActivity::class.java))
+                navController.navigate(R.id.settingsFragment)
             }
             R.id.nav_search_wiki ->{
-               supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SearchFragment())
-                    .addToBackStack("SearchFragment")
-                    .commit()
+                navController.navigate(R.id.searchFragment)
             }
-//            R.id.nav_help -> {
-//                Log.d(TAG, "MainActivity onNavigationItemSelected nav_help")
-//               // showHelp()
-//            }
 
             R.id.nav_share -> {
                 Log.d(TAG, "MainActivity onNavigationItemSelected nav_share")

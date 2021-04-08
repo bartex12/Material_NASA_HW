@@ -1,17 +1,19 @@
 package geekbarains.material.ui.tabs.earth
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
-import geekbarains.material.ui.animation.AnimationActivity
+import geekbarains.material.model.Constants
 import geekbarains.material.util.snackBarLong
 import kotlinx.android.synthetic.main.fragment_earth.*
 
@@ -23,6 +25,7 @@ class EarthFragment: Fragment() {
 
     private lateinit var viewModelEarth: EarthViewModel
     private var adapter: EarthRecyclerAdapter? = null
+    lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +37,8 @@ class EarthFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
 
         viewModelEarth =ViewModelProvider(requireActivity()).get(EarthViewModel::class.java)
 
@@ -89,9 +94,8 @@ class EarthFragment: Fragment() {
             override fun onItemClick(url: String) {
                 Log.d(TAG, "### EarthFragment getOnClickListener $url")
 
-                val intent = Intent(requireActivity(), AnimationActivity::class.java)
-                intent.putExtra(AnimationActivity.URL_ANIMATION, url)
-                startActivity(intent)
+                val bundle = bundleOf(Constants.URL_ANIMATION to url)
+                navController.navigate(R.id.animationFragment, bundle)
             }
         }
 

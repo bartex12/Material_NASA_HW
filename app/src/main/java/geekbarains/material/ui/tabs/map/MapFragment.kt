@@ -7,12 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
+import geekbarains.material.model.Constants
 import geekbarains.material.ui.maps.MapsActivity
 import geekbarains.material.ui.tabs.map.states.CapitalOfState
 import geekbarains.material.ui.tabs.map.coord.CapitalCoords
@@ -28,10 +32,9 @@ class MapFragment : Fragment(){
     }
     lateinit var viewModelMap:MapViewModel
     private var adapter: MapRecyclerAdapter? = null
-
     private var temp  = 0
-
     private var capitalOfState = listOf<CapitalOfState>()
+    lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +48,8 @@ class MapFragment : Fragment(){
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
 
         viewModelMap = ViewModelProvider(this).get(MapViewModel::class.java)
         //так как используются вкладки, а список на второй вкладке - для его отображения
@@ -127,7 +132,8 @@ class MapFragment : Fragment(){
         Log.d(TAG, "MapFragment renderCoords " +
                 "Координаты для ${capitalCoords.name}  lon = $lon  lat = $lat  temp =$temp")
 
-        MapsActivity.start(requireActivity(), lat, lon)
+        val bundle = bundleOf(Constants.LAT to lat,  Constants.LON to lon) //так проще
+        navController.navigate(R.id.mapsActivity, bundle)
     }
 
     private fun renderLoadingStart(){
