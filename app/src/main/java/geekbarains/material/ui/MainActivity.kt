@@ -1,10 +1,12 @@
 package geekbarains.material.ui
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -14,7 +16,11 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
 import com.google.android.material.navigation.NavigationView
 import geekbarains.material.R
+import geekbarains.material.ui.favorite.FavoriteFragment
+import geekbarains.material.ui.search.SearchFragment
+import geekbarains.material.ui.settings.SettingsActivity
 import geekbarains.material.ui.tabs.ApiFragment
+import geekbarains.material.util.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import java.security.KeyManagementException
@@ -161,26 +167,37 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_favorites -> {
                 Log.d(TAG, "MainActivity onNavigationItemSelected nav_favorites")
-                //presenter.showFavorites()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, FavoriteFragment())
+                    .addToBackStack("FavoriteFragment")
+                    .commit()
             }
             R.id.nav_setting -> {
                 Log.d(TAG, "MainActivity onNavigationItemSelected nav_setting")
-                //presenter. showSettingsActivity()
+                startActivity(Intent(this, SettingsActivity::class.java))
             }
-            R.id.nav_help -> {
-                Log.d(TAG, "MainActivity onNavigationItemSelected nav_help")
-               // presenter.showHelp()
+            R.id.nav_search_wiki ->{
+               supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SearchFragment())
+                    .addToBackStack("SearchFragment")
+                    .commit()
             }
+//            R.id.nav_help -> {
+//                Log.d(TAG, "MainActivity onNavigationItemSelected nav_help")
+//               //showHelp()
+//            }
 
             R.id.nav_share -> {
                 Log.d(TAG, "MainActivity onNavigationItemSelected nav_share")
                 //поделиться - передаём ссылку на приложение в маркете
                 //shareApp()
+                toast(getString(R.string.stub))
             }
             R.id.nav_rate -> {
                 Log.d(TAG, "MainActivity onNavigationItemSelected nav_send")
                 //оценить приложение - попадаем на страницу приложения в маркете
                 //rateApp()
+                toast(getString(R.string.stub))
             }
         }
         // Выделяем выбранный пункт меню в шторке
