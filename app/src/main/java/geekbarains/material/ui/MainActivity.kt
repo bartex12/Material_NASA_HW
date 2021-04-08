@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 //            R.id.nav_help -> {
 //                Log.d(TAG, "MainActivity onNavigationItemSelected nav_help")
-//               //showHelp()
+//               // showHelp()
 //            }
 
             R.id.nav_share -> {
