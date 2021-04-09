@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-   style="@style/FrameStyle">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FrameStyle">
 
     <ProgressBar
         android:id="@+id/progressBarNasa"
@@ -28,7 +29,8 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip1"
                     style="@style/ChipStyle"
-                    android:text="@string/today" />
+                    android:fontFamily="@font/andika"
+                    android:text="@string/today"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip2"
@@ -44,9 +46,7 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip4"
-                style="@style/Widget.MaterialComponents.Chip.Action"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/ChipStyleAction"
                 android:text="@string/else_foto"
                 app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
                 app:layout_constraintStart_toStartOf="@+id/chipGroupMain"/>
@@ -73,22 +73,20 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_descr"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/ChipStyle"
                 android:text="@string/show_descr"
                 app:layout_constraintEnd_toEndOf="@+id/chipGroupMain"
-                app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupMain" />
 
             <geekbarains.material.util.EquilateralImageView
                 android:id="@+id/image_view"
                 style="@style/EquilateralImageViewStyle"
+                android:layout_marginTop="@dimen/layout_margin_16dp"
                 android:contentDescription="@string/photo_of_the_day_stub"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chip_descr"
+                app:layout_constraintTop_toBottomOf="@+id/chip4"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
             <WebView
@@ -97,7 +95,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chip_descr"
+                app:layout_constraintTop_toBottomOf="@+id/chip4"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

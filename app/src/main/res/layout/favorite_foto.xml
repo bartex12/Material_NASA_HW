@@ -10,17 +10,17 @@
         android:id="@+id/fotoImageViewEdit"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginStart="@dimen/layout_margin_8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/photo_56in100" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoTitleEdit"
+        style="@style/MyTextStyleFavorite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="?colorPrimary"
-        android:text="Заголовок"
-        android:textSize="16sp"
+        android:text="@string/header"
         android:maxLines="2"
         android:layout_marginStart="@dimen/layout_margin_8dp"
         app:layout_constraintEnd_toEndOf="@+id/barrierFotoEdit"
@@ -30,13 +30,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoDateEdit"
+        style="@style/MyTextStyleFavorite"
+        android:textSize="14sp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Дата"
-        android:textSize="14sp"
-        android:textColor="?colorPrimary"
-        android:layout_marginBottom="@dimen/layout_margin_8dp"
+        android:text="@string/dateFoto"
         android:layout_marginStart="@dimen/layout_margin_8dp"
+        android:layout_marginBottom="@dimen/layout_margin_8dp"
         app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
         app:layout_constraintEnd_toStartOf="@+id/barrierFotoEdit"
         app:layout_constraintHorizontal_bias="0.0"
@@ -109,15 +109,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/fotoImageViewEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/fotoImageViewEdit"
-        app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24" />
+        app:srcCompat="@drawable/ic_baseline_arrow_drop_down_24" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoDescriptionTextViewEdit"
+        style="@style/MyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="@dimen/layout_margin_8dp"
         android:text="@string/video_mars"
-        android:textColor="#000"
+        android:textColor="@color/black"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

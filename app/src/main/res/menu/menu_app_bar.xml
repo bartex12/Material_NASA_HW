@@ -8,7 +8,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/app_bar_favorites"
-        android:icon="@drawable/ic_favorite_border_white_24"
+        android:icon="@drawable/ic_favorite_filled_24"
         android:title="@string/favorites"
         app:showAsAction="always" />
 
@@ -22,5 +22,11 @@
         android:id="@+id/app_bar_settings"
         android:icon="@drawable/ic_settings_menu"
         android:title="@string/settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/app_bar_help"
+        android:icon="@drawable/ic_baseline_help_outline_24"
+        android:title="@string/help"
         app:showAsAction="never" />
 </menu>
