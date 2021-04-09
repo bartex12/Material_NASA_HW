@@ -59,14 +59,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             e.printStackTrace()
         }
 
-//        val favoriteListFotos = PreferenceManager.getDefaultSharedPreferences(this)
-//            .getStringSet("ListFavoriteFotos", mutableSetOf())
-//        if (favoriteListFotos != null) {
-//            if (favoriteListFotos.size == 0) {
-//
-//            }
-//        }
-
         //читаем сохранённный в настройках тип картинки
         oldType = PreferenceManager.getDefaultSharedPreferences(this)
                .getString("ListEarth", "1")!!.toInt()
@@ -105,12 +97,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
         //слушатель меню шторки -для обработки пунктов шторки
         nav_view.setNavigationItemSelectedListener(this)
-//
-//        if (savedInstanceState == null) {
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.container, TabsFragment.newInstance())
-//                .commitNow()
-//        }
     }
 
     // Этот метод вызывается всякий раз, когда пользователь выбирает переход вверх
@@ -145,6 +131,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_search_wiki ->{
                 navController.navigate(R.id.searchFragment)
+            }
+            R.id.nav_help ->{
+                navController.navigate(R.id.helpFragment)
             }
 
             R.id.nav_share -> {

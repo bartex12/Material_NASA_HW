@@ -1,4 +1,4 @@
-package geekbarains.material.view.fragments.tabs
+package geekbarains.material.view.fragments.tabs.tab
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

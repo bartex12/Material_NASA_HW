@@ -145,6 +145,9 @@ class FavoriteFragment: Fragment() {
 
             R.id.app_bar_search_wiki ->
                 navController.navigate(R.id.searchFragment)
+
+            R.id.app_bar_help ->
+                navController.navigate(R.id.helpFragment)
         }
         return super.onOptionsItemSelected(item)
     }

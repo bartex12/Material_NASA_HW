@@ -1,5 +1,6 @@
 package geekbarains.material.view.fragments.tabs.pictureofday
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -64,6 +65,9 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "PictureOfTheDayFragment onViewCreated  ")
 
+
+
+
         navController = Navigation.findNavController(view)
 
         //разрешаем показ меню во фрагменте
@@ -79,25 +83,35 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //если грузим видео с фазами луны в 2021 то val todayAsString = "2021-01-11"
-        //но мы грузим картинку дня и поэтому
-        val todayAsString =
-            dateFormat.format(Calendar.getInstance().apply { add(Calendar.DATE, 0) }.time )
-        Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
 
-        if (savedInstanceState == null){
-            Log.d(TAG, "savedInstanceState == null")
-            viewModel. sendServerRequest(todayAsString)
-        }
+//        //ставим шрифт для описания
+//        activity?. let {
+//            bottom_sheet_description.typeface =
+//                Typeface.createFromAsset(it.assets, "MelancholySerif-zoGL.otf")
+//            bottom_sheet_description_header.typeface =
+//                Typeface.createFromAsset(it.assets, "MelancholySerif-zoGL.otf")
+//        }
+            //если грузим видео с фазами луны в 2021 то val todayAsString = "2021-01-11"
+            //но мы грузим картинку дня и поэтому
+            val todayAsString =
+                dateFormat.format(Calendar.getInstance().apply { add(Calendar.DATE, 0) }.time )
+            Log.d(TAG, "PictureOfTheDayFragment onActivityCreated todayAsString = $todayAsString")
+
+            if (savedInstanceState == null){
+                Log.d(TAG, "savedInstanceState == null")
+                viewModel. sendServerRequest(todayAsString)
+            }
 //        val calen =Calendar.getInstance().time
 //        val cal = GregorianCalendar(year, month, dayOfMonth).time
 //        cal.after(GregorianCalendar().time)
 
-        viewModel.getData()
-            .observe(viewLifecycleOwner, Observer<PictureOfTheDaySealed> { renderData(it) })
+            viewModel.getData()
+                .observe(viewLifecycleOwner, Observer<PictureOfTheDaySealed> { renderData(it) })
+
     }
 
     private fun initFavoritListener() {
+
         favoriteFoto.setOnClickListener {
             favorite?. let{
                 viewModel.addToFavorite(it)

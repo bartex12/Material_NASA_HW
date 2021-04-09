@@ -1,4 +1,4 @@
-package geekbarains.material.view
+package geekbarains.material.util
 
 import android.content.Context
 import android.util.AttributeSet

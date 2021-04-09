@@ -93,6 +93,8 @@ class SearchFragment : Fragment(){
         when (item.itemId) {
             R.id.app_bar_settings ->
               navController.navigate(R.id.settingsFragment)
+            R.id.app_bar_help ->
+                navController.navigate(R.id.helpFragment)
         }
         return super.onOptionsItemSelected(item)
     }

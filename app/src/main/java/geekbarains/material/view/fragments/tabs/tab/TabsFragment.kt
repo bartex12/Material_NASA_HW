@@ -1,4 +1,4 @@
-package geekbarains.material.view.fragments.tabs
+package geekbarains.material.view.fragments.tabs.tab
 
 import android.os.Bundle
 import android.view.*
@@ -32,7 +32,10 @@ class TabsFragment:Fragment() {
         //разрешаем показ меню во фрагменте
         setHasOptionsMenu(true)
 
-        view_pager.adapter = ViewPageAdapter(childFragmentManager)
+        view_pager.adapter =
+            ViewPageAdapter(
+                childFragmentManager
+            )
         tab_layout.setupWithViewPager(view_pager)
 
     }
@@ -57,6 +60,9 @@ class TabsFragment:Fragment() {
 
             R.id.app_bar_settings ->
                 navController.navigate(R.id.settingsFragment)
+
+            R.id.app_bar_help ->
+                navController.navigate(R.id.helpFragment)
         }
         return super.onOptionsItemSelected(item)
     }
