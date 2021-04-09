@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/apiFragment"
-        android:name="geekbarains.material.ui.tabs.ApiFragment"
+        android:name="geekbarains.material.view.fragments.tabs.TabsFragment"
         android:label="fragment_tabs"
         tools:layout="@layout/fragment_tabs" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="geekbarains.material.ui.favorite.FavoriteFragment"
+        android:name="geekbarains.material.view.fragments.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="geekbarains.material.ui.search.SearchFragment"
+        android:name="geekbarains.material.view.fragments.search.SearchFragment"
         android:label="SearchFragment" >
         <action
             android:id="@+id/action_searchFragment_to_settingsFragment"
@@ -48,15 +48,15 @@
     </fragment>
     <activity
         android:id="@+id/mapsActivity"
-        android:name="geekbarains.material.ui.maps.MapsActivity"
+        android:name="geekbarains.material.view.activities.MapsActivity"
         android:label="MapsActivity" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="geekbarains.material.ui.settings.SettingsFragment"
+        android:name="geekbarains.material.view.fragments.settings.SettingsFragment"
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/animationFragment"
-        android:name="geekbarains.material.ui.animation.AnimationFragment"
+        android:name="geekbarains.material.view.fragments.animation.AnimationFragment"
         android:label="AnimationFragment" >
         <action
             android:id="@+id/action_animationFragment_to_settingsFragment"

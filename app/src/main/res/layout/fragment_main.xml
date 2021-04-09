@@ -81,7 +81,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
                 />
 
-            <geekbarains.material.util.EquilateralImageView
+            <geekbarains.material.view.EquilateralImageView
                 android:id="@+id/image_view"
                 style="@style/EquilateralImageViewStyle"
                 android:contentDescription="@string/photo_of_the_day_stub"

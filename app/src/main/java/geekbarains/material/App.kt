@@ -1,7 +1,7 @@
 package geekbarains.material
 
 import android.app.Application
-import geekbarains.material.room.Database
+import geekbarains.material.model.room.Database
 
 class App:Application() {
     companion object {

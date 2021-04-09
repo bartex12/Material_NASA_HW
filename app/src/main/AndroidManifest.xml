@@ -21,13 +21,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.maps.MapsActivity"
+            android:name="geekbarains.material.view.activities.MapsActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".ui.settings.SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".ui.MainActivity"
+            android:name=".view.activities.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
