@@ -29,13 +29,13 @@
             <TextView
                 android:id="@+id/bottom_sheet_description_header"
                 style="@style/TextViewBottomSheetHeaderStyle"
-                android:fontFamily="@font/actor"
+
                 tools:text="@string/bottov_shit_title"/>
 
             <TextView
                 android:id="@+id/bottom_sheet_description"
                 style="@style/TextViewBottomSheetDescriptionStyle"
-                android:fontFamily="@font/actor"
+
                 tools:text="@string/bottom_shit_text" />
 
         </LinearLayout>

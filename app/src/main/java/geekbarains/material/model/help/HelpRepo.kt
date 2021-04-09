@@ -11,29 +11,7 @@ class HelpRepo(val app: Application):
     IHelpRepo {
 
     override fun getHelpText(): String? {
-        val iFile: InputStream = app.resources.openRawResource(R.raw.help_nasa)
-        return inputStreamToString(iFile)
+      return app.applicationContext.getString(R.string.helpString222)
     }
 
-    private fun inputStreamToString(iFile: InputStream): String? {
-        val strFull = StringBuilder()
-        var str: String? = ""
-        try {
-            // открываем поток для чтения
-            val ir = InputStreamReader(iFile)
-            val br = BufferedReader(ir)
-            // читаем содержимое
-            // в Java это  while ((str = br.readLine()) != null) {...}
-            while (br.readLine().also { str = it } != null) {
-                //Чтобы не было в одну строку, ставим символ новой строки
-                strFull.append(str).append("\n")
-            }
-            //закрываем потоки
-            iFile.close()
-            ir.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-        return strFull.toString()
-    }
 }

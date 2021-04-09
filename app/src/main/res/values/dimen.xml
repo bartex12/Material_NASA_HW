@@ -7,8 +7,11 @@
     <dimen name="tv_paddingStart">10dp</dimen>
     <dimen name="tv_paddingEnd">10dp</dimen>
     <dimen name="tv_layout_marginTop">5dp</dimen>
+
+    <dimen name="layout_margin_4dp">4dp</dimen>
     <dimen name="layout_margin_8dp">8dp</dimen>
     <dimen name="layout_margin_16dp">16dp</dimen>
+
     <dimen name="boxCornerRadiusTopStart">20dp</dimen>
     <dimen name="boxCornerRadiusBottomEnd">20dp</dimen>
     <dimen name="cl_paddingStart">10dp</dimen>

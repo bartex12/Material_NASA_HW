@@ -26,9 +26,9 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoTitleVideo"
+        style="@style/MyTextStyleFavorite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="?colorPrimary"
         android:text="@string/head"
         android:textSize="16sp"
         android:maxLines="2"
@@ -40,11 +40,11 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoDateVideo"
+        style="@style/MyTextStyleFavorite"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/datee"
         android:textSize="14sp"
-        android:textColor="?colorPrimary"
         android:layout_marginBottom="@dimen/layout_margin_8dp"
         android:layout_marginStart="@dimen/layout_margin_8dp"
         app:layout_constraintBottom_toBottomOf="@+id/videoScreen"
@@ -126,9 +126,10 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fotoDescriptionVideo"
+        style="@style/MyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="@dimen/layout_margin_8dp"
         android:text="@string/video_mars"
         android:textColor="#000"
         android:visibility="gone"

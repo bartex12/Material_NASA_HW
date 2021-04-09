@@ -65,9 +65,6 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "PictureOfTheDayFragment onViewCreated  ")
 
-
-
-
         navController = Navigation.findNavController(view)
 
         //разрешаем показ меню во фрагменте
@@ -84,13 +81,6 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        //ставим шрифт для описания
-//        activity?. let {
-//            bottom_sheet_description.typeface =
-//                Typeface.createFromAsset(it.assets, "MelancholySerif-zoGL.otf")
-//            bottom_sheet_description_header.typeface =
-//                Typeface.createFromAsset(it.assets, "MelancholySerif-zoGL.otf")
-//        }
             //если грузим видео с фазами луны в 2021 то val todayAsString = "2021-01-11"
             //но мы грузим картинку дня и поэтому
             val todayAsString =
@@ -101,9 +91,6 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
                 Log.d(TAG, "savedInstanceState == null")
                 viewModel. sendServerRequest(todayAsString)
             }
-//        val calen =Calendar.getInstance().time
-//        val cal = GregorianCalendar(year, month, dayOfMonth).time
-//        cal.after(GregorianCalendar().time)
 
             viewModel.getData()
                 .observe(viewLifecycleOwner, Observer<PictureOfTheDaySealed> { renderData(it) })
