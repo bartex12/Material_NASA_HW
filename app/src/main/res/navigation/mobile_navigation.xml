@@ -51,7 +51,8 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="geekbarains.material.view.fragments.search.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -64,7 +65,8 @@
     <activity
         android:id="@+id/mapsActivity"
         android:name="geekbarains.material.view.activities.MapsActivity"
-        android:label="MapsActivity" />
+        android:label="MapsActivity"
+        tools:layout="@layout/activity_maps"/>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="geekbarains.material.view.fragments.settings.SettingsFragment"
@@ -72,7 +74,8 @@
     <fragment
         android:id="@+id/animationFragment"
         android:name="geekbarains.material.view.fragments.animation.AnimationFragment"
-        android:label="AnimationFragment" >
+        android:label="AnimationFragment"
+        tools:layout="@layout/fragment_anime">
         <action
             android:id="@+id/action_animationFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -83,7 +86,8 @@
     <fragment
         android:id="@+id/helpFragment"
         android:name="geekbarains.material.view.fragments.help.HelpFragment"
-        android:label="HelpFragment" >
+        android:label="HelpFragment"
+        tools:layout="@layout/fragment_help">
         <action
             android:id="@+id/action_helpFragment_to_searchFragment"
             app:destination="@id/searchFragment"

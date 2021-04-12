@@ -168,6 +168,7 @@
     <string name="before_today">\"Нужно не позднее сегодняшнего дня \"</string>
     <string name="toast_add">Добавлено в избранное</string>
     <string name="toast_remove">Удалено из избранного</string>
+    <string name="zoom_zoom">Сильное увеличение</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>

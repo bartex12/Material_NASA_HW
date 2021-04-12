@@ -58,6 +58,7 @@ class TabsFragment:Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.app_bar_edit).isVisible = false
+        menu.findItem(R.id.app_bar_zoom).isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

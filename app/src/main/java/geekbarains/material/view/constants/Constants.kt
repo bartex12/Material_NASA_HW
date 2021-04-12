@@ -8,5 +8,6 @@ object Constants {
     const val LON = "LON"
     const val DATE_DATA_PICKER = "DATE_DATA_PICKER"
     const val PAGER_POSITION = "PAGER_POSITION"
+    const val MEDIA_IMAGE = "image"
 
 }

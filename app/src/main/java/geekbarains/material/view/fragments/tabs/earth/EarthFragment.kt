@@ -101,7 +101,8 @@ class EarthFragment: Fragment() {
             override fun onItemClick(url: String) {
                 Log.d(TAG, "### EarthFragment getOnClickListener $url")
 
-                val bundle = bundleOf(Constants.URL_ANIMATION to url)
+                val bundle = bundleOf(Constants.URL_ANIMATION to url,
+                    Constants.MEDIA_TYPE_ANIMATION to "image")
                 navController.navigate(R.id.animationFragment, bundle)
             }
         }
