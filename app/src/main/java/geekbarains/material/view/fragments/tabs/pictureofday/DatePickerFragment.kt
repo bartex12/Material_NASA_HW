@@ -12,7 +12,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DatePickerFragment(val listener:OnItemClickListener) : DialogFragment(),  DatePickerDialog.OnDateSetListener {
+class DatePickerFragment(val listener:OnItemClickListener, val date:String) : DialogFragment(),  DatePickerDialog.OnDateSetListener {
 
     companion object{
         const val TAG = "33333"
@@ -25,30 +25,31 @@ class DatePickerFragment(val listener:OnItemClickListener) : DialogFragment(),  
     //открываем DatePicker с текущей датой
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         Log.d(TAG, "DatePickerFragment onCreateDialog ")
-        val calendar = Calendar.getInstance()
-        val yy = calendar[Calendar.YEAR]
-        val mm = calendar[Calendar.MONTH]
-        val dd = calendar[Calendar.DAY_OF_MONTH]
+
+        //парсим строку с датой
+        val yy = date.take(4).toInt()
+        val mm = (date.take(7)).takeLast(2).toInt()
+        val dd = date.takeLast(2).toInt()
+        //обязательно в конструктор передавать слушатель, иначе onDateSet не сработает
+        val datePicker = DatePickerDialog(requireContext(), this, yy, /*индекс с 0*/mm-1, dd )
 
         val dateFormat: DateFormat = SimpleDateFormat("dd–MM–yyyy", Locale.getDefault())
         val first = getString(R.string.first_foto_apod)
         val now  = dateFormat.format(GregorianCalendar(yy, mm, dd).time)
-
-        //обязательно в конструктор передавать слушатель, иначе onDateSet не сработает
-        val datePicker = DatePickerDialog(requireContext(), this, yy, mm, dd )
         datePicker.setTitle("от  $first \nдо  $now")
+
         return datePicker
     }
     //выбираем дату и после нажатия ok попадаем в этот метод
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
         val cal = GregorianCalendar(year, month, dayOfMonth).time
-        if(cal.before(GregorianCalendar(1995, 6, 16).time)){
+        if(cal.before(GregorianCalendar(1995, /*индекс с 0*/5, 16).time)){
             Log.d(TAG, "DatePickerFragment onDateSet before")
-            toast("нужно после 16-06-1995")
+            toast(getString(R.string.after_1995))
         }else if(cal.after(GregorianCalendar().time)){
             Log.d(TAG, "DatePickerFragment onDateSet after")
-            toast("нужно до сегодня ")
+            toast(getString(R.string.before_today))
         }else{
             val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val date:String = dateFormat.format(GregorianCalendar(year, month, dayOfMonth).time)

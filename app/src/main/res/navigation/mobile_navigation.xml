@@ -30,7 +30,9 @@
             app:destination="@id/animationFragment" />
         <action
             android:id="@+id/action_apiFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
+            app:destination="@id/helpFragment"
+            app:popUpTo="@id/apiFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -42,7 +44,9 @@
             app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_favoriteFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
+            app:destination="@id/helpFragment"
+            app:popUpTo="@id/favoriteFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -53,7 +57,9 @@
             app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_searchFragment_to_helpFragment"
-            app:destination="@id/helpFragment" />
+            app:destination="@id/helpFragment"
+            app:popUpTo="@id/searchFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <activity
         android:id="@+id/mapsActivity"
@@ -77,5 +83,21 @@
     <fragment
         android:id="@+id/helpFragment"
         android:name="geekbarains.material.view.fragments.help.HelpFragment"
-        android:label="HelpFragment" />
+        android:label="HelpFragment" >
+        <action
+            android:id="@+id/action_helpFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:popUpTo="@id/helpFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_helpFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment"
+            app:popUpTo="@id/helpFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_helpFragment_to_apiFragment"
+            app:destination="@id/apiFragment"
+            app:popUpTo="@id/helpFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

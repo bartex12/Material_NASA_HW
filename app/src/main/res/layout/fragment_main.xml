@@ -20,7 +20,8 @@
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupMain"
                 style="@style/ChipGroupStyle"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/layout_margin_16dp"
+                android:layout_marginBottom="@dimen/layout_margin_16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -30,7 +31,7 @@
                     android:id="@+id/chip1"
                     style="@style/ChipStyle"
                     android:fontFamily="@font/andika"
-                    android:text="@string/today"/>
+                    android:text="@string/today" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip2"
@@ -38,44 +39,43 @@
                     android:text="@string/yesterday" />
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chip3"
-                    style="@style/ChipStyle"
-                    android:text="@string/before_yesterday" />
+                    android:id="@+id/chip4"
+                    style="@style/ChipStyleAction"
+                    android:text="@string/by_date" />
 
             </com.google.android.material.chip.ChipGroup>
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip4"
-                style="@style/ChipStyleAction"
-                android:text="@string/else_foto"
-                app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
-                app:layout_constraintStart_toStartOf="@+id/chipGroupMain"/>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/favoriteFoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/chip4"
-                app:layout_constraintStart_toEndOf="@+id/chip4"
-                app:layout_constraintTop_toTopOf="@+id/chip4"
-                app:layout_constraintEnd_toStartOf="@+id/chip_descr"
-                app:srcCompat="@drawable/ic_favorite_border_36" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/favoriteFotoFilled"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/chip4"
-                app:layout_constraintStart_toEndOf="@+id/chip4"
-                app:layout_constraintTop_toTopOf="@+id/chip4"
-                app:layout_constraintEnd_toStartOf="@+id/chip_descr"
-                app:srcCompat="@drawable/ic_favorite_filled_36" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_descr"
-                style="@style/ChipStyle"
-                android:text="@string/show_descr"
+            <Button
+                android:id="@+id/btn_addToFavorite"
+                style="?favorite"
+                android:text="@string/addToFavorite"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/chipGroupMain"
+                app:layout_constraintStart_toStartOf="@+id/chipGroupMain"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
+                tools:visibility="visible"/>
+            <Button
+                android:id="@+id/btn_removeFavorite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="?attr/borderlessButtonStyle"
+                android:textColor="?colorPrimary"
+                android:textSize="12sp"
+                android:text="@string/removeFromFavorite"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/chipGroupMain"
+                app:layout_constraintStart_toStartOf="@+id/chipGroupMain"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupMain"
+               tools:visibility="visible"/>
+
+            <View
+                android:id="@+id/viewMain"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="50dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chipGroupMain" />
 
             <geekbarains.material.util.EquilateralImageView
@@ -86,7 +86,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chip4"
+                app:layout_constraintTop_toBottomOf="@+id/viewMain"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
             <WebView
@@ -95,13 +95,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chip4"
+                app:layout_constraintTop_toBottomOf="@+id/viewMain"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
 <!--    BottomSheet  -->
     <include layout="@layout/bottom_sheet_layout" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
