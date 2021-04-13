@@ -25,7 +25,7 @@ class PictureOfTheDayViewModel : ViewModel() {
 
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDaySealed> = MutableLiveData()
     private val retrofitImpl: PODRetrofitImpl =
-        PODRetrofitImpl()
+        PODRetrofitImpl("https://api.nasa.gov/")
 
     val prefHelper :IPrefRepo = PrefRepo(App.instance)
 

@@ -8,4 +8,4 @@ import kotlinx.android.parcel.Parcelize
 data class  PictureOfEarth (
         @Expose val date:String? = null,
         @Expose val image: String? = null
-    ): Parcelable
+    ):   Parcelable

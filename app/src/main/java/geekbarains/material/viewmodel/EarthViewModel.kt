@@ -18,9 +18,7 @@ class EarthViewModel: ViewModel() {
     //для получения картинки Земли
     private val pictureEarthSealed =  MutableLiveData<PictureEarthSealed>()
     private val pictureRepo: IPictureEarthRepo =
-        PictureEarthRepo(
-            ApiFactoryPictureOfEarth.API
-        )
+        PictureEarthRepo(ApiFactoryPictureOfEarth.API )
 
     fun getPictures():LiveData<PictureEarthSealed> {
         loadPictures()

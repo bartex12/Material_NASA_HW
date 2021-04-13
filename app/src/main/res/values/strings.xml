@@ -169,6 +169,9 @@
     <string name="toast_add">Добавлено в избранное</string>
     <string name="toast_remove">Удалено из избранного</string>
     <string name="zoom_zoom">Сильное увеличение</string>
+    <string name="curiosity">Curiosity</string>
+    <string name="opportunity">Opportunity</string>
+    <string name="spirit">Spirit</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>

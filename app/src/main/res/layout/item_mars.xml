@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/CardStyle"
+    >
+
+<FrameLayout
+    android:id="@+id/contaner_earth"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_mars"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_mars" />
+
+    <TextView
+        android:id="@+id/tv_mars"
+        style="@style/MyTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin_8dp"
+        android:elevation="3dp"
+        android:layout_gravity="end"
+        android:text="@string/tv_str"
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
+
+</FrameLayout>
+</androidx.cardview.widget.CardView >
