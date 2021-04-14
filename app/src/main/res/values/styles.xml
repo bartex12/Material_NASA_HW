@@ -13,7 +13,7 @@
         <item name="colorSecondaryVariant">#0039CB</item>
         <item name="colorOnSecondary">#FFFFFF</item>
         <item name="colorError">#F44336</item>
-        <item name="colorOnError">#FFFFFF</item>
+        <item name="colorOnError">@color/whisper2</item>
         <item name="colorSurface">#FFFFFF</item>
         <item name="colorOnSurface">#212121</item>
         <item name="android:colorBackground">@color/background</item>
@@ -30,6 +30,7 @@
         <item name="favoriteRemove"> @style/ButtonFavoriteStyle</item>
         <item name="bottom_sheet_view_background"> @color/bright_gray</item>
         <item name="bottom_sheet_root_background"> @color/whisper</item>
+        <item name="card_background_tint"> @color/whisper2</item>
 
         <!--        <item name="android:forceDarkAllowed"> true </item>-->
     </style>
@@ -38,12 +39,14 @@
         <item name="colorPrimary">@color/colorPrimaryPurple</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkPurple</item>
         <item name="colorAccent">@color/colorAccentPurple</item>
+        <item name="colorOnError">@color/whisper2Purple</item>
     </style>
 
     <style name="AppThemeBlack" parent="AppTheme">
         <item name="colorPrimary">@color/colorPrimaryBlack</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkBlack</item>
         <item name="colorAccent">@color/colorAccentBlack</item>
+        <item name="colorOnError">@color/whisper2Black</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />

@@ -5,35 +5,59 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import geekbarains.material.R
-import geekbarains.material.model.earth.entity.PictureEarthSealed
-import geekbarains.material.model.earth.entity.PictureOfEarth
-import geekbarains.material.model.mars.entity.FotosOfMars
 import geekbarains.material.model.mars.entity.MarsResponseData
 import geekbarains.material.model.mars.entity.MarsSealed
 import geekbarains.material.util.snackBarLong
-import geekbarains.material.view.fragments.adapters.EarthRecyclerAdapter
+import geekbarains.material.view.constants.Constants
+import geekbarains.material.view.constants.Constants.CURIOSITY
+import geekbarains.material.view.constants.Constants.OPPORTUNITY
+import geekbarains.material.view.constants.Constants.SPIRIT
 import geekbarains.material.view.fragments.adapters.MarsRVAdapter
-import geekbarains.material.view.fragments.tabs.earth.EarthFragment
-import geekbarains.material.viewmodel.EarthViewModel
 import geekbarains.material.viewmodel.MarsViewModel
-import kotlinx.android.synthetic.main.fragment_earth.*
 import kotlinx.android.synthetic.main.fragment_mars.*
 
-class MarsFragment: Fragment() {
+class MarsFragment: Fragment(), DatePickerFragmentRover.OnItemClickListenerRover {
 
     companion object{
         const val TAG = "33333"
     }
 
+    var dateCuriocity = "2015-6-3"
+    var dateOpportunity = "2015-6-3"
+    var dateSpirit = "2005-6-3"
+
+    var roverType = CURIOSITY
+
     private lateinit var viewModelMars: MarsViewModel
     private var adapter: MarsRVAdapter? = null
     lateinit var navController: NavController
+
+    //метод интерфейса DatePickerFragment
+    override fun onItemClick(date: String, typeRover: Int) {
+        when(typeRover){
+            CURIOSITY->{
+                viewModelMars.saveDatePickerDateCur(date)
+                chip1Mars.isChecked = true
+            }
+            OPPORTUNITY->{
+                viewModelMars.saveDatePickerDateOpp(date)
+                chip2Mars.isChecked = true
+            }
+            SPIRIT->{
+                viewModelMars.saveDatePickerDateSpir(date)
+                chip3Mars.isChecked = true
+            }
+        }
+        viewModelMars. loadData(date, typeRover)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,15 +70,51 @@ class MarsFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModelMars = ViewModelProvider(requireActivity()).get(MarsViewModel::class.java)
+        navController = Navigation.findNavController(view)
 
-        viewModelMars.loadData("2015-6-3")
+        viewModelMars = ViewModelProvider(requireActivity()).get(MarsViewModel::class.java)
+        viewModelMars.loadData(dateCuriocity, CURIOSITY)
+        chip1Mars.isChecked = true
 
         viewModelMars.getData().observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
+
         initAdapter()
+        initViews()
     }
+
+   fun initViews(){
+       chip1Mars.setOnClickListener {
+           roverType = CURIOSITY
+           viewModelMars.loadData(dateCuriocity, roverType)
+       }
+       chip2Mars.setOnClickListener {
+           roverType = OPPORTUNITY
+           viewModelMars.loadData(dateOpportunity, roverType)
+       }
+       chip3Mars.setOnClickListener {
+           roverType = SPIRIT
+           viewModelMars.loadData(dateSpirit, roverType)
+       }
+       chip4Mars.setOnClickListener {
+           when(roverType){
+               CURIOSITY->{
+                   DatePickerFragmentRover(this, viewModelMars.getDatePickerDateCur(),CURIOSITY )
+               }
+               OPPORTUNITY->{
+                   DatePickerFragmentRover(this, viewModelMars.getDatePickerDateOpp(), OPPORTUNITY)
+               }
+               SPIRIT->{
+                   DatePickerFragmentRover(this, viewModelMars.getDatePickerDateSpir(), SPIRIT)
+               }
+               else-> {
+                   DatePickerFragmentRover(this, viewModelMars.getDatePickerDateCur(),CURIOSITY )
+               }}
+               .show(childFragmentManager, "DatePickerRover")
+       }
+   }
+
 
     private fun renderData(data: MarsSealed) {
         when(data){
@@ -103,6 +163,16 @@ class MarsFragment: Fragment() {
         object : MarsRVAdapter.OnItemClickListener {
             override fun onItemClick(url: String) {
                 Log.d(TAG, "### MarsFragment getOnClickListener $url")
+
+               val  newUrl = url.replace("http", "https")
+                val bundle = bundleOf(
+                    Constants.URL_ANIMATION to newUrl,
+                    Constants.MEDIA_TYPE_ANIMATION to Constants.MEDIA_NONE)
+                navController.navigate(R.id.animationFragment, bundle)
             }
         }
+
+
+
+
 }

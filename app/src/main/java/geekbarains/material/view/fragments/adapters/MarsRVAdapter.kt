@@ -51,16 +51,21 @@ class MarsRVAdapter(val listener:OnItemClickListener)
 
         fun bind(foto:FotosOfMars){
 
-            val url = foto.img_src?.replace("http", "https")
+            var url: String? = null
+            foto.img_src ?. let{
+                 url = it.replace("http", "https")
+            }
+            url?. let{
+                //грузим картинку
+                Picasso.with(context)
+                    .load(it)
+                    .placeholder(R.drawable.ic_no_photo_vector)
+                    .error(R.drawable.ic_load_error_vector)
+                    .into(itemView.iv_mars)
+            }
 
-            //грузим картинку
-            Picasso.with(context)
-                .load(url)
-                .placeholder(R.drawable.ic_no_photo_vector)
-                .error(R.drawable.ic_load_error_vector)
-                .into(itemView.iv_mars)
-
-            itemView.tv_mars.text = foto.earth_date
+            itemView.tv_mars_date.text = foto.earth_date
+            itemView.tv_mars_rover.text = foto.rover?.name ?: context.getString(R.string.unknown)
 
             Log.d(EarthRecyclerAdapter.TAG, "MarsRVAdapter bind tv_mars.text ${foto.earth_date} " +
                     "foto.img_src = ${foto.img_src}" )

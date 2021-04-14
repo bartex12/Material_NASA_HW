@@ -55,7 +55,7 @@ class AnimationFragment: Fragment() {
         mediaType =  arguments?.getString(Constants.MEDIA_TYPE_ANIMATION)
         Log.d(TAG, "*** AnimationFragment onViewCreated  mediaType = $mediaType url = $url")
 
-        if(mediaType == Constants.MEDIA_IMAGE){
+        if(mediaType == Constants.MEDIA_IMAGE||mediaType == Constants.MEDIA_NONE){
             Log.d(TAG, "*** AnimationFragment onViewCreated  mediaType = image")
             image_view_animate.visibility = View.VISIBLE
             web_view_zoom.visibility = View.GONE
@@ -118,7 +118,8 @@ class AnimationFragment: Fragment() {
         menu.findItem(R.id.app_bar_search_wiki).isVisible = false
         menu.findItem(R.id.app_bar_edit).isVisible = false
         menu.findItem(R.id.app_bar_favorites).isVisible = false
-        menu.findItem(R.id.app_bar_zoom).isVisible = mediaType == Constants.MEDIA_IMAGE
+        menu.findItem(R.id.app_bar_zoom).isVisible =
+            mediaType == Constants.MEDIA_IMAGE||!(mediaType == Constants.MEDIA_NONE)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

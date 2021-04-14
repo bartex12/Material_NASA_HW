@@ -9,5 +9,13 @@ object Constants {
     const val DATE_DATA_PICKER = "DATE_DATA_PICKER"
     const val PAGER_POSITION = "PAGER_POSITION"
     const val MEDIA_IMAGE = "image"
+    const val MEDIA_NONE = "MEDIA_NONE"
+    const val DATE_DATA_PICKER_CUR = "DATE_DATA_PICKER_CUR"
+    const val DATE_DATA_PICKER_OPP = "DATE_DATA_PICKER_OPP"
+    const val DATE_DATA_PICKER_SPIR = "DATE_DATA_PICKER_SPIR"
+
+    const val CURIOSITY = 1
+    const val OPPORTUNITY = 2
+    const val SPIRIT = 3
 
 }

@@ -31,6 +31,7 @@ class HelpFragment: Fragment(){
 
         const val PHOTO_OF_DAY: String = "ФОТО ДНЯ"
         const val EARTH: String = "ЗЕМЛЯ"
+        const val MARS: String = "МАРС"
         const val SEARCH_IN_WIKI: String = "поиска в Википедии"
         const val WORLD_MAP: String = "КАРТА МИРА"
         const val BY_DATE: String = "По дате"
@@ -60,6 +61,7 @@ class HelpFragment: Fragment(){
             makeLinks(it, PHOTO_OF_DAY, color, spanHelp)
             makeLinks(it, BY_DATE, color, spanHelp)
             makeLinks(it, EARTH, color, spanHelp)
+            makeLinks(it, MARS, color, spanHelp)
             makeLinks(it, WORLD_MAP, color, spanHelp)
             makeLinks(it, SEARCH_IN_WIKI, color, spanHelp)
             makeLinks(it, SELECTED, color, spanHelp)
@@ -98,18 +100,29 @@ class HelpFragment: Fragment(){
                 Log.d(TAG, "HelpFragment makeLinks onClick")
                 when(phrase){
                     PHOTO_OF_DAY -> navController.navigate(R.id.action_helpFragment_to_apiFragment)
+
                     EARTH ->{
                       val bundle =   Bundle().apply { putInt(Constants.PAGER_POSITION, 1) }
                         navController.navigate(R.id.action_helpFragment_to_apiFragment, bundle)
                     }
-                    SEARCH_IN_WIKI
-                     -> navController.navigate(R.id.action_helpFragment_to_searchFragment)
-                    SELECTED-> navController.navigate(R.id.action_helpFragment_to_favoriteFragment)
-                    BY_DATE-> navController.navigate(R.id.action_helpFragment_to_apiFragment)
-                    WORLD_MAP-> {
+
+                    MARS -> {
                         val bundle =   Bundle().apply { putInt(Constants.PAGER_POSITION, 2) }
                         navController.navigate(R.id.action_helpFragment_to_apiFragment, bundle)
                     }
+
+                    SEARCH_IN_WIKI
+                     -> navController.navigate(R.id.action_helpFragment_to_searchFragment)
+
+                    SELECTED-> navController.navigate(R.id.action_helpFragment_to_favoriteFragment)
+
+                    BY_DATE-> navController.navigate(R.id.action_helpFragment_to_apiFragment)
+
+                    WORLD_MAP-> {
+                        val bundle =   Bundle().apply { putInt(Constants.PAGER_POSITION, 3) }
+                        navController.navigate(R.id.action_helpFragment_to_apiFragment, bundle)
+                    }
+
                     else -> {
                         val bundle =   Bundle().apply { putInt(Constants.PAGER_POSITION, 0) }
                         navController.navigate(R.id.action_helpFragment_to_apiFragment, bundle)

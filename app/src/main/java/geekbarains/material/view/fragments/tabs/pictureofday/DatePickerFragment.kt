@@ -12,11 +12,13 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DatePickerFragment(private val listener:OnItemClickListener, val date:String) : DialogFragment(),  DatePickerDialog.OnDateSetListener {
+class DatePickerFragment(private val listener:OnItemClickListener, val date:String)
+    : DialogFragment(),  DatePickerDialog.OnDateSetListener {
 
     companion object{const val TAG = "33333"}
 
     interface OnItemClickListener{fun onItemClick(date:String) }
+    interface OnItemClickListenerRover{fun onItemClick(date:String, typeRover:Int) }
 
     //открываем DatePicker с текущей датой
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

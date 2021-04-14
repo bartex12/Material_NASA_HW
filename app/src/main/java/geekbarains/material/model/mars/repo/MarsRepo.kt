@@ -24,4 +24,6 @@ class MarsRepo(val api: IDataSourceMars):    IMarsRepo {
         return api.getFotosOfMarsSpirit(date, api_key)
             .observeOn(Schedulers.io())
     }
+
+
 }

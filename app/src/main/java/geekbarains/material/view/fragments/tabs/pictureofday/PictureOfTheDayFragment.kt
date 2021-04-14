@@ -15,6 +15,7 @@ import androidx.navigation.Navigation
 import coil.api.clear
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.chip.Chip
 import geekbarains.material.R
 import geekbarains.material.model.pictureofday.entity.FavoriteSealed
 import geekbarains.material.model.pictureofday.entity.PictureOfTheDaySealed
@@ -88,6 +89,7 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
             if (savedInstanceState == null){
                 Log.d(TAG, "savedInstanceState == null")
                 viewModel. sendServerRequest(todayAsString)
+                chip1.isChecked = true
             }
 
             viewModel.getData()
