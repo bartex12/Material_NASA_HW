@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import geekbarains.material.R
-import geekbarains.material.util.toast
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*

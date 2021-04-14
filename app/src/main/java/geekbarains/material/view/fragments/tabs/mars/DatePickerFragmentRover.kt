@@ -9,7 +9,6 @@ import androidx.fragment.app.DialogFragment
 import geekbarains.material.view.constants.Constants.CURIOSITY
 import geekbarains.material.view.constants.Constants.OPPORTUNITY
 import geekbarains.material.view.constants.Constants.SPIRIT
-import geekbarains.material.view.fragments.tabs.pictureofday.DatePickerFragment
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
