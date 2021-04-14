@@ -1,6 +1,5 @@
 package geekbarains.material.view.fragments.tabs.pictureofday
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,9 +18,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import geekbarains.material.R
 import geekbarains.material.model.pictureofday.entity.FavoriteSealed
 import geekbarains.material.model.pictureofday.entity.PictureOfTheDaySealed
-import geekbarains.material.view.constants.Constants
 import geekbarains.material.model.room.Favorite
 import geekbarains.material.util.toast
+import geekbarains.material.view.constants.Constants
 import geekbarains.material.viewmodel.PictureOfTheDayViewModel
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -49,7 +48,7 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
 
     //метод обратного вызова из класса DatePickerFragment - календарь
     override fun onItemClick(date: String) {
-        //viewModel.saveDate(date)
+        viewModel.saveDatePickerDate(date)
         chipGroupMain.clearCheck() //убираем выделение
         viewModel. sendServerRequest(date)
     }
@@ -73,7 +72,6 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
         val bottomSheet: ConstraintLayout = initBottomSheet(view)
         //инициализация группы чипсов фрагмента
         initChipGroup()
-        initDescription(bottomSheet)
         initDatePicker()
         initFavoritListener()
     }
@@ -90,6 +88,7 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
             if (savedInstanceState == null){
                 Log.d(TAG, "savedInstanceState == null")
                 viewModel. sendServerRequest(todayAsString)
+                chip1.isChecked = true
             }
 
             viewModel.getData()
@@ -99,66 +98,39 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
 
     private fun initFavoritListener() {
 
-        favoriteFoto.setOnClickListener {
+        btn_addToFavorite.setOnClickListener {
             favorite?. let{
                 viewModel.addToFavorite(it)
             }
-            toast("Сохранено в избранном")
+            toast(getString(R.string.toast_add))
         }
-        favoriteFotoFilled.setOnClickListener {
+        btn_removeFavorite.setOnClickListener {
             favorite?. let{
                 viewModel.removeFavorite(it)
             }
-            toast("Удалено из избранного")
+            toast(getString(R.string.toast_remove))
         }
     }
 
     private fun initDatePicker() {
         chip4.setOnClickListener {
             //показываем календарь в диалоге для выбора даты
-            DatePickerFragment(this).show(childFragmentManager, "DatePicker")
-        }
-    }
-
-    private fun initDescription(bottomSheet: ConstraintLayout) {
-        chip_descr.setOnClickListener {
-            isExpanded = !isExpanded
-            if (isExpanded) {
-                bottomSheet.visibility = View.VISIBLE
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-            } else {
-                bottomSheet.visibility = View.GONE
-            }
+            DatePickerFragment(this, viewModel.getDatePickerDate())
+                .show(childFragmentManager, "DatePicker")
         }
     }
 
         //находим корневой лейаут и подключаем BottomSheet
     private fun initBottomSheet(view: View): ConstraintLayout {
         val bottomSheet: ConstraintLayout = view.findViewById(R.id.bottom_sheet_container)
-        bottomSheet.visibility = View.INVISIBLE
+        bottomSheet.visibility = View.VISIBLE
         setBottomSheetBehavior(bottomSheet)
         return bottomSheet
     }
 
         private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-
-        //скрываем bottom_app_bar при движении bottomSheet и показываем при сворачивании
-        bottomSheetBehavior.addBottomSheetCallback( object : BottomSheetBehavior.BottomSheetCallback(){
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_DRAGGING ){
-                    //что то делать при протаскивании
-                    chip_descr.isChecked =true
-                }else if (newState == BottomSheetBehavior.STATE_COLLAPSED){
-                    //что-то делать при сворачивании
-                    chip_descr.isChecked =false
-                    isExpanded = false
-                }
-            }
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            }
-        })
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     private fun initChipGroup() {
@@ -202,11 +174,11 @@ class PictureOfTheDayFragment : Fragment() , DatePickerFragment.OnItemClickListe
                 Log.d(TAG, "#*#*# PictureOfTheDayFragment renderFavorite Success" +
                         " data.isFavorite = ${data.isFavorite}")
                 if(data.isFavorite){
-                    favoriteFoto.visibility = View.GONE
-                    favoriteFotoFilled.visibility= View.VISIBLE
+                    btn_addToFavorite.visibility = View.GONE
+                    btn_removeFavorite.visibility= View.VISIBLE
                 }else{
-                    favoriteFoto.visibility = View.VISIBLE
-                    favoriteFotoFilled.visibility = View.GONE
+                    btn_addToFavorite.visibility = View.VISIBLE
+                    btn_removeFavorite.visibility = View.GONE
                 }
             }
             is FavoriteSealed.Error -> {

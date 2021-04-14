@@ -1,37 +1,36 @@
-package geekbarains.material.model.pictureofday.api
+package geekbarains.material.model.mars.api
 
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import geekbarains.material.model.earth.api.IDataSourcePictureEarth
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 
-class PODRetrofitImpl(val baseUrl:String) {
+object ApiFactoryMars {
 
-   // private val baseUrl = "https://api.nasa.gov/"
+    val API: IDataSourceMars
 
-    fun getRetrofitImpl(): PictureOfTheDayAPI {
-        return Retrofit.Builder()
-            .baseUrl(baseUrl)
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(gson()))
-            .client(createOkHttpClient(PODInterceptor()))
-            .build()
-            .create(PictureOfTheDayAPI::class.java)
+    init {
+        API = getFotosService()
     }
 
-    private fun gson(): Gson =
-        GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .excludeFieldsWithoutExposeAnnotation()
-            .create()
-
-
+    private fun getFotosService(): IDataSourceMars {
+        return  Retrofit.Builder()
+            .baseUrl("https://api.nasa.gov/mars-photos/api/v1/rovers/")
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+            .client(
+                createOkHttpClient(
+                    PODInterceptor()
+                )
+            )
+            .build()
+            .create(IDataSourceMars::class.java)
+    }
 
     private fun createOkHttpClient(interceptor: Interceptor): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
@@ -41,7 +40,7 @@ class PODRetrofitImpl(val baseUrl:String) {
         return httpClient.build()
     }
 
-    inner class PODInterceptor : Interceptor {
+    class PODInterceptor : Interceptor {
 
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): okhttp3.Response {

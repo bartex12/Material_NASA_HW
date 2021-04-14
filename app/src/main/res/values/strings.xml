@@ -154,15 +154,31 @@
 На вкладке ФОТО ДНЯ можно посмотреть на фото с сайта NASA APOD,
 где каждый день появляется новое фотография или видео с простров вселенной,
 а также краткое объяснение, написанное профессиональным астрономом.\n
-Кроме того, можно получить фото дня для любой доступной дате, воспользовавшись календарём, который вызывается по кнопке Ещё фото\n\n
+Кроме того, можно получить фото дня для любой доступной даты, воспользовавшись календарём, который вызывается по кнопке По дате\n\n
 На вкладке ЗЕМЛЯ находятся  ежедневные изображения диска Земли,
 собранных прибором Earth Polychromatic Imaging Camera (EPIC)\n\n
+На вкладке МАРС находятся изображения, полученные с марсоходов Curiosity, Opportunity и Spirit.\n\n
 На вкладке КАРТА МИРА можно посмотреть местоположение любой страны мира на карте Google, выбрав её из списка\n\n
 Функция поиска в Википедии позволяет найти интересующий вас термин по ключевым словам\n\n
-Понравившиеся изображения и видео  можно сохранить в списке Избранное
+В списке Избранное можно сохранить понравившиеся изображения и видео.
 </string>
     <string name="header">Заголовок</string>
     <string name="dateFoto">Дата</string>
+    <string name="by_date">По дате</string>
+    <string name="after_1995">Нужно не раньше 16 июня 1995 года</string>
+    <string name="before_today">\"Нужно не позднее сегодняшнего дня \"</string>
+    <string name="toast_add">Добавлено в избранное</string>
+    <string name="toast_remove">Удалено из избранного</string>
+    <string name="zoom_zoom">Сильное увеличение</string>
+    <string name="curiosity">Curiosity</string>
+    <string name="opportunity">Opportunity</string>
+    <string name="spirit">Spirit</string>
+    <string name="choose_date">Выбрать дату в календаре</string>
+    <string name="unknown">Неизвестно</string>
+    <string name="splash">Экран загрузки</string>
+    <string name="show_hide">Показать/скрыть.</string>
+    <string name="show_screen">Показываем экран загрузки</string>
+    <string name="hide_screen">Не показываем экран загрузки</string>
 
     <string-array name="pref_entry_color">
         <item>Стандартная</item>

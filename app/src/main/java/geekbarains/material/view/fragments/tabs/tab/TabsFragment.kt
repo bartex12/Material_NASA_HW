@@ -1,11 +1,15 @@
 package geekbarains.material.view.fragments.tabs.tab
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import geekbarains.material.R
+import geekbarains.material.view.constants.Constants
+import geekbarains.material.view.fragments.tabs.pictureofday.PictureOfTheDayFragment
 import kotlinx.android.synthetic.main.fragment_tabs.*
 
 class TabsFragment:Fragment() {
@@ -26,6 +30,7 @@ class TabsFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "**-** TabsFragment onViewCreated  ")
 
         navController = Navigation.findNavController(view)
 
@@ -37,7 +42,12 @@ class TabsFragment:Fragment() {
                 childFragmentManager
             )
         tab_layout.setupWithViewPager(view_pager)
-
+        //устанавливаем текущую вкладку - если в аргументах  ничего нет - фото дня
+        val tabPosition = arguments?.getInt(Constants.PAGER_POSITION, 0)
+        Log.d(TAG, "**-** TabsFragment onViewCreated  tabPosition = $tabPosition")
+        tabPosition?. let{
+            view_pager.currentItem = it
+        }?: let{view_pager.currentItem = 0}
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -48,6 +58,7 @@ class TabsFragment:Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.app_bar_edit).isVisible = false
+        menu.findItem(R.id.app_bar_zoom).isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

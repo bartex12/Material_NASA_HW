@@ -22,7 +22,7 @@
             android:title="@string/help" />
     </group>
 
-    <item android:title="@string/addition">
+    <item android:title="@string/addition" >
         <menu>
             <item
                 android:id="@+id/nav_share"

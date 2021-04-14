@@ -129,6 +129,7 @@ class FavoriteFragment: Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         menu.findItem(R.id.app_bar_favorites).isVisible = false
+        menu.findItem(R.id.app_bar_zoom).isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

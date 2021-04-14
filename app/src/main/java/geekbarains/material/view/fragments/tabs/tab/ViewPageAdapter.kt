@@ -14,23 +14,23 @@ class ViewPageAdapter(fragmentManager : FragmentManager)
     companion object{
        const val PICTURE_OF_DAY = 0
        const val EARTH = 1
-       const val WORLD_MAP = 2
-        const val MARS = 3
+        const val MARS = 2
+        const val WORLD_MAP = 3
     }
 
    private val fragments = arrayOf(
        PictureOfTheDayFragment(),
        EarthFragment(),
-       MapFragment(),
-       MarsFragment()
+       MarsFragment(),
+       MapFragment()
        )
 
     override fun getItem(position: Int): Fragment {
         return  when(position){
             0->fragments[PICTURE_OF_DAY]
             1->fragments[EARTH]
-            2->fragments[WORLD_MAP]
-            3->fragments[MARS]
+            2->fragments[MARS]
+            3->fragments[WORLD_MAP]
             else -> fragments[PICTURE_OF_DAY]
         }
     }
@@ -43,8 +43,8 @@ class ViewPageAdapter(fragmentManager : FragmentManager)
         return  when(position){
             0->"Фото дня"
             1->"Земля"
-            2->"Карта мира"
-            3->"Марс"
+            2->"Марс"
+            3->"Карта мира"
             else -> "Фото дня"
         }
     }

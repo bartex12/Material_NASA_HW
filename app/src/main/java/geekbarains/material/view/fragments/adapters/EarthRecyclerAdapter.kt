@@ -12,7 +12,8 @@ import geekbarains.material.model.earth.entity.PictureOfEarth
 import kotlinx.android.synthetic.main.item_earth.view.*
 
 
-class EarthRecyclerAdapter(val onItemClickListener: OnItemClickListener): RecyclerView.Adapter<EarthRecyclerAdapter.ViewHolder>() {
+class EarthRecyclerAdapter(val onItemClickListener: OnItemClickListener)
+    : RecyclerView.Adapter<EarthRecyclerAdapter.ViewHolder>() {
 
     companion object{
         const val TAG = "33333"

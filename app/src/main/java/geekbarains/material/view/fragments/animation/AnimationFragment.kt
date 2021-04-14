@@ -17,6 +17,10 @@ import com.squareup.picasso.Picasso
 import geekbarains.material.R
 import geekbarains.material.view.constants.Constants
 import kotlinx.android.synthetic.main.activity_animations.*
+import kotlinx.android.synthetic.main.activity_animations.container_animate
+import kotlinx.android.synthetic.main.activity_animations.image_view_animate
+import kotlinx.android.synthetic.main.activity_animations.web_view_animate
+import kotlinx.android.synthetic.main.fragment_anime.*
 
 class AnimationFragment: Fragment() {
     companion object{
@@ -25,6 +29,10 @@ class AnimationFragment: Fragment() {
 
     private var isExpanded = false
     lateinit var navController: NavController
+    var  url: String? = null
+    var mediaType: String? = null
+    var isZoom = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,13 +51,14 @@ class AnimationFragment: Fragment() {
         //разрешаем показ меню во фрагменте
         setHasOptionsMenu(true)
 
-        val url = arguments?.getString(Constants.URL_ANIMATION)
-        val mediaType =  arguments?.getString(Constants.MEDIA_TYPE_ANIMATION)
+        url = arguments?.getString(Constants.URL_ANIMATION)
+        mediaType =  arguments?.getString(Constants.MEDIA_TYPE_ANIMATION)
         Log.d(TAG, "*** AnimationFragment onViewCreated  mediaType = $mediaType url = $url")
 
-        if(mediaType == "image"){
+        if(mediaType == Constants.MEDIA_IMAGE||mediaType == Constants.MEDIA_NONE){
             Log.d(TAG, "*** AnimationFragment onViewCreated  mediaType = image")
             image_view_animate.visibility = View.VISIBLE
+            web_view_zoom.visibility = View.GONE
             web_view_animate.visibility = View.GONE
             //грузим несуществующий файл
             //web_view.loadUrl("file:///android_asset/nonexistent.html")
@@ -93,6 +102,7 @@ class AnimationFragment: Fragment() {
             web_view_animate.settings.javaScriptCanOpenWindowsAutomatically = true
 
             image_view_animate.visibility = View.GONE
+            web_view_zoom.visibility = View.GONE
             web_view_animate.visibility = View.VISIBLE
             url?. let{web_view_animate.loadUrl(it)}
         }
@@ -108,12 +118,35 @@ class AnimationFragment: Fragment() {
         menu.findItem(R.id.app_bar_search_wiki).isVisible = false
         menu.findItem(R.id.app_bar_edit).isVisible = false
         menu.findItem(R.id.app_bar_favorites).isVisible = false
+        menu.findItem(R.id.app_bar_zoom).isVisible =
+            mediaType == Constants.MEDIA_IMAGE||!(mediaType == Constants.MEDIA_NONE)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_settings -> navController.navigate(R.id.settingsFragment)
             R.id.app_bar_help ->navController.navigate(R.id.helpFragment)
+            R.id.app_bar_zoom ->{
+                isZoom = !isZoom
+                //показываем крупно в web_view
+                if (isZoom){
+                    image_view_animate.visibility = View.GONE
+                    web_view_animate.visibility = View.GONE
+                    web_view_zoom.visibility = View.VISIBLE
+                    url?. let{web_view_zoom.loadUrl(it)}
+                }else{
+                    //показываем  в image_view
+                    image_view_animate.visibility = View.VISIBLE
+                    web_view_animate.visibility = View.GONE
+                    web_view_zoom.visibility = View.GONE
+
+                    Picasso.with(requireActivity())
+                        .load(url)
+                        .placeholder(R.drawable.ic_no_photo_vector)
+                        .error(R.drawable.ic_load_error_vector)
+                        .into(image_view_animate)
+                }
+            }
         }
         return super.onOptionsItemSelected(item)
     }

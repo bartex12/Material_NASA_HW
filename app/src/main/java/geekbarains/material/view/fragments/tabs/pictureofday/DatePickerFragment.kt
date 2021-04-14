@@ -6,54 +6,39 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
-import geekbarains.material.R
-import geekbarains.material.util.toast
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DatePickerFragment(val listener:OnItemClickListener) : DialogFragment(),  DatePickerDialog.OnDateSetListener {
+class DatePickerFragment(private val listener:OnItemClickListener, val date:String)
+    : DialogFragment(),  DatePickerDialog.OnDateSetListener {
 
-    companion object{
-        const val TAG = "33333"
-    }
+    companion object{const val TAG = "33333"}
 
-    interface OnItemClickListener{
-        fun onItemClick(date:String)
-    }
+    interface OnItemClickListener{fun onItemClick(date:String) }
+    interface OnItemClickListenerRover{fun onItemClick(date:String, typeRover:Int) }
 
     //открываем DatePicker с текущей датой
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         Log.d(TAG, "DatePickerFragment onCreateDialog ")
-        val calendar = Calendar.getInstance()
-        val yy = calendar[Calendar.YEAR]
-        val mm = calendar[Calendar.MONTH]
-        val dd = calendar[Calendar.DAY_OF_MONTH]
 
-        val dateFormat: DateFormat = SimpleDateFormat("dd–MM–yyyy", Locale.getDefault())
-        val first = getString(R.string.first_foto_apod)
-        val now  = dateFormat.format(GregorianCalendar(yy, mm, dd).time)
+        //парсим строку с датой
+        val yy = date.take(4).toInt()
+        val mm = (date.take(7)).takeLast(2).toInt()
+        val dd = date.takeLast(2).toInt()
 
         //обязательно в конструктор передавать слушатель, иначе onDateSet не сработает
-        val datePicker = DatePickerDialog(requireContext(), this, yy, mm, dd )
-        datePicker.setTitle("от  $first \nдо  $now")
+        val datePicker = DatePickerDialog(requireContext(), this, yy, /*индекс с 0*/mm-1, dd )
+        datePicker.datePicker.maxDate = System.currentTimeMillis()
+        datePicker.datePicker.minDate = GregorianCalendar(1995, /*индекс с 0*/5, 16).timeInMillis
+
         return datePicker
     }
     //выбираем дату и после нажатия ok попадаем в этот метод
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-
-        val cal = GregorianCalendar(year, month, dayOfMonth).time
-        if(cal.before(GregorianCalendar(1995, 6, 16).time)){
-            Log.d(TAG, "DatePickerFragment onDateSet before")
-            toast("нужно после 16-06-1995")
-        }else if(cal.after(GregorianCalendar().time)){
-            Log.d(TAG, "DatePickerFragment onDateSet after")
-            toast("нужно до сегодня ")
-        }else{
             val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val date:String = dateFormat.format(GregorianCalendar(year, month, dayOfMonth).time)
             listener.onItemClick(date)
             Log.d(TAG, "DatePickerFragment onDateSet  $date")
-        }
     }
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import geekbarains.material.App
 import geekbarains.material.model.pictureofday.repo.RoomFavoriteCash
 import geekbarains.material.model.room.Database
 import geekbarains.material.model.room.Favorite
@@ -11,6 +12,8 @@ import geekbarains.material.model.pictureofday.entity.FavoriteSealed
 import geekbarains.material.model.pictureofday.repo.IRoomFavoriteCash
 import geekbarains.material.model.pictureofday.api.PODRetrofitImpl
 import geekbarains.material.model.pictureofday.entity.PictureOfTheDaySealed
+import geekbarains.material.model.pref.IPrefRepo
+import geekbarains.material.model.pref.PrefRepo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
@@ -22,7 +25,9 @@ class PictureOfTheDayViewModel : ViewModel() {
 
     private val liveDataForViewToObserve: MutableLiveData<PictureOfTheDaySealed> = MutableLiveData()
     private val retrofitImpl: PODRetrofitImpl =
-        PODRetrofitImpl()
+        PODRetrofitImpl("https://api.nasa.gov/")
+
+    val prefHelper :IPrefRepo = PrefRepo(App.instance)
 
     var date = ""
 
@@ -126,4 +131,10 @@ class PictureOfTheDayViewModel : ViewModel() {
             })
     }
 
+   fun saveDatePickerDate(date:String){
+       prefHelper.saveDatePickerDate(date)
+   }
+    fun getDatePickerDate():String{
+      return  prefHelper.getDatePickerDate()
+    }
 }

@@ -87,6 +87,7 @@ class SearchFragment : Fragment(){
         menu.findItem(R.id.app_bar_search_wiki).isVisible = false
         menu.findItem(R.id.app_bar_edit).isVisible = false
         menu.findItem(R.id.app_bar_favorites).isVisible = false
+        menu.findItem(R.id.app_bar_zoom).isVisible = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

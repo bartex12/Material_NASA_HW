@@ -34,7 +34,6 @@ class MapRecyclerAdapter(private val onitemClickListener: OnitemClickListener)
         holder.bind( listCapitals[position])
     }
 
-
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
 
         fun bind(capitalOfState: CapitalOfState){
